@@ -1,0 +1,65 @@
+body {
+  background:#ccc;
+  margin:0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#header a:hover{
+  color: #fff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+#hook_page{
+  margin-top:100px;
+}
+
+#create-hook{
+  margin-top:100px;
+}
+
+#create-place{
+  margin-top:100px;
+}
+
+#places{
+  margin-top:100px;
+}
+
+
+#places_joined{
+  margin-top:10%;
+}
+
+#filter-by-date{
+  margin-left:10%;
+  margin-right:25px;
+}
+
+#bg-img{
+  background-image:url('./bg-image2.jpg');
+  background-repeat: no-repeat;
+  min-height: 300px;
+  background-size: 100%;
+
+
+}
+
+#how-it-works{
+  border: 5px solid white;
+}
+
+#intro{
+  margin-top:1%;
+}
+
+#app-name{
+  font-family: 'Pacifico', cursive;
+}
