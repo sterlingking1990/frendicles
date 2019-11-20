@@ -19,13 +19,13 @@
   "scripts": {
     "start": "node server/server.js",
     "server":"nodemon server/server.js",
-    "friendicle-app":"npm start --prefix friendicle-app",
-    "dev":"concurrently \"npm run server\" \"npm run friendicle-app\"",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix friendicle-app && npm run build --prefix friendicle-app",
+    "friendicle-app":"yarn start --prefix friendicle-app",
+    "dev":"concurrently \"yarn run server\" \"yarn run friendicle-app\"",
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false yarn install --prefix friendicle-app && yarn run build --prefix friendicle-app",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "friendicle-app-install":"npm install --prefix friendicle-app"
+    "friendicle-app-install":"yarn install --prefix friendicle-app"
     
   },
   "proxy": "http://localhost:5000",
