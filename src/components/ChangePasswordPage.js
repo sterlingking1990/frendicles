@@ -1,0 +1,67 @@
+import React from 'react'
+
+
+const INITIAL_DETAILS={
+    new_password:'',
+    confirm_password:'',
+    error:null,
+}
+
+class ChangePasswordPage extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={...INITIAL_DETAILS}
+    }
+
+    onChange=event=>{
+        this.setState({[event.target.name]:event.target.value})
+    }
+
+    changePassword=event=>{
+        const {new_password} = this.state
+
+        this.props.firebase.doPasswordUpdate(new_password)
+        .then(()=>{
+            this.setState({...INITIAL_DETAILS})
+        })
+        .catch(error=>{
+            this.setState({error})
+        })
+        event.preventDefault()
+    }
+
+    render(){
+        const {
+            new_password,
+            confirm_password,
+            error
+        } = this.state;
+
+        const isInvalid = confirm_password !== new_password || confirm_password === '';
+
+        return(
+            <div id="change-password">
+            <div className="container mt-3">
+                <div className="row">
+                    <div className="col-lg-12 sm-12">
+                        <div className="form-group">
+                            <input name="new_password" className="form-control" type="password" placeholder="enter new password" onChange={this.onChange} value={new_password} />
+                        </div>
+                        <div className="form-group">
+                            <input name="confirm_Password" className="form-control" type="password" placeholder="confirm password" onChange={this.onChange} value={confirm_password} />
+                        </div>
+                        <div className="form-group">
+                            <button type="submit" className="form-control btn-success text-white" disabled={isInvalid} onClick={this.changePassword}>Reset Password</button>
+                        </div>
+                        <div className="form-group">
+                            {error && <p className="text-muted text-red bg-white">{error.message}</p>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        )
+    }
+}
+
+export default ChangePasswordPage

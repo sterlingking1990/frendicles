@@ -1,5 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import SignOutUser from './SignOutUser'
 const AdminHeader = () => (
     <div id="header">
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
@@ -21,12 +22,13 @@ const AdminHeader = () => (
                         <li className="nav-item">
                             <NavLink to="/create-hook" className="nav-link">Create Hook</NavLink>
                         </li>
-                        {/* <li className="nav-item active">
-                            <NavLink to="/" className="nav-link">Admin</NavLink>
-                        </li> */}
                         <li className="nav-item">
                             <NavLink to="/create-place" className="nav-link">Create Place</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <SignOutUser/>
+                        </li>
+
                     </ul>
                 </div>
             </div>

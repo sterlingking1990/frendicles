@@ -38,6 +38,10 @@ code {
   margin-top:10%;
 }
 
+#change-password{
+  margin-top:10%;
+}
+
 #filter-by-date{
   margin-left:10%;
   margin-right:25px;
@@ -62,4 +66,52 @@ code {
 
 #app-name{
   font-family: 'Pacifico', cursive;
+}
+
+#sign-up{
+  margin-top:10%;
+
+}
+
+#sign-in{
+  margin-top:10%;
+}
+
+#places_to_join{
+  margin-top:10%;
+}
+
+#menu-anchor a:link, a:visited {
+  background-color: #343A40;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#menu-anchor{
+  margin-top:2px;
+}
+
+#menu-anchor a:active {
+  background-color:white;
+}
+
+#menu-anchor ul li{
+  margin:1px 1px 1px 1px;
+
+}
+
+#edit_delete_hook{
+  margin-right:20px;
+}
+
+#delete_place{
+  color:red;
+}
+
+#edit_form{
+  margin-left: 50px;
+  margin-right: 50px;
 }

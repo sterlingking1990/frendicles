@@ -2,16 +2,15 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Dashboard from '../components/Dashboard';
 import ErrorPage from '../components/ErrorPage';
-import HooksToJoin from '../components/HooksToJoin';
-import HookPlacesJoined from '../components/HookPlacesJoined';
-import HookPlacesToJoin from '../components/HookPlacesToJoin';
+import PlacesToJoinFB from './PlacesToJoinFB';
+import ChangePasswordPage from '../components/ChangePasswordPage';
 const UserRouter = () => (
             <Switch>
                 <Route exact path="/" component={Dashboard} />
-                <Route exact path="/hooks" component={HooksToJoin} />
-                <Route exact path="/hook-places/:id" component={HookPlacesToJoin} />
-                <Route exact path="/hook-places-joined" component={HookPlacesJoined}  />
+                <Route exact path="/places" component={PlacesToJoinFB} />
+                <Route exact path="/change-password" component={ChangePasswordPage} />
                 <Route exact component={ErrorPage} />
+
             </Switch>
 )
 
