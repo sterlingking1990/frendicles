@@ -26,7 +26,7 @@ code {
 }
 
 #create-place{
-  margin-top:100px;
+  margin-top:10%;
 }
 
 #places{
@@ -114,4 +114,39 @@ code {
 #edit_form{
   margin-left: 50px;
   margin-right: 50px;
+}
+
+#accept_transaction{
+  margin-top:10%;
+
+}
+
+#set_fun_limit{
+  margin-top:10%;
+}
+
+#transaction_code{
+  margin-left:25%;
+  color: white;
+}
+
+#display_fun{
+  margin-top:2%;
+}
+
+#show_transaction_history{
+  margin-top:2%;
+}
+
+#my_transactions{
+  margin-top: 10%;
+}
+
+#confirm_transaction_code{
+  margin-top:10%;
+}
+
+#processed{
+  color:green;
+  
 }

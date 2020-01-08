@@ -49,6 +49,13 @@ class Firebase {
   doPasswordReset = email=>this.auth.sendPasswordResetEmail(email)
 
   doPasswordUpdate= password => this.auth.currentUser.updatePassword(password)
+
+  getAuthStatus=()=>{
+    return this.auth
+      .onAuthStateChanged(authUser=>{
+        return authUser
+      })
+  }
   
   
 //define user API
@@ -72,10 +79,16 @@ places=()=>this.db.ref('places')
 //join api
 joinPlace=uid=>this.db.ref(`join-places/${uid}`)
 joinPlaces=()=> this.db.ref('join-places')
+
+funSlot=uid=>this.db.ref(`fun-slots/${uid}`)
+funSlots=()=>this.db.ref('fun-slots')
+
+funType=uid=>this.db.ref(`fun-types/${uid}`)
+funTypes=()=>this.db.ref('fun-types')
+
+funSetting = uid => this.db.ref(`fun-settings/${uid}`)
+funSettings = () => this.db.ref('fun-settings')
+
 }
-
-
-
-
 
 export default Firebase

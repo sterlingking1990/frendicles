@@ -1,5 +1,6 @@
 import React from 'react'
 import {withFirebase} from '../firebase'
+import { AuthUserContext } from '../session';
 
 
 const INITIALS={
@@ -59,7 +60,7 @@ class CreatePlaceFB extends React.Component{
 
     }
 
-    handleSubmit=event=>{
+    handleSubmit=authUser=>{
         const {place_name,description,contact,image,place_hooks}=this.state
         const isPlaceName=place_name!==""
         const isDescription=description!==""
@@ -69,6 +70,7 @@ class CreatePlaceFB extends React.Component{
         const proceedToSubmit=isPlaceName && isDescription && isContact && isImage && isPlaceHooks 
         if(proceedToSubmit){
             this.props.firebase.places().push({
+                userId:authUser.uid,
                 place_name,
                 description,
                 contact,
@@ -80,8 +82,6 @@ class CreatePlaceFB extends React.Component{
         else{
             this.setState({isCreated:false})
         }
-
-        event.preventDefault()
     }
 
     componentDidMount(){
@@ -108,17 +108,20 @@ class CreatePlaceFB extends React.Component{
     render(){
         const {place_name,description,contact,image,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
         return(
-            <div id="create-place">
-                <div className="container mt-4">
+                
+                <div id="create-place">
+                <AuthUserContext>
+                    {authUser => (
+                <div className="container mt-3">
                     <div className="row">
                         <div className="col-lg-12">
-                            {isCreated && <p className="text-center text-white bg-dark">place created successfully</p>}
-                            <p className="display-4 text-success text-center">Create Place for HookUp</p>
+                            {isCreated && <p className="text-center text-white bg-dark">offer created successfully</p>}
+                            <p className="display-4 text-success text-center">Create Promotional Offer</p>
                             <div className="form-group">
-                                <input type="text" name="place_name" placeholder="enter the place name" value={place_name} className="form-control" onChange={this.onChange} />
+                                <input type="text" name="place_name" placeholder="enter offer name" value={place_name} className="form-control" onChange={this.onChange} />
                             </div>
                             <div className="form-group">
-                                <textarea cols="6" rows="5" name="description" placeholder="describe the place" value={description} className="form-control" onChange={this.onChange} />
+                                <textarea cols="6" rows="5" name="description" placeholder="describe the offer" value={description} className="form-control" onChange={this.onChange} />
                             </div>
                             <div className="form-group">
                                 <input type="text" name="contact" placeholder="enter contact address/phone" value={contact} className="form-control" onChange={this.onChange} />
@@ -126,29 +129,34 @@ class CreatePlaceFB extends React.Component{
                             <div className="form-group">
                                 <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} />
                             </div>
-                            <p className="bg-dark text-white">What hooks relate to this place?</p>
+                            <p className="bg-dark text-white">What hooks relate to this offer?</p>
                             <div className="form-check-inline">
                             {loading_hooks &&<p className="text-center bg-dark text-white"></p>}
                                 {hooks.map((hook) =>
                                     <span className="mx-2"><label className="mx-1" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" value={hook.uid} checked={place_hooks.includes(hook.uid) ? true : false} onChange={this.keepHookID} /></span>)}
                             </div>
                             <div className="form-group mt-2">
-                                <button className="form-control btn-dark text-white" onClick={this.handleSubmit}>Submit</button>
+                                <button className="form-control btn-dark text-white" onClick={()=>this.handleSubmit(authUser)}>Submit</button>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                    )}
+                </AuthUserContext>
+              
+              
 
-                    <div className="container mt-2">
+                    <div className="container mt-3">
                         <div className="row">
+                        <div className="col-lg-12 sm-12">
+                        <h3 className="display-4 text-center text-white mt-2">Offers You Created</h3>
                         {loading_places && <p className="text-center bg-dark text-white">loading...</p>}
                         <Places places={places} hooks={hooks} onDeletePlace={this.onDeletePlace} onPlaceUpdate={this.onPlaceUpdate}/>
                         </div>
                     </div>
+                </div>
             </div>
-
-
         )
     }
 
@@ -219,43 +227,39 @@ class PlaceTemplate extends React.Component{
         const {place_name,description,image,contact,isToEdit,place_hooks,hooks}=this.state
 
         return(
-            <div className="col-lg-12 sm-12">
-                <h3 className="display-4 text-center text-white mt-2">PLACES</h3>
+                <div>
                 {isToEdit ?
-                    <div id="edit_form">
-                        <div className="form-group">
-                            <input type="text" name="place_name" placeholder="enter the place name" value={place_name} className="form-control" onChange={this.onChange} />
-                        </div>
-                        <div className="form-group">
-                            <textarea cols="6" rows="5" name="description" placeholder="describe the place" value={description} className="form-control" onChange={this.onChange} />
-                        </div>
-                        <div className="form-group">
-                            <input type="text" name="contact" placeholder="enter contact address/phone" value={contact} className="form-control" onChange={this.onChange} />
-                        </div>
-                        <div className="form-group">
-                            <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} />
-                        </div>
-                        <p className="bg-dark text-white">What hooks relate to this place?</p>
-                        <div className="form-check-inline">
+                    <div>
+                    <div className="form-group">
+                        <input type="text" name="place_name" placeholder="enter the offer name" value={place_name} className="form-control" onChange={this.onChange} />
+                    </div>
+                    <div className="form-group">
+                        <textarea cols="6" rows="5" name="description" placeholder="describe the offer" value={description} className="form-control" onChange={this.onChange} />
+                    </div>
+                    <div className="form-group">
+                        <input type="text" name="contact" placeholder="enter contact address/phone" value={contact} className="form-control" onChange={this.onChange} />
+                    </div>
+                    <div className="form-group">
+                        <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} />
+                    </div>
+                    <p className="bg-dark text-white">What hooks relate to this offer?</p>
+                    <div className="form-check-inline">
                             {hooks.map((hook) =>
                                 <span className="mx-2"><label className="mx-1" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" value={hook.uid} checked={place_hooks.includes(hook.uid) ? true : false} onChange={this.updateHookID} /></span>)}
-                        </div>
-                        <div className="form-group mt-2">
-                            <button className="form-control btn-dark text-white" onClick={this.updatePlace}>Save Changes</button>
-                        </div>
-                        <div className="form-group mt-2">
-                            <button className="form-control btn-dark text-white" onClick={this.handleReset}>Reset</button>
-                        </div>
-
-                    </div> : 
+                    </div>
+                    <div className="form-group mt-2">
+                        <button className="form-control btn-dark text-white" onClick={this.updatePlace}>Save Changes</button>
+                    </div>
+                    <div className="form-group mt-2">
+                        <button className="form-control btn-dark text-white" onClick={this.handleReset}>Reset</button>
+                    </div> 
+                    </div>:
 
                     <div className="card bg-dark">
                         <span className="text-right text-sm text-display"><i className="fa fa-remove mx-2 text-red" id="delete_place" onClick={this.onDeletePlace}></i><i className="fa fa-edit mx-2 text-white" onClick={this.togglePlaceEdit}></i></span>
                         <div className="card-title">
                             <p className="display-4 text-center text-white">{place_name}</p>
-                        </div>
-                        <div className="card-body">
-                            <div className="card-image">
+                            <div className="card-body">
                                 <img src={image} className="img-responsive img-fluid" />
                             </div>
                             <p className="text-display p-2 text-white">{description}</p>

@@ -9,22 +9,33 @@ const AdminHeader = () => (
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <a href="/" className="navbar-brand"><span className="navbar-logo">friendicle</span></a>
+                <a href="/" className="navbar-brand"><span className="navbar-logo">ofatri</span></a>
 
                 <div className="collapse navbar-collapse" id="Navmenu">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                         <NavLink to="/hooks-page" className="nav-link">Hooks Page </NavLink>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
-                            <NavLink to="/places-page" className="nav-link">Places Page </NavLink>
+                        <NavLink to="/confirm-funcode" className="nav-link">Confirm TransactNFun Code</NavLink>
                         </li>
+                        {/* <li className="nav-item">
+                            <NavLink to="/places-page" className="nav-link">Places Page </NavLink>
+                        </li> */}
                         <li className="nav-item">
                             <NavLink to="/create-hook" className="nav-link">Create Hook</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to="/create-place" className="nav-link">Create Place</NavLink>
+                        <li className="dropdown" id="menu-anchor">
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Report
+                                <span className="caret"></span>
+                            </a>
+                            <ul className="dropdown-menu">
+                                <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>Users</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>Tranzacts</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>Completed Fun</NavLink></li>
+                            </ul>
                         </li>
+
                         <li className="nav-item">
                             <SignOutUser/>
                         </li>
