@@ -5,7 +5,7 @@ import store3 from '../../src/store3.jpg'
 
 const LandingPage = () => (
     <div>
-        <div id="bg-img"></div>
+    <div id="bg-img"></div>
         <div className="container" id="intro">
             <div className="row">
                 <div className="col-lg-12 sm-12">
@@ -16,33 +16,33 @@ const LandingPage = () => (
                 <div className="col-lg-4">
                     <div className="card bg-white mt-2">
                         <div className="card-image text-center">
-                            <img src={store1} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
+                            <img src={store1} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center"/>
                         </div>
                         <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-2">select a hook from collection of our available hooks. Hooks are transactions you want to carry out </p>
+                            <p className="text-justify text-center mx-3 my-2">select offers from collection of available offers. Offers are promotional transactions businesses are selling to you. They are buys that comes with reward </p>
                         </div>
                     </div>
                 </div>
-                <div className="col-lg-4">
-                    <div className="card bg-white mt-2">
-                        <div className="card-image text-center">
-                            <img src={store2} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                        </div>
-                        <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-4">Visit the store and make sure to complete the intended transaction. Ensure your token is marked after transaction</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-4">
-                    <div className="card bg-white mt-2">
-                        <div className="card-image text-center">
-                            <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                        </div>
-                        <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-4">Get cash and other friendibees when you complete the transaction</p>
+                    <div className="col-lg-4">
+                        <div className="card bg-white mt-2">
+                            <div className="card-image text-center">
+                                <img src={store2} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
+                            </div>
+                            <div className="card-content">
+                                <p className="text-justify text-center mx-3 my-4">Complete the intended transaction ensuring your token is verified after transaction</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div className="col-lg-4">
+                        <div className="card bg-white mt-2">
+                            <div className="card-image text-center">
+                                <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
+                            </div>
+                            <div className="card-content">
+                                <p className="text-justify text-center mx-3 my-4">Get funbees offered by the business and the transaction you made</p>
+                            </div>
+                        </div>
+                    </div>
 
             </div>
             <div className="row mt-4">
@@ -54,7 +54,7 @@ const LandingPage = () => (
                         <div className="card bg-white">
                             <div className="card-title">
                                 <div className="media">
-                                    <span id="app-name">friendicle</span>
+                                <span id="app-name">friendicle</span>
                                 </div>
                                 <div className="media-body">
                                     <p className="text-muted my-1">We are customer rewarding company, partnering with over millions of enterprise who value her customers and always says yes to every of their needs</p>
@@ -66,39 +66,72 @@ const LandingPage = () => (
                 </div>
             </div>
 
-            <div className="row">
+            <div className="row my-3">
                 <div className="col-lg-12 sm-12">
                     <p className="text-display display-4 text-center bg-light">Ofatri Plans</p>
                 </div>
             </div>
             <div className="row">
                 <div className="col-lg-4">
+                    
                     <div className="card bg-white mt-2">
+                        <h3 className="card-title text-red text-center"><strong>Ofatri Basic</strong></h3>
                         <div className="card-image text-center">
                             <img src={store1} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
                         </div>
                         <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-2"><strong>Ofatri Basic</strong> is for loyal customers who believe they deserve rewards for every transactions they make from their customer/seller or service provider </p>
+                            <p className="text-justify text-center mx-3 my-2"><strong>Ofatri Basic</strong> is the free feature for loyal customers to get various rewards for every transactions they make from their customer/seller or service provider </p>
+                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri Basic enables you to...</strong></p>
+                            <ul id="center-basic">
+                                <li>Join Promotional Offers</li>
+                                <li>Get Rewarded</li>
+                            </ul>
+                            <div className="form-group" id="btn-basic-plan">
+                                <button className="form-control btn-success btn-lg text-center">SUBSCRIBE THIS OFFER</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-4">
                     <div className="card bg-white mt-2">
+                        <h3 className="card-title text-red text-center"><strong>Ofatri Standard</strong></h3>
                         <div className="card-image text-center">
                             <img src={store2} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
                         </div>
                         <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri Standard</strong> This is for businesses that want to create promotional offers so as to reward their loyal customers for the goods or service sold to them </p>
+                            <p className="text-justify text-center mx-3 my-2"><strong>Ofatri Standard</strong> This is the businesses feature. It enables businesses to create promotional offers that rewards their loyal customers for the goods or service sold to them </p>
+                            <p className="text-justify text-center mx-3 my-4"><strong>Businesses can...</strong></p>
+                            <ul id="center-standard">
+                                <li>Ofatri Basic Features</li>
+                                <li>Create Promotional Offer</li>
+                                <li>Accept Transactions</li>
+                                <li>Set Offer Limit and Fun Reward Types</li>
+                            </ul>
+                            <div className="form-group" id="btn-standard-plan">
+                                <button className="form-control btn-success btn-lg text-center">SUBSCRIBE THIS OFFER</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-4">
                     <div className="card bg-white mt-2">
+                        <h3 className="card-title text-red text-center"><strong>Ofatri TreatMeNice</strong></h3>
                         <div className="card-image text-center">
                             <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
                         </div>
                         <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri TreatMeNice</strong> With Ofatri TreatMeNice Plan, we handle everything about taking care of appreciating your special and loyal customers while you concentrate on your business of selling to them.</p>
+                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri TreatMeNice</strong> With Ofatri TreatMeNice Feature, we handle everything about taking care of appreciating your special and loyal customers while you concentrate on your business of selling to them.</p>
+                            <p className="text-justify text-center mx-3 my-4"><strong>With TreatMeNice, we...</strong></p>
+                            <ul>
+                                <li>Manage your Promotional Offer account</li>
+                                <li>Relate with your customers about your brand</li>
+                                <li>Create Promotional Offers that conforms with your brand</li>
+                                <li>Accept Transactions on your behalf</li>
+                                <li>Handle Customer Rewarding and Special Care on your behalf</li>
+                            </ul>
+                            <div className="form-group">
+                                <button className="form-control btn-success btn-lg text-center">SUBSCRIBE THIS OFFER</button>
+                            </div>
                         </div>
                     </div>
                 </div>
