@@ -138,7 +138,9 @@ class AcceptTransactionFB extends React.Component{
                 const funSettingsArr=Object.keys(funSettingsObject).map(key=>({
                     ...funSettingsObject[key],uid:key
                 }))
-                this.setState({fun_settings:funSettingsArr})
+
+                    const funbee_amount = funSettingsArr.filter(funSetting => parseInt(transaction_amount) > parseInt(funSetting.start_amount) && parseInt(transaction_amount) < parseInt(funSetting.end_amount))
+                this.setState({fun_settings:funbee_amount})
                     const funbees_won = this.state.fun_settings[0].fun_amount
                     this.setState({ funbees_won: funbees_won })
 

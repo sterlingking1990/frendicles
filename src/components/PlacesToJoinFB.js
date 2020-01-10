@@ -27,6 +27,7 @@ class PlacesToJoinFB extends React.Component {
     }
 
     componentDidMount(){
+        this.setState({ loading_hooks: true, loading_places: true })
         this.props.firebase.auth.onAuthStateChanged(authUser => {
             this.props.firebase.joinPlaces().orderByChild("userId").equalTo(authUser.uid).on("value", joinResult => {
                 const joinObject = joinResult.val()
@@ -38,11 +39,18 @@ class PlacesToJoinFB extends React.Component {
                     console.log(this.state.joinPlaces)
                 }
             })
+
+            this.props.firebase.places().on("value", placeSnapShot => {
+                const placeObject = placeSnapShot.val()
+                const placeList = Object.keys(placeObject).map(key => ({
+                    ...placeObject[key], uid: key
+                }))
+                const places_to_join = placeList.filter(place => place.userId !==authUser.uid)
+                this.setState({ places: places_to_join })
+            })
                 
         });
         
-
-        this.setState({loading_hooks:true,loading_places:true})
 
         this.props.firebase.hooks().once("value",snapShot=>{
             const hookObject=snapShot.val()
@@ -50,14 +58,6 @@ class PlacesToJoinFB extends React.Component {
                 ...hookObject[key],uid:key
             }))
             this.setState({hooks:hookList})
-        })
-
-        this.props.firebase.places().on("value",placeSnapShot=>{
-            const placeObject=placeSnapShot.val()
-            const placeList=Object.keys(placeObject).map(key=>({
-                ...placeObject[key],uid:key
-            }))
-            this.setState({places:placeList})
         })
 
         this.setState({loading_hooks:false,loading_places:false})
@@ -73,7 +73,7 @@ class PlacesToJoinFB extends React.Component {
         })
 
         this.setState({join_ref:joinRef.key,isToJoin:false})
-        this.props.firebase.joinPlaces().orderByChild('key').startAt(this.state.join_ref).on('value',snapShot=>{
+        this.props.firebase.joinPlaces().orderByChild('key').equalTo(this.state.join_ref).on('value',snapShot=>{
             const snapShotObj=snapShot.val()
             if(snapShotObj){
             const snapShotArray=Object.keys(snapShotObj).map(each=>({
@@ -106,7 +106,9 @@ class PlacesToJoinFB extends React.Component {
                 <div className="row">
                     <div className="col-lg-12 sm-12">
                     {loading_places && <p className="text-center bg-dark text-white">loading...</p>}
-                    <Places places={places} hooks={hooks} joinPlaces={joinPlaces} onJoinPlace={this.onJoinPlace} onUnJoinPlace={this.onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} join_token={join_token}/>
+                    {places.length>0 ? <Places places={places} hooks={hooks} joinPlaces={joinPlaces} onJoinPlace={this.onJoinPlace} onUnJoinPlace={this.onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} join_token={join_token}/> 
+                    :
+                    <h3 className="text-display display-4 text-center text-dark">No Offer created by other businesses, Be the first to Create promotional Offer for your businesses and get customers</h3> }
                     </div>
                 </div>
             </div>
@@ -142,16 +144,12 @@ class PlaceTemplate extends React.Component {
             {authUser=>(
                 <div>
                     <div className="card bg-dark">
-                        <div className="card-title">
-                            <p className="display-4 text-center text-white">{place_name}</p>
-                            {this.props.join_token && <p className="text-display text-center text-white">use this token to transact and win funbees - {this.props.join_token}</p>}
-                        </div>
+                        
                         <div className="card-body">
-                            <div className="card-image">
-                                <img src={image} className="img-responsive img-fluid" />
-                            </div>
-                            <p className="text-display p-2 text-white">{description}</p>
-                            <p className="text-display p-2 text-white">{contact}</p>
+                                <h3 className="card-title text-white">{place_name}</h3>
+                                <img src={image} className="card-img img-responsive img-fluid" />
+                            <p className="card-text text-white">{description}</p>
+                            <p className="card-text text-white">{contact}</p>
                             <div className="form-check-inline">
                                 {this.props.loading_hooks && <p className="text-center bg-dark text-white">loading hooks...</p>}
                                 {hooks.map((hook) =>
@@ -168,11 +166,13 @@ class PlaceTemplate extends React.Component {
                                             array_status.push(this.props.place_id===this.props.joinPlaces[i].place_id)
                                             if(this.props.place_id===this.props.joinPlaces[i].place_id){
                                                 var joinedPlaceID=this.props.joinPlaces[i].uid
+                                                var token =this.props.joinPlaces[i].token
                                             }
                                         }
                                         if(array_status.some(t=>t===true)){
                                             return(
-                                            <button className="form-control btn-danger text-dark" onClick={() => this.props.onUnJoinPlace(joinedPlaceID)}>UnJoin offer</button>)
+                                                
+                                            <button className="form-control btn-danger text-dark" onClick={() => this.props.onUnJoinPlace(joinedPlaceID)}>UnJoin offer [funbie token- {token}]</button>)
                                         }
                                         if(array_status.every(t=>t===false)){
                                             return(

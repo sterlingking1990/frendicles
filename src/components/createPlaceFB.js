@@ -93,14 +93,18 @@ class CreatePlaceFB extends React.Component{
             }))
             this.setState({hooks:hookList})
         })
+        this.props.firebase.auth.onAuthStateChanged(authUser=>{
+            this.props.firebase.places().on("value", placeSnapShot => {
+                const placeObject = placeSnapShot.val()
+                const placeList = Object.keys(placeObject).map(key => ({
+                    ...placeObject[key], uid: key
+                }))
+                const places_you_created = placeList.filter(place => place.userId === authUser.uid)
+                this.setState({ places: places_you_created })
+            })
 
-        this.props.firebase.places().on("value",placeSnapShot=>{
-            const placeObject=placeSnapShot.val()
-            const placeList=Object.keys(placeObject).map(key=>({
-                ...placeObject[key],uid:key
-            }))
-            this.setState({places:placeList})
         })
+       
         this.setState({loading_hooks:false,loading_places:false})
 
     }
@@ -145,18 +149,19 @@ class CreatePlaceFB extends React.Component{
                     )}
                 </AuthUserContext>
               
-              
-
+        
                     <div className="container mt-3">
-                        <div className="row">
+                    <div className="row">
                         <div className="col-lg-12 sm-12">
-                        <h3 className="display-4 text-center text-white mt-2">Offers You Created</h3>
+                        {places.length>0 ? <div><h3 className="display-4 text-center text-white mt-2">Offers You Created</h3>
                         {loading_places && <p className="text-center bg-dark text-white">loading...</p>}
-                        <Places places={places} hooks={hooks} onDeletePlace={this.onDeletePlace} onPlaceUpdate={this.onPlaceUpdate}/>
+                        <Places places={places} hooks={hooks} onDeletePlace={this.onDeletePlace} onPlaceUpdate={this.onPlaceUpdate}/></div>
+                        : <h3 className="display-4 text-center text-dark mt-2">You Have not created any Offer Yet, Create Promotional Offer And Start Getting Closed Deals From Customers</h3>}
                         </div>
                     </div>
-                </div>
-            </div>
+                    </div>
+                    </div>
+              
         )
     }
 
@@ -255,21 +260,21 @@ class PlaceTemplate extends React.Component{
                     </div> 
                     </div>:
 
-                    <div className="card bg-dark">
+                   
+                    <div className="card bg-dark" id="space-card">
                         <span className="text-right text-sm text-display"><i className="fa fa-remove mx-2 text-red" id="delete_place" onClick={this.onDeletePlace}></i><i className="fa fa-edit mx-2 text-white" onClick={this.togglePlaceEdit}></i></span>
-                        <div className="card-title">
-                            <p className="display-4 text-center text-white">{place_name}</p>
-                            <div className="card-body">
-                                <img src={image} className="img-responsive img-fluid" />
-                            </div>
-                            <p className="text-display p-2 text-white">{description}</p>
-                            <p className="text-display p-2 text-white">{contact}</p>
+                            <img src={image} className=" card-img-top img-responsive img-fluid" />
+                        <div className="card-body">
+                            <h3 className="card-title text-white">{place_name}</h3>
+                            <p className="card-text text-white">{description}</p>
+                            <p className="card-text text-white">{contact}</p>
                             <div className="form-check-inline">
                                 {hooks.map((hook) =>
                                     <span className="mx-2"><label className="mx-1 text-white" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" checked={place_hooks.includes(hook.uid) ? true : false} /></span>)}
                             </div>
                         </div>
                     </div>
+                 
                 
                 }
              

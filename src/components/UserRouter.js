@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Dashboard from '../components/Dashboard';
-import ErrorPage from '../components/ErrorPage';
+import Dashboard from './Dashboard';
+import ErrorPage from './ErrorPage';
 import PlacesToJoinFB from './PlacesToJoinFB';
-import ChangePasswordPage from '../components/ChangePasswordPage';
+import ChangePasswordPage from './ChangePasswordPage';
 import MyTransactionsFB from './MyTransactionsFB';
 const UserRouter = () => (
             <Switch>

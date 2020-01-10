@@ -1,6 +1,6 @@
-body {
+body,html {
   background:#ccc;
-  margin:0;
+  margin:5% auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -35,7 +35,7 @@ code {
 
 
 #places_joined{
-  margin-top:10%;
+  margin-top:40%;
 }
 
 #change-password{
@@ -52,8 +52,6 @@ code {
   background-repeat: no-repeat;
   min-height: 300px;
   background-size: 100%;
-
-
 }
 
 #how-it-works{
@@ -149,4 +147,30 @@ code {
 #processed{
   color:green;
   
+}
+
+#space-card{
+  margin-top:10px;
+}
+
+#center-basic{
+  margin-top: 10%;
+}
+
+#center-standard{
+  margin-top:10%;
+}
+
+#btn-standard-plan{
+  margin-top: 40%;
+}
+
+#btn-basic-plan{
+  margin-top: 60%;
+}
+
+@media screen and (max-width:480px){
+  body,html{
+    margin-top:10%;
+  }
 }

@@ -1,6 +1,7 @@
 import app  from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
+import {history} from '../routers/AppRouter'
 // Your web app's Firebase configuration
 var config = {
   apiKey: "AIzaSyDs12yK7z48Az_Syv7ePfWhcrKwNHDtH78",
@@ -44,7 +45,9 @@ class Firebase {
     .catch(error=>console.log(error))
   }
   
-  doSignOut=()=>this.auth.signOut()
+  doSignOut = () => this.auth.signOut().then(() => {
+    history.push('/')
+  })
 
   doPasswordReset = email=>this.auth.sendPasswordResetEmail(email)
 

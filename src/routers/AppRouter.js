@@ -26,7 +26,7 @@ const HOCHeader = (Component1, Component2, Component3, Component4) => {
                     if(authUser.email==='izundukingsleyemeka@gmail.com'){
                         return <Component1 />
                     }
-                    else if(authUser.email==='uche@gmail.com'){ //partner emails
+                    else if(authUser.email==='uche@gmail.com' || authUser.email==='cakelegend@gmail.com' || authUser.email==='emeka@gmail.com'){ //partner emails
                         return <Component4 />
                     }
                     else{
@@ -51,7 +51,7 @@ const HOCRouter = (Component1, Component2, Component3, Component4) => {
                         if (authUser.email === 'izundukingsleyemeka@gmail.com') {
                             return <Component1 />
                         }
-                        else if (authUser.email === 'uche@gmail.com') { //partner emails
+                        else if (authUser.email === 'uche@gmail.com' || authUser.email === 'cakelegend@gmail.com' || authUser.email === 'emeka@gmail.com') { //partner emails
                             return <Component4 />
                         }
                         else {

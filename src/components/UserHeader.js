@@ -13,16 +13,8 @@ const UserHeader = () => (
                 <div className="collapse navbar-collapse" id="NavbarMenu">
                     <ul className="navbar-nav ml-auto">
                     <li className="nav-item"><NavLink className="nav-link" to="/" activeClassName="is-active" exact={true}>Home</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/places" activeClassName="is-active" exact={true}>Offers</NavLink></li>
-                        
-                        <li className="dropdown" id="menu-anchor">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">TranzactNFun
-                                <span className="caret"></span>
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Transactions</NavLink></li>
-                            </ul>
-                        </li>
+                    <li className="nav-item"><NavLink className="nav-link" to="/places" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
+                    <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Rewards</NavLink></li>
 
                         <li className="dropdown" id="menu-anchor">
                             <a className="dropdown-toggle" data-toggle="dropdown" href="#">Account

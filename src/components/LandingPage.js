@@ -65,6 +65,45 @@ const LandingPage = () => (
                     </div>
                 </div>
             </div>
+
+            <div className="row">
+                <div className="col-lg-12 sm-12">
+                    <p className="text-display display-4 text-center bg-light">Ofatri Plans</p>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-lg-4">
+                    <div className="card bg-white mt-2">
+                        <div className="card-image text-center">
+                            <img src={store1} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
+                        </div>
+                        <div className="card-content">
+                            <p className="text-justify text-center mx-3 my-2"><strong>Ofatri Basic</strong> is for loyal customers who believe they deserve rewards for every transactions they make from their customer/seller or service provider </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-lg-4">
+                    <div className="card bg-white mt-2">
+                        <div className="card-image text-center">
+                            <img src={store2} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
+                        </div>
+                        <div className="card-content">
+                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri Standard</strong> This is for businesses that want to create promotional offers so as to reward their loyal customers for the goods or service sold to them </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-lg-4">
+                    <div className="card bg-white mt-2">
+                        <div className="card-image text-center">
+                            <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
+                        </div>
+                        <div className="card-content">
+                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri TreatMeNice</strong> With Ofatri TreatMeNice Plan, we handle everything about taking care of appreciating your special and loyal customers while you concentrate on your business of selling to them.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 )
