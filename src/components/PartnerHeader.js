@@ -44,6 +44,8 @@ const UserHeader = () => (
                                 <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu">
+                                <li><NavLink className="nav-link" to="/ofatri-balance" activeClassName="is-active" exact={true}>Ofatri Balance</NavLink></li>
+                                <li></li>
                                 <li><NavLink className="nav-link" to="/change-password" activeClassName="is-active" exact={true}>Change Password</NavLink></li>
                                 <li>
                                     <SignOutUser />

@@ -92,6 +92,9 @@ funTypes=()=>this.db.ref('fun-types')
 funSetting = uid => this.db.ref(`fun-settings/${uid}`)
 funSettings = () => this.db.ref('fun-settings')
 
+ofatriAccount = uid =>this.db.ref(`ofatri-accounts/${uid}`)
+ofatriAccounts = () => this.db.ref('ofatri-accounts')
+
 }
 
 export default Firebase

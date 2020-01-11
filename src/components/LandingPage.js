@@ -19,7 +19,7 @@ const LandingPage = () => (
                             <img src={store1} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center"/>
                         </div>
                         <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-2">select offers from collection of available offers. Offers are promotional transactions businesses are selling to you. They are buys that comes with reward </p>
+                            <p className="text-justify text-center mx-3 my-2">Join offers from collection of available offers i.e Cake4VAL,Hair4Val,Look9ce,Selfie2Kill, Drive2Rock. Offers are promotional transactions businesses are selling to you that comes with reward </p>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ const LandingPage = () => (
                                 <img src={store2} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
                             </div>
                             <div className="card-content">
-                                <p className="text-justify text-center mx-3 my-4">Complete the intended transaction ensuring your token is verified after transaction</p>
+                            <p className="text-justify text-center mx-3 my-4">Proceed to make transaction with the offer provider using your usual means i.e instragram, phone call etc. After the transaction, Issue the token generated when you joined the offer to the offer provider to verify and reveal your reward</p>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ const LandingPage = () => (
                                 <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
                             </div>
                             <div className="card-content">
-                                <p className="text-justify text-center mx-3 my-4">Get funbees offered by the business and the transaction you made</p>
+                            <p className="text-justify text-center mx-3 my-4">Enjoy several rewards offered by the offer provider which can range from free photoshoot, cupcakes, smallchops, free gym access, val card, data topup, paid travel to beautiful locations within and across africa and many more</p>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ const LandingPage = () => (
                         <div className="card bg-white">
                             <div className="card-title">
                                 <div className="media">
-                                <span id="app-name">friendicle</span>
+                                <span id="app-name">ofatri</span>
                                 </div>
                                 <div className="media-body">
                                     <p className="text-muted my-1">We are customer rewarding company, partnering with over millions of enterprise who value her customers and always says yes to every of their needs</p>

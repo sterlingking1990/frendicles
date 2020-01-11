@@ -8,13 +8,16 @@ import AdminDashboard from '../components/AdminDashboard';
 import ErrorPage from '../components/ErrorPage';
 import ConfirmFunCodeFB from './ConfirmFunCodeFB';
 // import PlacesPage from '../components/PlacesPage';
+import UpdateAccountFB from './UpdateAccountFB';
 import CreateHookFB from './CreateHookFB';
 const AdminRouter = () => (
             <Switch>
                 <Route exact path="/" component={AdminDashboard} />
+
                 {/* <Route exact path="/edit-place/:id" component={EditPlace}  /> */}
                 <Route exact path="/create-hook" component={CreateHookFB}  />
                 <Route exact path="/confirm-funcode" component={ConfirmFunCodeFB} />
+                <Route exact path="/update-ofatri-account" component={UpdateAccountFB} />
                 {/* <Route exact path="/hooks-page" component={HooksPage} />
                 <Route exact path="/places-page" component={PlacesPage} />
                 <Route exact path="/edit-hook/:id" component={EditHook}  /> */}

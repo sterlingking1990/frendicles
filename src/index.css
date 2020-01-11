@@ -169,6 +169,10 @@ code {
   margin-top: 60%;
 }
 
+#ofatri-balance{
+  margin-top: 10%;
+}
+
 @media screen and (max-width:480px){
   body,html{
     margin-top:10%;

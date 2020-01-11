@@ -10,6 +10,7 @@ import ChangePasswordPage from './ChangePasswordPage';
 import createPlaceFB from './createPlaceFB';
 import SetFunTypeFB from './SetFunTypeFB';
 import MyTransactionsFB from './MyTransactionsFB';
+import OfatriBalanceFB from './OfatriBalanceFB';
 
 const UserRouter = () => (
     <Switch>
@@ -21,6 +22,7 @@ const UserRouter = () => (
         <Route exact path="/set-fun-limit" component={SetFunLimitFB} />
         <Route exact path="/set-fun-type" component={SetFunTypeFB} />
         <Route exact path="/fun-slots" component={FunSlotsFB} />
+        <Route exact path="/ofatri-balance" component={OfatriBalanceFB} />
         <Route exact path="/change-password" component={ChangePasswordPage} />
         <Route exact component={ErrorPage} />
     </Switch>

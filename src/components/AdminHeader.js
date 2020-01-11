@@ -26,11 +26,11 @@ const AdminHeader = () => (
                             <NavLink to="/create-hook" className="nav-link">Create Hook</NavLink>
                         </li>
                         <li className="dropdown" id="menu-anchor">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Report
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Account
                                 <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu">
-                                <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>Users</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/update-ofatri-account" activeClassName="is-active" exact={true}>Update Ofatri Account</NavLink></li>
                                 <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>Tranzacts</NavLink></li>
                                 <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>Completed Fun</NavLink></li>
                             </ul>
