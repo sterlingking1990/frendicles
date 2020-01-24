@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {PasswordRecoveryLink} from './ForgetPasswordPage'
 
 const SignInPage=()=>(
-    <div id="sign-in">
+    <div>
         <SignInHandler/>
         <PasswordRecoveryLink/>
         <SignUpLink/>
@@ -52,17 +52,28 @@ class SignInHOC extends React.Component{
         }=this.state
 
         return(
+            <div className="login">
+                <div className="login-section">
+                    <div className="login-banner">
+                        <div className="login-banner-text">
+                            <h3>Welcome back, Continue Enjoying Rewards on Every Transaction You Make</h3>
+                            <span><strong>Sign In to Continue</strong></span>
+                        </div>
+                    </div>
+                </div>
             <div className="container mt-3">
                 <div className="row">
                     <div className="col-lg-12 sm-12">
+                            {error && <h3 className="text-display text-white bg-dark">Could not sign in, check your email or password and that network is fine</h3>}
                         <div className="form-group">
+
                             <input name="email" type="email" placeholder="email" className="form-control" value={email} onChange={this.onChange}/>
                         </div>
                         <div className="form-group">
                             <input name="password" type="password" placeholder="enter password" className="form-control" value={password} onChange={this.onChange}/>
                         </div>
                         <div className="form-group">
-                            <button type="submit" className="form-control" onClick={this.onSignIn}>Log In</button>
+                            <button type="submit" className="form-control btn-success" onClick={this.onSignIn}>Log In</button>
                         </div>
                         <div className="form-group">
                             {error && <p className="text-red bg-white">{error.message}</p>}
@@ -70,6 +81,7 @@ class SignInHOC extends React.Component{
                     </div>
                 </div>
             </div>
+        </div>
         )
     }
 }

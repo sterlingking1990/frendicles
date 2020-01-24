@@ -115,6 +115,7 @@ class AcceptTransactionFB extends React.Component{
                 this.setState({place_id:place_joined_detail[0].uid})
                 
             }
+            //consider adding break so that it doesnt try to look for another scenerio where the token exist twice in the joined
         }
 
         if(isTokenInPlaces.some(t=>t===true)){
@@ -139,9 +140,12 @@ class AcceptTransactionFB extends React.Component{
                     ...funSettingsObject[key],uid:key
                 }))
 
-                    const funbee_amount = funSettingsArr.filter(funSetting => parseInt(transaction_amount) > parseInt(funSetting.start_amount) && parseInt(transaction_amount) < parseInt(funSetting.end_amount))
+                
+                    const funbee_amount = funSettingsArr.filter(funSetting => parseInt(transaction_amount) > parseInt(funSetting.start_amount) && parseInt(transaction_amount) < parseInt(funSetting.end_amount));
+
                 this.setState({fun_settings:funbee_amount})
-                    const funbees_won = this.state.fun_settings[0].fun_amount
+                    var funbees_amount = parseInt((this.state.fun_settings[0].fun_amount/100)*parseInt(transaction_amount));
+                    const funbees_won=funbees_amount/2;  //divide the amount by 2 to get the amount user will get for his reward. the amin amount is the one the agent gets for procurring the customer
                     this.setState({ funbees_won: funbees_won })
 
                     //get details of the kind of fun to be processed i.e swimming is fun_unit 300n, beer 500n, so if the user fun amount is 1000, these type of fun

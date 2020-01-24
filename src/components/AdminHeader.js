@@ -31,8 +31,7 @@ const AdminHeader = () => (
                             </a>
                             <ul className="dropdown-menu">
                                 <li className="nav-item"><NavLink className="nav-link" to="/update-ofatri-account" activeClassName="is-active" exact={true}>Update Ofatri Account</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>Tranzacts</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>Completed Fun</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/users-info" activeClassName="is-active" exact={true}>User Info</NavLink></li>
                             </ul>
                         </li>
 

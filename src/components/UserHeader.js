@@ -15,6 +15,15 @@ const UserHeader = () => (
                     <li className="nav-item"><NavLink className="nav-link" to="/" activeClassName="is-active" exact={true}>Home</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" to="/places" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
                     <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Rewards</NavLink></li>
+                        <li className="dropdown" id="menu-anchor">
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">My Goal
+                                <span className="caret"></span>
+                            </a>
+                            <ul className="dropdown-menu">
+                                <li><NavLink className="nav-link" to="/set-reward-goal" activeClassName="is-active" exact={true}>Set Reward Goal</NavLink></li>
+                                <li><NavLink className="nav-link" to="/check-milestone" activeClassName="is-active" exact={true}>Check Milestone</NavLink></li>
+                            </ul>
+                        </li>
 
                         <li className="dropdown" id="menu-anchor">
                             <a className="dropdown-toggle" data-toggle="dropdown" href="#">Account

@@ -1,144 +1,151 @@
 import React from 'react'
-import store1 from '../../src/store1.jpg'
-import store2 from '../../src/store2.jpg'
-import store3 from '../../src/store3.jpg'
+// import store1 from '../../src/store1.jpg'
+// import store2 from '../../src/store2.jpg'
+// import store3 from '../../src/store3.jpg'
 
 const LandingPage = () => (
-    <div>
-    <div id="bg-img"></div>
-        <div className="container" id="intro">
-            <div className="row">
-                <div className="col-lg-12 sm-12">
-                    <p className="text-display display-4 text-center bg-light">How it works!</p>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-lg-4">
-                    <div className="card bg-white mt-2">
-                        <div className="card-image text-center">
-                            <img src={store1} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center"/>
-                        </div>
-                        <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-2">Join offers from collection of available offers i.e Cake4VAL,Hair4Val,Look9ce,Selfie2Kill, Drive2Rock. Offers are promotional transactions businesses are selling to you that comes with reward </p>
-                        </div>
-                    </div>
-                </div>
-                    <div className="col-lg-4">
-                        <div className="card bg-white mt-2">
-                            <div className="card-image text-center">
-                                <img src={store2} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                            </div>
-                            <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-4">Proceed to make transaction with the offer provider using your usual means i.e instragram, phone call etc. After the transaction, Issue the token generated when you joined the offer to the offer provider to verify and reveal your reward</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4">
-                        <div className="card bg-white mt-2">
-                            <div className="card-image text-center">
-                                <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                            </div>
-                            <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-4">Enjoy several rewards offered by the offer provider which can range from free photoshoot, cupcakes, smallchops, free gym access, val card, data topup, paid travel to beautiful locations within and across africa and many more</p>
-                            </div>
-                        </div>
-                    </div>
+    <div className="landing">
+        <div className="section">
+            <div className="banner">
 
             </div>
-            <div className="row mt-4">
-                <div className="col-lg-12 sm-12">
-                    <p className="text-display display-4 text-center bg-light text-success">About Us</p>
+            <div className="banner-text">
+                <h3>Are you about to make a transaction from 1000 naira upto 1,000,000 or even more?!</h3>
+                <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
+                <span><strong>No Referral </strong></span> <strong> No Paper work</strong>
+                <p><button id="begin-here">Begin Here </button> <button id="plans">See Plans</button></p>
+            </div>
+        </div>
+
+        <div className="first-body">
+            <div className="first-body-items">
+                <div className="first-body-item">
+                    <div className="first-note-pic">
+                    </div>
+                    <div className="first-note">
+                        <h3>What we are doing...</h3>
+                        <div>Ofatri is partnering with several businesses so as to reward you everytime you make transactions with them.
+                        Rewards range from - data top-up, airtime top-up, fuel top-up, transport fare i.e uber, gokada, brand products, trip to dubia and many more...</div>
+                    </div>
                 </div>
-                <div className="col">
-                    <div id="about-us">
-                        <div className="card bg-white">
-                            <div className="card-title">
-                                <div className="media">
-                                <span id="app-name">ofatri</span>
-                                </div>
-                                <div className="media-body">
-                                    <p className="text-muted my-1">We are customer rewarding company, partnering with over millions of enterprise who value her customers and always says yes to every of their needs</p>
-                                    <p className="text-muted mx-3">We are on a mission of continuously increasing customer base of industries through appreciating the customers each time they complete a transaction</p>
-                                </div>
-                            </div>
-                        </div>
+            </div>
+        </div>
+
+        <div className="second-body">
+            <div className="second-body-text1">
+                <h3>During this festives...</h3>
+                <p>Here are several offers that comes with rewards</p>
+            </div>
+            <div className="second-body-pic1">
+                <div className="offers">
+                    <div>Cake4Val</div>
+                    <div>DressNRock</div>
+                    <div>KingsRide</div>
+                    <div>OwnALand</div>
+                    <div>Shop4Val</div>
+                </div>
+            </div>
+            <div className="second-body-text2">
+                <p>And Much More...</p>
+            </div>
+        </div>
+
+        <div className="third-body">
+            <div className="third-body-text1">
+                <h3>How to get Rewards</h3>
+            </div>
+            <div className="third-body-step">
+                <div className="steps">
+                    <div className="step">1</div>
+                    <div className="step-headline">
+                        Search an Offer
+                    </div>
+                    <div className="step-description">
+                        After SignUp, Login and search for an Offer i.e Cake4Val 
                     </div>
                 </div>
             </div>
 
-            <div className="row my-3">
-                <div className="col-lg-12 sm-12">
-                    <p className="text-display display-4 text-center bg-light">Ofatri Plans</p>
+            <div className="third-body-step">
+                <div className="steps">
+                    <div className="step">2</div>
+                    <div className="step-headline">
+                        Join the Offer
+                    </div>
+                    <div className="step-description">
+                        Click 'Join Offer' to reveal your personal reward token
+                    </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-lg-4">
-                    
-                    <div className="card bg-white mt-2">
-                        <h3 className="card-title text-red text-center"><strong>Ofatri Basic</strong></h3>
-                        <div className="card-image text-center">
-                            <img src={store1} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                        </div>
-                        <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-2"><strong>Ofatri Basic</strong> is the free feature for loyal customers to get various rewards for every transactions they make from their customer/seller or service provider </p>
-                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri Basic enables you to...</strong></p>
-                            <ul id="center-basic">
-                                <li>Join Promotional Offers</li>
-                                <li>Get Rewarded</li>
-                            </ul>
-                            <div className="form-group" id="btn-basic-plan">
-                                <button className="form-control btn-success btn-lg text-center">SUBSCRIBE THIS OFFER</button>
-                            </div>
-                        </div>
+            <div className="third-body-step">
+                <div className="steps">
+                    <div className="step">3</div>
+                    <div className="step-headline">
+                        Get Rewarded
+                    </div>
+                    <div className="step-description">
+                        After making transaction with the business contact, your reward token is used to reward you
                     </div>
                 </div>
-                <div className="col-lg-4">
-                    <div className="card bg-white mt-2">
-                        <h3 className="card-title text-red text-center"><strong>Ofatri Standard</strong></h3>
-                        <div className="card-image text-center">
-                            <img src={store2} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                        </div>
-                        <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-2"><strong>Ofatri Standard</strong> This is the businesses feature. It enables businesses to create promotional offers that rewards their loyal customers for the goods or service sold to them </p>
-                            <p className="text-justify text-center mx-3 my-4"><strong>Businesses can...</strong></p>
-                            <ul id="center-standard">
-                                <li>Ofatri Basic Features</li>
-                                <li>Create Promotional Offer</li>
-                                <li>Accept Transactions</li>
-                                <li>Set Offer Limit and Fun Reward Types</li>
-                            </ul>
-                            <div className="form-group" id="btn-standard-plan">
-                                <button className="form-control btn-success btn-lg text-center">SUBSCRIBE THIS OFFER</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-lg-4">
-                    <div className="card bg-white mt-2">
-                        <h3 className="card-title text-red text-center"><strong>Ofatri TreatMeNice</strong></h3>
-                        <div className="card-image text-center">
-                            <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                        </div>
-                        <div className="card-content">
-                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri TreatMeNice</strong> With Ofatri TreatMeNice Feature, we handle everything about taking care of appreciating your special and loyal customers while you concentrate on your business of selling to them.</p>
-                            <p className="text-justify text-center mx-3 my-4"><strong>With TreatMeNice, we...</strong></p>
-                            <ul>
-                                <li>Manage your Promotional Offer account</li>
-                                <li>Relate with your customers about your brand</li>
-                                <li>Create Promotional Offers that conforms with your brand</li>
-                                <li>Accept Transactions on your behalf</li>
-                                <li>Handle Customer Rewarding and Special Care on your behalf</li>
-                            </ul>
-                            <div className="form-group">
-                                <button className="form-control btn-success btn-lg text-center">SUBSCRIBE THIS OFFER</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
 
+            <div className="third-body-text2">
+                Its That Simple...
+            </div>
+        </div>
+
+        <div className="fourth-body">
+            <div className="fourth-body-headline">
+                <h3>Ofatri Business Plan</h3>
+            </div>
+            <div className="fourth-body-text">
+                <div>Its 2020, a year of appreciation. Customers are buying from brands that are rewarding no matter how little their transaction</div>
+                <div>Increace your customer inflow by partnering with Ofatri in making sure your customers stay happy and returning for more!</div>
+            </div>
+            <div className="fourth-body-button">
+                <button id="contact-ofatri">Contact Ofatri Now!!!</button>
+            </div>
+        </div>
+        
+        <div className="fifth-body">
+            <div className="fifth-body-headline">
+                <h3>Business Using Ofatri</h3>
+            </div>
+            <div className="fifth-body-text">
+                <div className="fifth-body-logo">
+                    <div>CakeLegend</div>
+                    <div>Tricia Kitchen</div>
+                    <div>SabiiDress</div>
+                    <div>HotPot</div>
+                    <div>RosySky</div>
+                </div>
+            </div>
+            <div className="fifth-body-more">
+                And Many more
+            </div>
+        </div>
+
+        <div className="sixth-body">
+            <div className="sixth-body-items">
+                <div className="sixth-body-contacts">
+                    <div className="sixth-body-address">
+                        <div>Head Office: Block ID Area 8 Opic Estate Agbara, Ogun State</div>
+                        <div>Phone Number: 08060456301</div>
+                        <div>Email:ofatri@gmail.com</div>
+                        <div><span>f</span><span>i</span><span>t</span></div>
+                    </div>
+                    <div className="sixth-body-socials">
+                            <div>work with ofatri</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div className="sixth-body-copy">
+                <div>copyright (c) ofatri 2020</div>
             </div>
         </div>
     </div>
+
 )
 
 

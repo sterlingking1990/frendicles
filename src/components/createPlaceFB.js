@@ -182,7 +182,7 @@ const Places=({places,hooks,onDeletePlace,onPlaceUpdate})=>(
 class PlaceTemplate extends React.Component{
     constructor(props){
         super(props);
-        this.state={isToEdit:false,place_name:this.props.place.place_name,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,hooks:this.props.hooks,place_hooks:this.props.place.place_hooks,place_id:this.props.place_id,hook_count:this.props.place.place_hooks.length}
+        this.state={isToEdit:false,place_name:this.props.place.place_name,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0}
 
     }
 
@@ -249,6 +249,7 @@ class PlaceTemplate extends React.Component{
                     </div>
                     <p className="bg-dark text-white">What hooks relate to this offer?</p>
                     <div className="form-check-inline">
+
                             {hooks.map((hook) =>
                                 <span className="mx-2"><label className="mx-1" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" value={hook.uid} checked={place_hooks.includes(hook.uid) ? true : false} onChange={this.updateHookID} /></span>)}
                     </div>

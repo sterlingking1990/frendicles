@@ -1,6 +1,7 @@
 import app  from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
+import 'firebase/functions'
 import {history} from '../routers/AppRouter'
 // Your web app's Firebase configuration
 var config = {
@@ -16,9 +17,12 @@ var config = {
 class Firebase {
   constructor() {
     app.initializeApp(config)
+    //authentication
     this.auth=app.auth();
     //database
     this.db=app.database();
+    //functions
+    // this.function=app.functions();
   }
 
 //create user and save user data 
@@ -36,6 +40,14 @@ class Firebase {
       })
       .catch(err => console.log(err));
   }
+
+  //send mail
+
+  // doSendMail=()=>{
+  //   const callable=this.function.httpsCallable("sendEmail")
+  //   console.log(callable())
+  //   return callable({text:'Sending email with react and node mailer',subject:'Hello React Nodemailer'}).then(console.log)
+  // }
 
   doSignInWithEmailAndPassword=(email,password)=>{
     return this.auth
@@ -94,6 +106,9 @@ funSettings = () => this.db.ref('fun-settings')
 
 ofatriAccount = uid =>this.db.ref(`ofatri-accounts/${uid}`)
 ofatriAccounts = () => this.db.ref('ofatri-accounts')
+
+goalSetting = uid =>this.db.ref(`goal-settings/${uid}`)
+goalSettings = () =>this.db.ref('goal-settings')
 
 }
 
