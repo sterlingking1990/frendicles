@@ -29,7 +29,7 @@ class SignInHOC extends React.Component{
         this.setState({[event.target.name]:event.target.value})
     }
 
-    onSignIn=event=>{
+    onSignIn=()=>{
         const {email,password}=this.state;
         this.props.firebase
         .doSignInWithEmailAndPassword(email,password)
@@ -37,11 +37,7 @@ class SignInHOC extends React.Component{
             this.setState({...INITIAL_DETAILS})
             history.push('/')
         })
-        .catch(error=>{
-            this.setState({...INITIAL_DETAILS,error})
-        })
-
-        event.preventDefault();
+        .catch(error=>this.setState({...INITIAL_DETAILS,error:error.message}))
     }
 
     render(){
@@ -64,7 +60,7 @@ class SignInHOC extends React.Component{
             <div className="container mt-3">
                 <div className="row">
                     <div className="col-lg-12 sm-12">
-                            {error && <h3 className="text-display text-white bg-dark">Could not sign in, check your email or password and that network is fine</h3>}
+                            {error && <h3 className="text-display text-white bg-dark">{error}</h3>}
                         <div className="form-group">
 
                             <input name="email" type="email" placeholder="email" className="form-control" value={email} onChange={this.onChange}/>

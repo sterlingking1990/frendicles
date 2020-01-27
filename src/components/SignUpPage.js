@@ -44,9 +44,7 @@ class SignUpHOC extends Component {
           }.bind(this), 2000);
                  
       })
-      .catch(error => {
-        this.setState({ ...INITIAL_DETAILS,error:error });
-      });
+      .catch(error => this.setState({ ...INITIAL_DETAILS,error:error.message }));
    
     event.preventDefault();
   }
@@ -79,7 +77,7 @@ class SignUpHOC extends Component {
             <div className="container mt-3">
                 <div className="row">
                     <div className="col-lg-12 sm-12">
-                            {error && <h3 className="text-display text-white bg-dark">Could not sign you up, check that your email is valid and network is fine</h3> }
+                            {error && <h3 className="text-display text-white bg-dark">{error}</h3> }
                         {send_mail && <h3 className="text-display text-white bg-dark">Successfully signed up, check your email for more on getting rewards</h3>}
                         <div className="form-group">
                             <input name="username" className="form-control" type="text" placeholder="enter username" onChange={this.onChange} value={username} />

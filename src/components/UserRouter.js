@@ -15,6 +15,7 @@ const UserRouter = () => (
                 <Route exact path="/change-password" component={ChangePasswordPage} />
                 <Route exact path="/set-reward-goal" component={SetRewardGoal} />
                 <Route exact path="/check-milestone" component={CheckMilestone} />
+
                 <Route exact component={ErrorPage} />
             </Switch>
 )

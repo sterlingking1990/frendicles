@@ -83,11 +83,11 @@ class TransactionTemplate extends React.Component{
                             <span>{this.props.transaction.status && <i className="fa fa-check-circle" id="processed"></i>}<p className="text-center text-display text-white"><i>transaction code: {this.props.transaction.user_id}</i></p></span>
                         {(() => {
                             for (let i = 0; i < current_place.length; i++) {
-                                return <h3 className="text-display text-center bg-dark text-white">{current_place[i].place_name} Hotel</h3>
+                                return <h3 className="text-display text-center bg-dark text-white">{current_place[i].place_name}</h3>
                             }
                         })()}
                         <div className="card-body">
-                            <h5 className="text-display text-center text-white">funcoin award: <i className="fa fa-money"></i> {this.props.transaction.funbees}</h5>
+                            <h5 className="text-display text-center text-white">funcoin award: <i className="fa fa-money"></i> {this.props.transaction.funbees_won}</h5>
                         </div>
 
                     </div>

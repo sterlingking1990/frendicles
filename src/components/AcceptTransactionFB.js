@@ -24,6 +24,7 @@ const INITIAL_DETAILS={
     error_verification: false, 
     error_fetching_fun_settings: false,
     error_fetching_fun_types:false,
+    error_getting_range:false,
 }
 class AcceptTransactionFB extends React.Component{
     constructor(props){
@@ -58,16 +59,7 @@ class AcceptTransactionFB extends React.Component{
                 }
             })
 
-            this.props.firebase.places().on('value',snapShotPlace=>{
-                const placeObject=snapShotPlace.val()
-                if(placeObject){
-                    const placeArray=Object.keys(placeObject).map(key=>({
-                        ...placeObject,uid:key
-                    }))
-                    this.setState({places:placeArray})
-                }
-
-            })
+            
 
             //get the lists of transactions completed by this user
             this.props.firebase.auth.onAuthStateChanged(authUser=>{
@@ -78,11 +70,26 @@ class AcceptTransactionFB extends React.Component{
                         ...transactionObject[key],uid:key
                     }))
                     this.setState({transaction_processed:transactionArr,loading_transactions:false})
+                    console.log(transactionArr)
                 }
                 else{
                     this.setState({loading_transactions:false})
                 }
                 })
+
+                //get the places(offers) created by the current user
+                this.props.firebase.places().orderByChild('userId').equalTo(authUser.uid).on('value', snapShotPlace => {
+                    const placeObject = snapShotPlace.val()
+                    if (placeObject) {
+                        const placeArray = Object.keys(placeObject).map(key => ({
+                            ...placeObject, uid: key
+                        }))
+                        this.setState({ places: placeArray })
+                    }
+
+                })
+
+                
             })
     }
 
@@ -106,9 +113,14 @@ class AcceptTransactionFB extends React.Component{
         for (let i = 0; i < joinedPlaces.length; i++) {
                 isTokenInPlaces.push(joinedPlaces[i].token===place_token)
             if(joinedPlaces[i].token===place_token){
+                //this means the token exist among joined offers
+                //next, check if the joinedPlaces[i].place_id is same as the current users place
+                //to make sure the token verified is not for another place(offer) but for this currenct users place(offer)
+
 
                 const user_joined_detail = this.state.users.filter(user => user.uid ===joinedPlaces[i].userId)
-                const place_joined_detail = this.state.places.filter(place => place.uid === joinedPlaces[i].place_id)
+                var place_joined_detail = this.state.places.filter(place => place.uid === joinedPlaces[i].place_id)
+
                 this.setState({user_verified:user_joined_detail[0].username})
                 this.setState({place_verified:place_joined_detail[0][joinedPlaces[i].place_id].place_name})
                 this.setState({user_id:user_joined_detail[0].uid})
@@ -118,7 +130,7 @@ class AcceptTransactionFB extends React.Component{
             //consider adding break so that it doesnt try to look for another scenerio where the token exist twice in the joined
         }
 
-        if(isTokenInPlaces.some(t=>t===true)){
+        if(isTokenInPlaces.some(t=>t===true) && !!place_joined_detail){
 
             this.setState({verified:true})
             this.setState({error_verification:false})
@@ -142,11 +154,74 @@ class AcceptTransactionFB extends React.Component{
 
                 
                     const funbee_amount = funSettingsArr.filter(funSetting => parseInt(transaction_amount) > parseInt(funSetting.start_amount) && parseInt(transaction_amount) < parseInt(funSetting.end_amount));
+                    //check if the transaction amount was able to pick the range from the fun settings by this user
+                    
+                    if(funbee_amount.length>0){
+                        console.log(funbee_amount)
+                        console.log(transaction_amount)
+                        var funbees_amount = parseInt((funbee_amount[0].fun_amount)/100)*parseInt(transaction_amount);
+                        const funbees_won=funbees_amount/2;  //divide the amount by 2 to get the amount user will get for his reward. the amin amount is the one the agent gets for procurring the customer
+                        this.setState({ funbees_won: funbees_won })
+                        console.log(funbees_won);
+                        //deciding the fun types from the transaction amount and finally storing the fun 
+                        this.props.firebase.funTypes().orderByChild('userId').equalTo(authUser.uid).on('value', snapShot => {
+                            const funTypesObject = snapShot.val()
+                            if (funTypesObject) {
+                                const funTypeArr = Object.keys(funTypesObject).map(key => ({
+                                    ...funTypesObject[key], uid: key
+                                }))
+                                this.setState({ fun_types: funTypeArr })
 
-                this.setState({fun_settings:funbee_amount})
-                    var funbees_amount = parseInt((this.state.fun_settings[0].fun_amount/100)*parseInt(transaction_amount));
-                    const funbees_won=funbees_amount/2;  //divide the amount by 2 to get the amount user will get for his reward. the amin amount is the one the agent gets for procurring the customer
-                    this.setState({ funbees_won: funbees_won })
+                                
+                                if (funbees_won !== null) {
+                                    var fun_types_offered = []
+                                    for (let i = 0; i < funTypeArr.length; i++) {
+                                        if (parseInt(funTypeArr[i].unit_cost) <= parseInt(funbees_won)) {
+                                            const fun = {
+                                                fun_type: funTypeArr[i].fun_type,
+                                                unit_cost: funTypeArr[i].unit_cost,
+                                            }
+                                            fun_types_offered.push({
+                                                ...fun
+                                            })
+                                        }
+                                    }
+
+                                    this.props.firebase.funSlots().push({
+                                        user_id,
+                                        place_id,
+                                        transaction_amount,
+                                        funbees_won,
+                                        fun_types_offered: fun_types_offered,
+                                        transaction_by: authUser.uid,
+                                    })
+
+                                    this.setState({ transaction_completed: true })
+
+                                    setTimeout(function () {
+                                        this.setState({ transaction_completed: false })
+                                    }.bind(this), 3000)
+                                }
+                                else {
+                                    this.setState({ error_getting_range: true })
+
+                                    setTimeout(function () {
+                                        this.setState({ error_getting_range: false, })
+                                    }.bind(this), 3000)
+                                }
+                            }
+                            else {
+                                this.setState({ error_fetching_fun_types: true })
+                            }
+                        })
+
+                    }
+                    else{
+                        this.setState({error_getting_range:true})
+                        setTimeout(function () {
+                            this.setState({ error_getting_range: false, })
+                        }.bind(this), 3000)
+                    }
 
                     //get details of the kind of fun to be processed i.e swimming is fun_unit 300n, beer 500n, so if the user fun amount is 1000, these type of fun
                     //will display so the user can now test his creative choice that adds up to the fun amount and then friendicle will process the location and make
@@ -160,50 +235,7 @@ class AcceptTransactionFB extends React.Component{
                 }
             })
 
-            //deciding the fun types from the transaction amount and finally storing the fun 
-            this.props.firebase.funTypes().orderByChild('userId').equalTo(authUser.uid).on('value',snapShot=>{
-                const funTypesObject=snapShot.val()
-                if(funTypesObject){
-                    const funTypeArr=Object.keys(funTypesObject).map(key=>({
-                        ...funTypesObject[key],uid:key
-                    }))
-                    this.setState({fun_types:funTypeArr})
-
-                    var fun_types = this.state.fun_types
-                    const funbees = this.state.funbees_won
-                    var fun_types_offered=[]
-                    for(let i = 0; i< fun_types.length;i++){
-                        if(parseInt(fun_types[i].unit_cost)<=parseInt(funbees)){
-                            const fun={
-                                fun_type:fun_types[i].fun_type,
-                                unit_cost:fun_types[i].unit_cost,
-                            }
-                            fun_types_offered.push({
-                                ...fun
-                            })
-                        }
-                    }
-
-                    this.props.firebase.funSlots().push({
-                        user_id,
-                        place_id,
-                        transaction_amount,
-                        funbees,
-                        fun_types_offered:fun_types_offered,
-                        transaction_by: authUser.uid,
-                    })
-
-                    this.setState({ transaction_completed: true })
-
-                    setTimeout(function () {
-                        this.setState({ transaction_completed: false })
-                    }.bind(this), 3000)
-
-                }
-                else{
-                    this.setState({error_fetching_fun_types:true})
-                }
-            })
+            
         e.preventDefault()
     }
 
@@ -219,7 +251,7 @@ class AcceptTransactionFB extends React.Component{
     }
 
     render(){
-        const {verified,token,error_verification,user_verified,place_verified,transaction_completed,funbees_won,error_fetching_fun_settings,transaction_processed,transaction_amount,loading_transactions,error_fetching_fun_types}=this.state
+        const {verified,token,error_verification,user_verified,place_verified,transaction_completed,funbees_won,error_fetching_fun_settings,transaction_processed,transaction_amount,loading_transactions,error_fetching_fun_types,error_getting_range}=this.state
 
         return(
             <div id="accept_transaction">
@@ -248,10 +280,11 @@ class AcceptTransactionFB extends React.Component{
                                                 </div>
                                             </div>
                                         }
-                                        {error_verification && <h3 className="text-display text-center bg-dark text-white">Could not verify customer transaction token</h3>}
+                                        {error_verification && <h3 className="text-display text-center bg-dark text-white">Error Verification, Check that this token belongs to this offer</h3>}
                                         {error_fetching_fun_settings && <h3 className="text-display text-center bg-dark text-white">Please set funbees settings for customer transactions</h3>}
                                         {error_fetching_fun_types && <h3 className="text-display text-center bg-dark text-white">Please set fun types for customer completed transaction</h3>}
                                         {transaction_completed && <h3 className="text-display text-center bg-dark text-white">Transaction Completed, funbee won- {funbees_won} </h3>}
+                                        {error_getting_range && <h3 className="text-display text-center bg-dark text-white">The transaction amount is not configured to recieve reward</h3>}
 
                                     </div>
 
@@ -266,7 +299,7 @@ class AcceptTransactionFB extends React.Component{
                         <div className="col-lg-12 sm-12">
                                 <h3 className="text-display text-center bg-dark text-white">Transaction History</h3>
                             {loading_transactions && <p className="text-display text-center bg-dark text-white">loading transactions...</p>}
-                            {transaction_processed &&
+                            {transaction_processed.length>0 &&
                             <FirebaseContext.Consumer>
 
                                 {firebase=>(
@@ -327,7 +360,7 @@ class TransactionTemplate extends React.Component{
                                     }
                                 })()}
                                     <div className="card-body">
-                                        <h5 className="text-display text-center text-white"> {this.props.transaction_processed.funbees}</h5>
+                                        <h5 className="text-display text-center text-white"> {this.props.transaction_processed.funbees_won}</h5>
                                     </div>
                                 
                                 </div>

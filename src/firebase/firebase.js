@@ -38,7 +38,6 @@ class Firebase {
           email,
         })
       })
-      .catch(err => console.log(err));
   }
 
   //send mail
@@ -53,8 +52,8 @@ class Firebase {
     return this.auth
     .signInWithEmailAndPassword(email,password)
 
-    .then(response=>console.log(response))
-    .catch(error=>console.log(error))
+    // .then(response=>console.log(response))
+    // .catch(error=>console.log(error))
   }
   
   doSignOut = () => this.auth.signOut().then(() => {
@@ -109,6 +108,9 @@ ofatriAccounts = () => this.db.ref('ofatri-accounts')
 
 goalSetting = uid =>this.db.ref(`goal-settings/${uid}`)
 goalSettings = () =>this.db.ref('goal-settings')
+
+adminGoalSetting=uid=>this.db.ref(`admin-goal-settings/${uid}`)
+adminGoalSettings=()=>this.db.ref('admin-goal-settings')
 
 }
 

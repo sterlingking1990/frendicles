@@ -17,14 +17,21 @@ const AdminHeader = () => (
                         <NavLink to="/hooks-page" className="nav-link">Hooks Page </NavLink>
                         </li> */}
                         <li className="nav-item">
-                        <NavLink to="/confirm-funcode" className="nav-link">Confirm TransactNFun Code</NavLink>
+                        <NavLink to="/confirm-funcode" className="nav-link">Confirm FunCode</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/redeem-coin" className="nav-link">Redeem Coin</NavLink>
                         </li>
                         {/* <li className="nav-item">
                             <NavLink to="/places-page" className="nav-link">Places Page </NavLink>
                         </li> */}
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink to="/create-hook" className="nav-link">Create Hook</NavLink>
+                        </li> */}
+                        <li className="nav-item">
+                            <NavLink to="/admin-setup-goal" className="nav-link">Setup Goals</NavLink>
                         </li>
+  
                         <li className="dropdown" id="menu-anchor">
                             <a className="dropdown-toggle" data-toggle="dropdown" href="#">Account
                                 <span className="caret"></span>
