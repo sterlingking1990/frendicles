@@ -245,11 +245,13 @@ code {
 
 .first-note-pic{
   flex:1 1 auto;
-  background-image: url('bg-image.jpg');
+  background: url('bg-image.jpg') no-repeat center center;
+  -webkit-background-size:cover;
+  -o-background-size:cover;
+  -moz-background-size:cover;
   background-size: 100%;
   width: 400px;
   height: 300px;
-  background-repeat: no-repeat;
 }
 
 .first-note{
@@ -259,7 +261,7 @@ code {
 
 .first-note>div{
   flex:1 1 auto;
-  width: 450px;
+  width: 400px;
 }
 
 .second-body{
@@ -676,10 +678,27 @@ text-align:center
 
 }
 
-.first-body-item>div:first-child{
+.first-note-pic{
+  flex:1 1 auto;
+  background-image: url('bg-image.jpg') no-repeat center center;
+  -webkit-background-size:cover;
+  -o-background-size:cover;
+  -moz-background-size:cover;
+  background-size: cover;
+  width: 400px;
+  height: 300px;
+  background-repeat: no-repeat;
   align-self: center;
-  margin: 10px;
-  border: 2px solid white;
+}
+
+.first-note{
+  color: white;
+  margin: auto;
+}
+
+.first-note>div{
+  flex:1 1 auto;
+  width: 400px;
 }
 
 .second-body{
@@ -769,6 +788,42 @@ text-align:center
   color:white;
 }
 
+.fourth-body{
+  display:grid;
+  grid-template-columns: repeat(12,minmax(1fr));
+  grid-template-rows: repeat(5,minmax(1fr));
+  margin: 5%;
+  background-color: #DAD4F7
+}
+
+.fourth-body-headline{
+  grid-column: 1/12;
+  grid-row: 1;
+  text-align:center;
+}
+
+.fourth-body-text{
+  grid-column:1/12;
+  display:flex;
+  flex-wrap: wrap;
+  flex:1 1 auto;
+  text-align:center
+}
+
+.fourth-body-button{
+  grid-column:1/12;
+  text-align:center; 
+}
+
+.fourth-body-button>button{
+  width: 450px;
+  height: 100px;
+  background-color: #343A40;
+  color:white;
+  font-size:1.4em;
+}
+
+
 .fifth-body{
   display: grid;
   grid-template-columns: repeat(12,minmax(1fr));
@@ -790,8 +845,8 @@ text-align:center
 .fifth-body-logo{
   display: flex;
   flex-direction: column;
-  
   align-items: center;
+  
 }
 
 .fifth-body-logo>div{
