@@ -56,7 +56,7 @@ const LandingPage = () => (
             </div>
             <div className="third-body-step">
                 <div className="steps">
-                    <div className="step">1</div>
+                    <div className="step"><span>1</span></div>
                     <div className="step-headline">
                         Search an Offer
                     </div>

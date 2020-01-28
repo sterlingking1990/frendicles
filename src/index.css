@@ -228,7 +228,7 @@ code {
 .first-body{
   display: grid;
   grid-template-columns: repeat(12,minmax(1fr));
-  grid-template-rows: repeat(1,minmax(300px,1fr));
+  grid-template-rows: repeat(5,minmax(1fr));
   margin: 5%;
   background-color: #343A40;
 }
@@ -273,6 +273,7 @@ code {
 .second-body-text1{
   grid-column: 2/10;
   grid-row: 1;
+  text-align:center;
 }
 
 .second-body-pic1{
@@ -284,6 +285,7 @@ code {
   display: flex;
   flex-wrap:wrap;
 }
+
 .offers>div{
 flex:1 1 auto;
 border-radius: 50px;
@@ -306,7 +308,7 @@ text-align: center;
 .third-body{
   display:grid;
   grid-template-columns: repeat(12,minmax(1fr));
-  grid-template-rows: repeat(5,minmax(100px,1fr));
+  grid-template-rows: repeat(5,minmax(1fr));
   margin: 5%;
   background-color:#343A40;
   border: 3px solid white;
@@ -327,9 +329,14 @@ text-align: center;
 
 .steps{
   display:flex;
-  justify-content: space-around;
-  text-align:center;
+  justify-content: space-between;
   color: #ccc;
+}
+
+.steps>div:nth-child(2){
+  flex:1 1 auto !important;
+  margin:5% !important;
+  align-self:center;
 }
 
 .step{
@@ -337,27 +344,27 @@ text-align: center;
 }
 
 .steps>div:nth-child(3){
-width: 450px;
+flex:1 1 auto !important;
+margin:5% !important;
+text-align:center 
 }
 
 .third-body-text2{
   grid-column: 10/12;
-  padding:10px;
-  text-align:left;
   color: white;
 }
 
 .fourth-body{
   display:grid;
   grid-template-columns: repeat(12,minmax(1fr));
-  grid-template-rows: repeat(4,minmax(100px,1fr));
+  grid-template-rows: repeat(4,minmax(1fr));
   margin: 5%;
   background-color: #DAD4F7
 }
 
 .fourth-body-headline{
   grid-column: 1/12;
-  grid-row: 1/2;
+  grid-row: 1;
   text-align:center;
 }
 
@@ -369,7 +376,7 @@ width: 450px;
 
 .fourth-body-button{
   grid-column:1/12;
-  grid-row: 3/4;
+  grid-row: 3;
   text-align:center;
   
 }
@@ -710,15 +717,16 @@ width: 450px;
 .third-body{
   display: grid;
   grid-template-columns: repeat(12,minmax(1fr));
-  grid-template-rows: repeat(3,minmax(1fr));
+  grid-template-rows: repeat(5,minmax(1fr));
   background-color: #343A40;
 }
 
 .third-body-text1{
   grid-column: 1/12;
+  grid-row:1/2;
   text-align: center;
   color: white;
-  height: 10px;
+  padding: 10px;
 }
 
 .third-body-step{
@@ -732,20 +740,32 @@ width: 450px;
   margin: 10px;
 }
 
-.step{
+.steps>div:nth-child(2){
+  margin:2% !important;
+}
+
+.steps>div:nth-child(3){
+  margin:2% !important;
+}
+
+.steps>div:first-child{
   display: block;
   border-radius: 50px;
   width: 100px;
   height: 100px;
-  border: 1px solid #DAD4F7;
+  border: 2px solid #DAD4F7;
   background-color:white;
   color: #343A40;
-  padding-top:35px; 
+  text-align:center;
+  font-size:1.2rem;
+  padding-top:5%;
+
 }
+
+
 
 .third-body-text2{
   grid-column: 10/12;
-  text-align: center;
   color:white;
 }
 
