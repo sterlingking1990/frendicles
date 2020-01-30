@@ -597,6 +597,15 @@ text-align:center
   font:sans-serif comic helvetica;
 }
 
+.offer_payment{
+  display:flex;
+  flex-wrap: wrap;
+}
+
+.offer_payment>*{
+  flex:1 1 auto;
+}
+
 
 
 

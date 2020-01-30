@@ -2,10 +2,14 @@ import React from 'react'
 import {withFirebase, FirebaseContext} from '../firebase'
 import { AuthUserContext } from '../session';
 import moment from 'moment';
+import PaystackButton from 'react-paystack';
 
 
 
 const INITIALS = {
+    pkey: "pk_test_c6ee2e7a44ffb088bff0cd3cfe7665336b40b6c0", //PAYSTACK PUBLIC KEY
+    email: "izundukingsleyemeka@gmail.com",  // customer email
+    amount: 10000,
     places: [],
     hooks: [],
     joinPlaces:[],
@@ -22,6 +26,8 @@ const INITIALS = {
     join_token:null,
     search_text:'',
     user_id:'',
+    make_payment:false,
+    negotiation_pay:0,
 }
 
 class PlacesToJoinFB extends React.Component {
@@ -155,8 +161,45 @@ class PlacesToJoinFB extends React.Component {
              event.preventDefault();
          }
 
+         readyPayment=()=>{
+             const {make_payment}=this.state
+             if(make_payment){
+                 this.setState({make_payment:false})
+             }
+             else{
+                 this.setState({make_payment:true})
+             }
+         }
+
+         setNegotiationPay=event=>{
+             const negotiated_amount=event.target.value
+             console.log(event.target.value)
+            
+             this.setState({[event.target.name]:negotiated_amount})
+             event.preventDefault();
+         }
+
+    callback = (response) => {
+        console.log(response); // card charged successfully, get reference here
+    }
+
+    close = () => {
+        console.log("Payment closed");
+    }
+
+    getReference = () => {
+        //you can put any unique reference implementation code here
+        let text = "";
+        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
+
+        for (let i = 0; i < 15; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
+
     render(){
-        const {loading_places,places,hooks,join_ref,joinPlaces,isToJoin,join_token,allJoined,isToUnjoin,search_text} = this.state
+        const {loading_places,places,hooks,join_ref,joinPlaces,isToJoin,join_token,allJoined,isToUnjoin,search_text, make_payment, negotiation_pay, amount,email,pkey} = this.state
 
         return(
             <div id="places_to_join">
@@ -169,7 +212,7 @@ class PlacesToJoinFB extends React.Component {
                     </div>
                     <div className="col-lg-12 sm-12">
                     {loading_places && <p className="text-center bg-dark text-white">loading...</p>}
-                    {places.length>0 ? <Places places={places} allJoined={allJoined} hooks={hooks} joinPlaces={joinPlaces} onJoinPlace={this.onJoinPlace} onUnJoinPlace={this.onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnjoin} join_token={join_token}/>
+                    {places.length>0 ? <Places places={places} allJoined={allJoined} hooks={hooks} joinPlaces={joinPlaces} onJoinPlace={this.onJoinPlace} onUnJoinPlace={this.onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnjoin} join_token={join_token} readyPayment={this.readyPayment} make_payment={make_payment} setNegotiationPay={this.setNegotiationPay} negotiation_pay={negotiation_pay} email={email} amount={amount} pkey={pkey} getReference={this.getReference} close={this.close} callback={this.callback}/>
                     :
                     <h3 className="text-display display-4 text-center text-dark">No Offer created by other businesses, Be the first to Create promotional Offer for your businesses and get customers</h3> }
                     </div>
@@ -180,10 +223,10 @@ class PlacesToJoinFB extends React.Component {
     }
 }
 
-const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_ref,isToJoin,isToUnJoin,join_token,allJoined }) => (
+const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_ref,isToJoin,isToUnJoin,join_token,allJoined, readyPayment, make_payment, setNegotiationPay, negotiation_pay,email,amount,pkey, getReference={getReference}, close={close},callback={callback} }) => (
     <div>
         {places.map(place => (
-            <PlaceTemplate key={place.uid} place_id={place.uid} place={place} hooks={hooks} allJoined={allJoined} joinPlaces={joinPlaces} onJoinPlace={onJoinPlace} onUnJoinPlace={onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnJoin} join_token={join_token}/>
+            <PlaceTemplate key={place.uid} place_id={place.uid} readyPayment={readyPayment} setNegotiationPay={setNegotiationPay} make_payment={make_payment} negotiation_pay={negotiation_pay} place={place} hooks={hooks} allJoined={allJoined} joinPlaces={joinPlaces} onJoinPlace={onJoinPlace} onUnJoinPlace={onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnJoin} join_token={join_token} email={email} amount={amount} pkey={pkey} getReference={getReference} close={close} callback={callback}/>
         ))}
     </div>
 )
@@ -191,7 +234,23 @@ const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_re
 class PlaceTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isJoined: false, place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
+        this.state = {make_payment:false,nego_amount:0,isJoined: false, place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
+
+    }
+
+    setNegotiationPay=event=>{
+        const nego_amount=event.target.value;
+        this.setState({nego_amount:nego_amount})
+    }
+
+    readyPayment=()=>{
+        const { make_payment } = this.state
+        if (make_payment) {
+            this.setState({ make_payment: false })
+        }
+        else {
+            this.setState({ make_payment: true })
+        }
 
     }
 
@@ -199,7 +258,7 @@ class PlaceTemplate extends React.Component {
 
 
     render() {
-        const { place_name, description, image, contact,place_id} = this.state
+        const { place_name, description, image, contact,place_id,nego_amount,make_payment} = this.state
 
         return (
             <AuthUserContext>
@@ -241,9 +300,34 @@ class PlaceTemplate extends React.Component {
                                         }
                                         if(array_status.some(t=>t===true)){
                                             return(
-                                            <div>
+                                            <div className="offer-payment">
                                             <button className="form-control btn-danger text-dark" onClick={() => this.props.onUnJoinPlace(joinedPlaceID,authUser)}>{count_users} joined <span>Unjoin</span> </button>
-                                            <p className="text-display text-white bg-dark"> [reward token- {token}]</p></div> )
+
+                                            
+                                            <p className="text-display text-white bg-dark"> [reward token- {token}]</p>
+                                            <div className="form-check-inline">
+                                            <span className="mx-2"><label className="mx-1 text-red" for="ready_for_payment">make payment</label><input className="form-check-input" name="make_payment" value={make_payment} type="checkbox" checked={make_payment} onChange={this.readyPayment}/></span></div>
+                                            {make_payment && <div><div className="form-group mt-1"><input className="form-control" placeholder="Enter the amount negotiated" type="number" value={nego_amount} onChange={this.setNegotiationPay}/></div>
+                                            <div>
+                                                    <p>
+                                                        <PaystackButton
+                                                            text="Make Payment"
+                                                            class="payButton"
+                                                            callback={this.props.callback}
+                                                            close={this.props.close}
+                                                            disabled={true} 
+                                                            embed={true} 
+                                                            reference={this.props.getReference()}
+                                                            email={this.props.email}
+                                                            amount={nego_amount}
+                                                            paystackkey={this.props.pkey}
+                                                            tag="button"
+                                                        />
+                                                    </p>
+                                                </div>
+                                                </div>
+                                            }
+                                            </div> )
                                         }
                                         if(array_status.every(t=>t===false)){
                                             return(
