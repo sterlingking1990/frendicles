@@ -9,6 +9,8 @@ const INITIALS={
     place_name:'',
     description:'',
     contact:'',
+    email:'',
+    subaccount:'',
     image:'',
     place_hooks:[],
     toEdit:'',
@@ -49,33 +51,39 @@ class CreatePlaceFB extends React.Component{
         this.props.firebase.place(uid).remove()
     }
 
-    onPlaceUpdate=(place_name,description,image,place_hooks,place_id,contact)=>{
+    onPlaceUpdate=(place_name,description,image,place_hooks,place_id,contact,email,subaccount)=>{
         this.props.firebase.place(place_id).set({
-            place_name,
-            description,
-            contact,
-            image,
-            place_hooks,
+            place_name:place_name,
+            description:description,
+            contact:contact,
+            email:email,
+            subaccount:subaccount,
+            image:image,
+            place_hooks:place_hooks,
         })
 
     }
 
     handleSubmit=authUser=>{
-        const {place_name,description,contact,image,place_hooks}=this.state
+        const {place_name,description,contact,email,subaccount,image,place_hooks}=this.state
         const isPlaceName=place_name!==""
         const isDescription=description!==""
         const isContact=contact!==""
+        const isSubaccount=subaccount!==""
+        const isEmail=email!==""
         const isImage=image!==""
         const isPlaceHooks=place_hooks!==null
-        const proceedToSubmit=isPlaceName && isDescription && isContact && isImage && isPlaceHooks 
+        const proceedToSubmit=isPlaceName && isDescription && isContact && isImage && isPlaceHooks && isSubaccount && isEmail
         if(proceedToSubmit){
             this.props.firebase.places().push({
                 userId:authUser.uid,
-                place_name,
-                description,
-                contact,
-                image,
-                place_hooks,
+                place_name:place_name,
+                description:description,
+                contact:contact,
+                email:email,
+                subaccount:subaccount,
+                image:image,
+                place_hooks:place_hooks,
             })
             this.setState({isCreated:true})
         }
@@ -110,7 +118,7 @@ class CreatePlaceFB extends React.Component{
     }
 
     render(){
-        const {place_name,description,contact,image,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
+        const {place_name,description,contact,email,subaccount,image,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
         return(
                 
                 <div id="create-place">
@@ -129,6 +137,12 @@ class CreatePlaceFB extends React.Component{
                             </div>
                             <div className="form-group">
                                 <input type="text" name="contact" placeholder="enter contact address/phone" value={contact} className="form-control" onChange={this.onChange} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" name="contact" placeholder="enter email address" value={email} className="form-control" onChange={this.onChange} />
+                            </div>
+                            <div className="form-group">
+                                <input type="text" name="contact" placeholder="enter subaccount number" value={subaccount} className="form-control" onChange={this.onChange} />
                             </div>
                             <div className="form-group">
                                 <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} />
@@ -182,7 +196,7 @@ const Places=({places,hooks,onDeletePlace,onPlaceUpdate})=>(
 class PlaceTemplate extends React.Component{
     constructor(props){
         super(props);
-        this.state={isToEdit:false,place_name:this.props.place.place_name,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0}
+        this.state={isToEdit:false,place_name:this.props.place.place_name,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0}
 
     }
 
@@ -218,8 +232,8 @@ class PlaceTemplate extends React.Component{
     }
 
     updatePlace=()=>{
-        const {place_name,description,image,place_hooks,place_id,contact}=this.state
-        this.props.onPlaceUpdate(place_name,description,image,place_hooks,place_id,contact)
+        const {place_name,description,image,place_hooks,place_id,contact,email,subaccount}=this.state
+        this.props.onPlaceUpdate(place_name,description,image,place_hooks,place_id,contact,email,subaccount)
         this.setState({isToEdit:false})
     }
 
@@ -229,7 +243,7 @@ class PlaceTemplate extends React.Component{
     }
 
     render(){
-        const {place_name,description,image,contact,isToEdit,place_hooks,hooks}=this.state
+        const {place_name,description,image,contact,email,subaccount,isToEdit,place_hooks,hooks}=this.state
 
         return(
                 <div>
@@ -243,6 +257,12 @@ class PlaceTemplate extends React.Component{
                     </div>
                     <div className="form-group">
                         <input type="text" name="contact" placeholder="enter contact address/phone" value={contact} className="form-control" onChange={this.onChange} />
+                    </div>
+                    <div className="form-group">
+                        <input type="text" name="contact" placeholder="enter email" value={email} className="form-control" onChange={this.onChange} />
+                    </div>
+                    <div className="form-group">
+                        <input type="text" name="contact" placeholder="enter subaccount number" value={subaccount} className="form-control" onChange={this.onChange} />
                     </div>
                     <div className="form-group">
                         <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} />
@@ -269,6 +289,8 @@ class PlaceTemplate extends React.Component{
                             <h3 className="card-title text-white">{place_name}</h3>
                             <p className="card-text text-white">{description}</p>
                             <p className="card-text text-white">{contact}</p>
+                            <p className="card-text text-white">{email}</p>
+                            <p className="card-text text-white">{subaccount}</p>
                             <div className="form-check-inline">
                                 {hooks.map((hook) =>
                                     <span className="mx-2"><label className="mx-1 text-white" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" checked={place_hooks.includes(hook.uid) ? true : false} /></span>)}

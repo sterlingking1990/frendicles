@@ -25,6 +25,7 @@ const UserHeader = () => (
                             </a>
                             <ul className="dropdown-menu">
                                 <li className="nav-item"><NavLink className="nav-link" to="/accept-transaction" activeClassName="is-active" exact={true}>Accept Tranzact</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/verify-transaction" activeClassName="is-active" exact={true}>Verify Tranzact</NavLink></li>
                             </ul>
                         </li>
 

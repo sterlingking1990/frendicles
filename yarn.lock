@@ -8323,6 +8323,14 @@ payment@^2.0.3:
   dependencies:
     qj "~2.0.0"
 
+paystack@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/paystack/-/paystack-2.0.1.tgz#14a854be4a9e29ecaeaea39f6ee34bedb18c3879"
+  integrity sha512-reVONV7ZUMln/iWeM60n0BbogF3/zFWmUrqbKYVNzEAv+p9TcWDCHfNZ2mBGXzIXhyTsNXWwf4wNcXe28btAHw==
+  dependencies:
+    promise "^7.1.1"
+    request "^2.79.0"
+
 pbkdf2@^3.0.3:
   version "3.0.17"
   resolved "https://registry.yarnpkg.com/pbkdf2/-/pbkdf2-3.0.17.tgz#976c206530617b14ebb32114239f7b09336e93a6"
@@ -10004,7 +10012,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@^2.87.0, request@^2.88.0:
+request@^2.79.0, request@^2.87.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==

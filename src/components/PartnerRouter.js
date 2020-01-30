@@ -11,6 +11,7 @@ import createPlaceFB from './createPlaceFB';
 import SetFunTypeFB from './SetFunTypeFB';
 import MyTransactionsFB from './MyTransactionsFB';
 import OfatriBalanceFB from './OfatriBalanceFB';
+import VerifyTransaction from './VerifyTransaction';
 
 const UserRouter = () => (
     <Switch>
@@ -19,6 +20,7 @@ const UserRouter = () => (
         <Route exact path="/places" component={PlacesToJoinFB} />
         <Route exact path="/my-transactions" component={MyTransactionsFB} />
         <Route exact path="/accept-transaction" component={AcceptTransactionFB} />
+        <Route exact path="/verify-transaction" component={VerifyTransaction} />
         <Route exact path="/set-fun-limit" component={SetFunLimitFB} />
         <Route exact path="/set-fun-type" component={SetFunTypeFB} />
         <Route exact path="/fun-slots" component={FunSlotsFB} />
