@@ -8,7 +8,7 @@ import PaystackButton from 'react-paystack';
 
 const INITIALS = {
     pkey: "pk_test_c6ee2e7a44ffb088bff0cd3cfe7665336b40b6c0", //PAYSTACK PUBLIC KEY
-    email: "izundukingsleyemeka@gmail.com",  // customer email
+    email: "",  // customer email
     amount: 10000,
     places: [],
     hooks: [],
@@ -26,6 +26,7 @@ const INITIALS = {
     join_token:null,
     search_text:'',
     user_id:'',
+    username:'',
 }
 
 class PlacesToJoinFB extends React.Component {
@@ -44,7 +45,7 @@ class PlacesToJoinFB extends React.Component {
                     const joinList = Object.keys(joinObject).map(key => ({
                         ...joinObject[key], uid: key
                     }))
-                    this.setState({ joinPlaces: joinList,user_id:authUser.uid })
+                    this.setState({ joinPlaces: joinList,user_id:authUser.uid,username:authUser.username,email:authUser.email })
                     console.log(this.state.joinPlaces)
                 }
             })
@@ -163,7 +164,7 @@ class PlacesToJoinFB extends React.Component {
     
 
     render(){
-        const {loading_places,places,hooks,join_ref,joinPlaces,isToJoin,join_token,allJoined,isToUnjoin,search_text,email,pkey} = this.state
+        const {loading_places,places,hooks,join_ref,joinPlaces,isToJoin,join_token,allJoined,isToUnjoin,search_text,email,pkey,username} = this.state
 
         return(
             <div>
@@ -184,7 +185,7 @@ class PlacesToJoinFB extends React.Component {
                     </div>
                     <div className="col-lg-12 sm-12">
                     {loading_places && <p className="text-center bg-dark text-white">loading...</p>}
-                    {places.length>0 ? <Places places={places} allJoined={allJoined} hooks={hooks} joinPlaces={joinPlaces} onJoinPlace={this.onJoinPlace} onUnJoinPlace={this.onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnjoin} join_token={join_token} email={email} pkey={pkey}/>
+                    {places.length>0 ? <Places places={places} allJoined={allJoined} hooks={hooks} joinPlaces={joinPlaces} onJoinPlace={this.onJoinPlace} onUnJoinPlace={this.onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnjoin} join_token={join_token} email={email} pkey={pkey} username={username}/>
                     :
                     <h3 className="text-display display-4 text-center text-dark">No Offer created by other businesses, Be the first to Create promotional Offer for your businesses and get customers</h3> }
                     </div>
@@ -195,10 +196,10 @@ class PlacesToJoinFB extends React.Component {
     }
 }
 
-const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_ref,isToJoin,isToUnJoin,join_token,allJoined,email,pkey }) => (
+const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_ref,isToJoin,isToUnJoin,join_token,allJoined,email,pkey,username }) => (
     <div>
         {places.map(place => (
-            <PlaceTemplate key={place.uid} place_id={place.uid} place={place} hooks={hooks} allJoined={allJoined} joinPlaces={joinPlaces} onJoinPlace={onJoinPlace} onUnJoinPlace={onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnJoin} join_token={join_token} email={email} pkey={pkey} />
+            <PlaceTemplate key={place.uid} place_id={place.uid} place={place} hooks={hooks} allJoined={allJoined} joinPlaces={joinPlaces} onJoinPlace={onJoinPlace} onUnJoinPlace={onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnJoin} join_token={join_token} email={email} pkey={pkey} username={username}/>
         ))}
     </div>
 )
@@ -206,8 +207,16 @@ const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_re
 class PlaceTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
+        this.state = {display_name:'',make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
 
+    }
+
+    componentDidMount(){
+        const display_name={
+            username:this.props.username,
+            offer:this.props.place.place_name
+        }
+        this.setState({display_name:display_name})
     }
 
     setNegotiationPay=event=>{
@@ -252,7 +261,7 @@ class PlaceTemplate extends React.Component {
 
 
     render() {
-        const { place_name, description, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount} = this.state
+        const { place_name, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount} = this.state
 
         return (
             <AuthUserContext>
@@ -319,7 +328,7 @@ class PlaceTemplate extends React.Component {
                                                             tag="button"
                                                             subaccount="ACCT_s1hnbe5hq53ak0c"
                                                             bearer="subaccount"
-                                                            display_name={authUser.username}
+                                                            metadata={display_name}
                                                         />
                                                     </p>
                                                 </div>

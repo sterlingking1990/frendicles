@@ -143,8 +143,13 @@ class AcceptTransactionFB extends React.Component{
         event.preventDefault()
     }
 
+    setFunbeeWon=event=>{
+        const funbee_amt=event.target.value
+        this.setState({funbees_won:funbee_amt})
+    }
+
     processFunbees=(e,authUser)=>{
-        const {user_id,place_id,transaction_amount}=this.state
+        const {user_id,place_id,transaction_amount,funbees_won}=this.state
             this.props.firebase.funSettings().orderByChild('userId').equalTo(authUser.uid).on('value',snapShotSettings=>{
                 if(snapShotSettings.val()){
                 const funSettingsObject=snapShotSettings.val()
@@ -153,7 +158,7 @@ class AcceptTransactionFB extends React.Component{
                 }))
 
                 
-                    const funbee_amount = funSettingsArr.filter(funSetting => parseInt(transaction_amount) > parseInt(funSetting.start_amount) && parseInt(transaction_amount) < parseInt(funSetting.end_amount));
+                    const funbee_amount = funbees_won===null?funSettingsArr.filter(funSetting => parseInt(transaction_amount) > parseInt(funSetting.start_amount) && parseInt(transaction_amount) < parseInt(funSetting.end_amount)):funbees_won;
                     //check if the transaction amount was able to pick the range from the fun settings by this user
                     
                     if(funbee_amount.length>0){
@@ -273,7 +278,9 @@ class AcceptTransactionFB extends React.Component{
                                                 <p className="text-display text-center text-white bg-dark">you are processing transaction for {user_verified} about {place_verified} offer</p>
                                                 <div className="form-group">
                                                     <p className="text-display text-center bg-dark text-white">Enter amount for transaction</p>
-                                                    <input className="form-control" type="text" onChange={this.saveTransactionAmount} />
+                                                    <input className="form-control" type="text" value={transaction_amount} onChange={this.saveTransactionAmount} />
+                                                    <p className="text-display text-center bg-dark text-white">Enter Flat Rate Reward</p>
+                                                    <input className="form-control" type="text" value={funbees_won} onChange={this.setFunbeeWon} />
                                                 </div>
                                                 <div className="form-group">
                                                     <button className="form-control btn-success bg-dark" onClick={(e)=>this.processFunbees(e,authUser)}>Save transaction</button>
