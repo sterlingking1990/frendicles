@@ -1,0 +1,30 @@
+.photos{
+    column-count:1;
+    column-gap: 1em;
+}
+
+.photo{
+    background-color: #eee;
+    display: inline-block;
+    margin-bottom: 1em;
+    width:100%;
+}
+
+@media only screen and (min-width: 480px) {
+    .photos{
+        column-count: 2;
+    }
+}
+
+@media only screen and (min-width:720px){
+    .photos{
+        column-count: 3;
+    }
+
+}
+
+@media only screen and (min-width: 960px){
+    .photos{
+        column-count: 4;
+    }
+}

@@ -3,7 +3,11 @@ import {withFirebase, FirebaseContext} from '../firebase'
 import { AuthUserContext } from '../session';
 import moment from 'moment';
 import PaystackButton from 'react-paystack';
+import InstragramGallery from './InstragramGallery';
 
+const THUMBNAIL_WIDTH=640;
+const PHOTO_COUNT=60;
+const INSTAGRAM_ID="3468531814"
 
 
 const INITIALS = {
@@ -207,7 +211,7 @@ const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_re
 class PlaceTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {display_name:'',make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
+        this.state = {display_name:'',view_more_images:false,make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
 
     }
 
@@ -257,25 +261,41 @@ class PlaceTemplate extends React.Component {
         return text;
     }
 
+    setViewGallery=()=>{
+        const view_insta_pics=this.state.view_more_images;
+        if(view_insta_pics){
+            this.setState({view_more_images:false})
+        }
+        else{
+        this.setState({view_more_images:true})
+        }
+    }
+
 
 
 
     render() {
-        const { place_name, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount} = this.state
+        const { place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount} = this.state
 
         return (
             <AuthUserContext>
             {authUser=>(
                 <div>
                     <div className="card bg-dark">
+                            <span className="text-right text-sm text-display"><i className="fa fa-info mx-2 text-red" id="delete_place" onClick={this.setViewGallery}></i></span>
                     
                         {this.props.isToUnJoin && <p className="text-danger text-center">sorry you cannot unjoin an offer you have already made transaction on</p>}
 
                         <div className="card-body">
+                        
+                        {view_more_images ? <InstragramGallery userId={INSTAGRAM_ID} thumbnailWidth={THUMBNAIL_WIDTH} photoCount={PHOTO_COUNT}/> : 
+                                <div>
                                 <h3 className="card-title text-white">{place_name}</h3>
                                 <img src={image} className="card-img img-responsive img-fluid" />
                             <p className="card-text text-white">{description}</p>
                             <p className="card-text text-white">{contact}</p>
+                            </div>
+                        }
                             {/* <div className="form-check-inline">
                                 {this.props.loading_hooks && <p className="text-center bg-dark text-white">loading hooks...</p>}
                                 {hooks.map((hook) =>
