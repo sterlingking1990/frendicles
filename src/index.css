@@ -325,6 +325,10 @@ text-align: center;
   color:white;
 }
 
+.reward_image{
+  display:none;
+}
+
 .third-body-step{
   grid-column: 1/12;
 }
@@ -380,6 +384,7 @@ text-align:center
   grid-column:1/12;
   grid-row: 3;
   text-align:center;
+  padding:10px;
   
 }
 
@@ -611,6 +616,10 @@ text-align:center
   height:100%;
 }
 
+ul{
+  list-style: square outside url(https://cdn.bitdegree.org/learn/list-style-image-marker-1.png?426d93cd);
+}
+
 
 
 
@@ -637,37 +646,35 @@ text-align:center
   .section{
     display: grid;
     grid-template-columns: repeat(12,minmax(1fr));
-    grid-template-rows: repeat(5,minmax(1fr));
+    grid-template-rows: repeat(10,minmax(1fr));
   }
 
   .banner{
   grid-column: 1/12;
-  grid-row: 1/5;
+  grid-row: 1;
   background: url('./bg-image2.jpg') no-repeat center center;
   -webkit-background-size:cover;
   -moz-background-size:cover;
   -o-background-size:cover;
   background-size: 100%;
+  height:100%;
   
 }
 
 .banner-text{
-  padding:10px;
-  grid-column: 3/9;
-  grid-row: 1/5;
+  grid-column: 2/9;
+  grid-row: 1/10;
   color: hsl(250, 69%, 98%);
   font-size: 0.9em;
   text-align:center;
+  padding:10px;
 }
 
-.banner-text h3{
-  font-size:1.2em;
-}
 
 .banner-text button{
-  margin-top: 10px;
   width: 150px;
   height: 30px;
+  border-radius:20px;
 }
 
 .first-body{
@@ -689,7 +696,7 @@ text-align:center
 }
 
 .first-note-pic{
-  flex:1 1 350px;
+  width:100%;
   background-image: url('bg-image.jpg') no-repeat center center;
   -webkit-background-size:cover;
   -o-background-size:cover;
@@ -702,10 +709,11 @@ text-align:center
 .first-note{
   color: white;
   margin: auto;
+  width:100%;
 }
 
 .first-note>div{
-  flex:1 1 300px;
+  width:100%;
   text-align:center;
 }
 
@@ -750,10 +758,24 @@ text-align:center
 
 .third-body-text1{
   grid-column: 1/12;
-  grid-row:1/2;
+  grid-row:1;
   text-align: center;
   color: white;
   padding: 10px;
+}
+
+.reward-image{
+  display:block;
+  grid-column:1/12;
+  grid-row:2;
+  background-image: url('./reward.jpg');
+   -webkit-background-size:cover;
+  -o-background-size:cover;
+  -moz-background-size:cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-self: center;
+
 }
 
 .third-body-step{
@@ -799,7 +821,7 @@ text-align:center
 .fourth-body{
   display:grid;
   grid-template-columns: repeat(12,minmax(1fr));
-  grid-template-rows: repeat(5,minmax(1fr));
+  grid-template-rows: repeat(7,minmax(1fr));
   background-color: #DAD4F7
 }
 
@@ -811,19 +833,20 @@ text-align:center
 
 .fourth-body-text{
   grid-column:1/12;
-  flex:1 1 auto;
+  grid-row:2;
   text-align:center
 }
 
 .fourth-body-button{
   grid-column:1/12;
-  flex:1 1 auto;
+  grid-row:3;
   text-align:center; 
+  margin:10px;
 }
 
 .fourth-body-button>button{
-  flex:1 1 30ch;
-  height: 100px;
+  width:100%;
+  padding: 10px;
   background-color: #343A40;
   color:white;
   font-size:1.4em;

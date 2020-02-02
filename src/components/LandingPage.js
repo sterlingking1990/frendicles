@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 // import store1 from '../../src/store1.jpg'
 // import store2 from '../../src/store2.jpg'
 // import store3 from '../../src/store3.jpg'
@@ -10,10 +11,9 @@ const LandingPage = () => (
 
             </div>
             <div className="banner-text">
-                <h3>Are you about to make a transaction from 1000 naira upto 1,000,000 or even more?!</h3>
                 <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
-                <span><strong>No Referral </strong></span> <strong> No Paper work</strong>
-                <p><button id="begin-here">Begin Here </button> <button id="plans">See Plans</button></p>
+                <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
+                <p><button id="begin-here"><NavLink to="/signin" exact={true}>Begin Here </NavLink></button></p>
             </div>
         </div>
 
@@ -54,6 +54,7 @@ const LandingPage = () => (
             <div className="third-body-text1">
                 <h3>How to get Rewards</h3>
             </div>
+            <div className="reward-image"></div>
             <div className="third-body-step">
                 <div className="steps">
                     <div className="step"><span>1</span></div>
@@ -99,11 +100,15 @@ const LandingPage = () => (
                 <h3>Ofatri Business Plan</h3>
             </div>
             <div className="fourth-body-text">
-                <div>Its 2020, a year of appreciation. Customers are buying from brands that are rewarding no matter how little their transaction</div>
-                <div>Increace your customer inflow by partnering with Ofatri in making sure your customers stay happy and returning for more!</div>
+                <ul>
+                <li>Do you run a business?</li>
+                <li>Are you on Instagram?</li>
+                <li>Do you have at least 60 Insta pics of your product or service?</li>
+                </ul>
+                <div>Then your business have what it takes to get listed on Ofatri</div>
             </div>
             <div className="fourth-body-button">
-                <button id="contact-ofatri">Contact Ofatri Now!!!</button>
+                <button id="contact-ofatri"><a href="https://forms.gle/BP4iTq6nFZfqdjxc6">Contact Ofatri Now!!!</a></button>
             </div>
         </div>
         
