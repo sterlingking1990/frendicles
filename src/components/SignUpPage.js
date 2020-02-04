@@ -64,13 +64,13 @@ class SignUpHOC extends Component {
         return (
 
             <div className="signup">
-                <div className="signup-section">
-                    <div className="signup-banner">
+                <div className="section">
+                    <div className="banner">
 
                     </div>
-                    <div className="signup-banner-text">
-                        <h3>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</h3>
-                        <span><strong>SignUp to begin </strong></span>
+                    <div className="banner-text">
+                        <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
+                        <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
                     </div>
                 </div>
 

@@ -56,7 +56,7 @@ class CheckMilestone extends React.Component{
         let no_transaction=''
         if(user_fun_list.length>0){
             for(let i=0;i<user_fun_list.length;i++){
-                sum_total_reward+=user_fun_list[i].status?0:user_fun_list[i].funbees_won
+                sum_total_reward+=user_fun_list[i].status?0:parseInt(user_fun_list[i].funbees_won)
             }
         }
         if(sum_total_reward===0){

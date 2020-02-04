@@ -135,12 +135,14 @@ const LandingPage = () => (
                 <div className="sixth-body-contacts">
                     <div className="sixth-body-address">
                         <div>Head Office: Block ID Area 8 Opic Estate Agbara, Ogun State</div>
-                        <div>Phone Number: 08060456301</div>
-                        <div>Email:ofatri@gmail.com</div>
-                        <div><span>f</span><span>i</span><span>t</span></div>
                     </div>
+                    <br/>
                     <div className="sixth-body-socials">
-                            <div>work with ofatri</div>
+
+                            <div>whatsApp: 08060456301</div>
+                            <div>IG,Twitter: @ofatri</div>
+                            <div>Email: izundukingsleyemeka@gmail.com</div>
+
                     </div>
                 </div>
             </div>

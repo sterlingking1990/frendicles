@@ -52,7 +52,7 @@ class SignInHOC extends React.Component{
                 <div className="login-section">
                     <div className="login-banner">
                         <div className="login-banner-text">
-                            <h3>Welcome back, Continue Enjoying Rewards on Every Transaction You Make</h3>
+                            <p>Welcome back, Continue Enjoying Rewards on Every Transaction You Make</p>
                             <span><strong>Sign In to Continue</strong></span>
                         </div>
                     </div>

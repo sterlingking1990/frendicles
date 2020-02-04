@@ -158,15 +158,21 @@ class AcceptTransactionFB extends React.Component{
                 }))
 
                 
-                    const funbee_amount = funbees_won===null?funSettingsArr.filter(funSetting => parseInt(transaction_amount) > parseInt(funSetting.start_amount) && parseInt(transaction_amount) < parseInt(funSetting.end_amount)):funbees_won;
+                    var funbee_amount = funbees_won===null?funSettingsArr.filter(funSetting => parseInt(transaction_amount) > parseInt(funSetting.start_amount) && parseInt(transaction_amount) < parseInt(funSetting.end_amount)):funbees_won;
                     //check if the transaction amount was able to pick the range from the fun settings by this user
                     
-                    if(funbee_amount.length>0){
+                    if(typeof(funbee_amount)===Array){
                         console.log(funbee_amount)
                         console.log(transaction_amount)
-                        var funbees_amount = parseInt((funbee_amount[0].fun_amount)/100)*parseInt(transaction_amount);
-                        const funbees_won=funbees_amount/2;  //divide the amount by 2 to get the amount user will get for his reward. the amin amount is the one the agent gets for procurring the customer
-                        this.setState({ funbees_won: funbees_won })
+                        //when funbee amount is set to percent charge on total buy of customer
+                        //hence getting the actual money- a product of the percent set
+                        funbee_amount = parseInt((funbee_amount[0].fun_amount)/100)*parseInt(transaction_amount);
+                    }
+                    //otherwise funbee amount is the one entered as flat rate , 
+                    //either of the amount is subjected to division by 2, the customers reward
+                    if(funbee_amount){
+                        const funbees_won=parseInt(funbee_amount/2);  //divide the amount by 2 to get the amount user will get for his reward. the amin amount is the one the agent gets for procurring the customer
+                        this.setState({ funbees_won: funbee_amount })
                         console.log(funbees_won);
                         //deciding the fun types from the transaction amount and finally storing the fun 
                         this.props.firebase.funTypes().orderByChild('userId').equalTo(authUser.uid).on('value', snapShot => {
@@ -177,8 +183,8 @@ class AcceptTransactionFB extends React.Component{
                                 }))
                                 this.setState({ fun_types: funTypeArr })
 
-                                
                                 if (funbees_won !== null) {
+                                    console.log(funbees_won)
                                     var fun_types_offered = []
                                     for (let i = 0; i < funTypeArr.length; i++) {
                                         if (parseInt(funTypeArr[i].unit_cost) <= parseInt(funbees_won)) {
@@ -260,6 +266,14 @@ class AcceptTransactionFB extends React.Component{
 
         return(
             <div id="accept_transaction">
+                <div className="section">
+                    <div className="banner">
+
+                    </div>
+                    <div className="banner-text">
+                        <h3>Make transactions, Get Rewarded, Reach your Goals</h3>
+                    </div>
+                </div>
             <AuthUserContext>
                 {authUser=>(
                         <div className="container mt-3">
@@ -287,11 +301,11 @@ class AcceptTransactionFB extends React.Component{
                                                 </div>
                                             </div>
                                         }
-                                        {error_verification && <h3 className="text-display text-center bg-dark text-white">Error Verification, Check that this token belongs to this offer</h3>}
-                                        {error_fetching_fun_settings && <h3 className="text-display text-center bg-dark text-white">Please set funbees settings for customer transactions</h3>}
-                                        {error_fetching_fun_types && <h3 className="text-display text-center bg-dark text-white">Please set fun types for customer completed transaction</h3>}
-                                        {transaction_completed && <h3 className="text-display text-center bg-dark text-white">Transaction Completed, funbee won- {funbees_won} </h3>}
-                                        {error_getting_range && <h3 className="text-display text-center bg-dark text-white">The transaction amount is not configured to recieve reward</h3>}
+                                        {error_verification && <p className="text-display text-center bg-dark text-white">Error Verification, Check that this token belongs to this offer</p>}
+                                        {error_fetching_fun_settings && <p className="text-display text-center bg-dark text-white">Please set funbees settings for customer transactions</p>}
+                                        {error_fetching_fun_types && <p className="text-display text-center bg-dark text-white">Please set fun types for customer completed transaction</p>}
+                                        {transaction_completed && <p className="text-display text-center bg-dark text-white">Transaction Completed, funbee won- {parseInt(funbees_won/2)} </p>}
+                                        {error_getting_range && <p className="text-display text-center bg-dark text-white">The transaction amount is not configured to recieve reward</p>}
 
                                     </div>
 

@@ -80,6 +80,16 @@ class UpdateAccountFB extends React.Component{
         const {email,balance,account_details,error}=this.state;
         return(
             <div id="update-transaction">
+                <div className="section">
+                    <div className="banner">
+
+                    </div>
+                    <div className="banner-text">
+                        <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
+                        <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
+                        
+                    </div>
+                </div>
                 <div className="container mt-3">
                     <div className="row">
                         <div className="col-lg-12 sm-12">

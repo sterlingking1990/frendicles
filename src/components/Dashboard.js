@@ -40,7 +40,7 @@ class Dashboard extends React.Component{
 
                             </div>
                             <div className="banner-text">
-                                <h3>Make transactions from 1000 upto 1,000,000 or more and get fantastic rewards</h3>
+                        <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
                                 {username ? <p>Welcome to Ofatri, {username}</p> : <p>Welcome to Ofatri {username}</p>}
                             </div>
                         </div>
@@ -242,11 +242,11 @@ class Dashboard extends React.Component{
 
                             <div className="row my-3">
                                 <div className="col-lg-12 sm-12">
-                                    <p className="text-display display-4 text-center bg-light">Ofatri Business Plans</p>
+                                    <p className="text-display display-4 text-center bg-light">Ofatri Business</p>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-lg-6">
+                                {/* <div className="col-lg-6">
 
                                     <div className="card bg-white mt-2">
                                         <h3 className="card-title text-red text-center"><strong>Ofatri Basic</strong></h3>
@@ -265,24 +265,30 @@ class Dashboard extends React.Component{
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                           
-                                <div className="col-lg-6">
+                                <div className="col">
                                     <div className="card bg-white mt-2">
-                                        <h3 className="card-title text-red text-center"><strong>Ofatri TreatMeNice</strong></h3>
+                                        <h3 className="card-title text-red text-center"><strong>Getting Listed on Ofatri</strong></h3>
                                         <div className="card-image text-center">
                                             <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
                                         </div>
                                         <div className="card-content">
-                                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri TreatMeNice</strong> With Ofatri TreatMeNice Feature, we handle everything about taking care of appreciating your special and loyal customers while you concentrate on your business of selling to them.</p>
-                                            <p className="text-justify text-center mx-3 my-4"><strong>With TreatMeNice, we...</strong></p>
+                                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri Business</strong> will provide your business with a dedicated Ofatri business manager who will handle everything relating to</p>
                                             <ul>
-                                                <li>Manage your Promotional Offer account</li>
-                                                <li>Relate with your customers about your brand</li>
-                                                <li>Create Promotional Offers that conforms with your brand</li>
+                                                <li>Getting you new customers at higher rate</li>
+                                                <li>Increasing your customer to product purchases</li>
+                                                <li>Increasing your business revenue</li>
                                             </ul>
+                                            <p className="text-justify text-center mx-3 my-4"><strong>To get listed, ensure you...</strong></p>
+                                            <ul>
+                                                <li>Have an Instagram account for your business</li>
+                                                <li>At least 20 pics of product or service in your Instagram business account </li>
+                                                <li>Can allow your customers pay online using trusted payment gateway i.e paystack</li>
+                                            </ul>
+                                            <p className="text-justify text-center mx-3 my-4"><strong>Click on subscribe now and a business manager will contact you...</strong></p>
                                             <div className="form-group">
-                                                <button className="form-control btn-success btn-lg text-center">SUBSCRIBE THIS OFFER</button>
+                                        <button className="form-control btn-success btn-lg text-center"><a href="https://forms.gle/BP4iTq6nFZfqdjxc6">SUBSCRIBE NOW</a></button>
                                             </div>
                                         </div>
                                     </div>

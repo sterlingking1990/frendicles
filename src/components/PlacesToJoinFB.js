@@ -7,7 +7,7 @@ import InstragramGallery from './InstragramGallery';
 
 const THUMBNAIL_WIDTH=640;
 const PHOTO_COUNT=60;
-const INSTAGRAM_ID="3468531814"
+// const INSTAGRAM_ID="3468531814"
 
 
 const INITIALS = {
@@ -211,7 +211,7 @@ const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_re
 class PlaceTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {display_name:'',view_more_images:false,make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
+        this.state = {subaccount:this.props.place.subaccount,display_name:'',view_more_images:false,make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, ig_acct:this.props.place.ig_acct,place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
 
     }
 
@@ -275,20 +275,20 @@ class PlaceTemplate extends React.Component {
 
 
     render() {
-        const { place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount} = this.state
+        const { ig_acct,place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount,subaccount} = this.state
 
         return (
             <AuthUserContext>
             {authUser=>(
                 <div>
                     <div className="card bg-dark">
-                            <span className="text-right text-sm text-display"><i className="fa fa-info mx-2 text-red" id="delete_place" onClick={this.setViewGallery}></i></span>
+                            <span className="text-right text-sm text-display"><i className="fa fa-image mx-2 text-green" id="view_gallery" onClick={this.setViewGallery}></i></span>
                     
                         {this.props.isToUnJoin && <p className="text-danger text-center">sorry you cannot unjoin an offer you have already made transaction on</p>}
 
                         <div className="card-body">
                         
-                        {view_more_images ? <InstragramGallery userId={INSTAGRAM_ID} thumbnailWidth={THUMBNAIL_WIDTH} photoCount={PHOTO_COUNT}/> : 
+                        {view_more_images ? <InstragramGallery userId={ig_acct} thumbnailWidth={THUMBNAIL_WIDTH} photoCount={PHOTO_COUNT}/> : 
                                 <div>
                                 <h3 className="card-title text-white">{place_name}</h3>
                                 <img src={image} className="card-img img-responsive img-fluid" />
@@ -346,7 +346,7 @@ class PlaceTemplate extends React.Component {
                                                             amount={main_nego_amount}
                                                             paystackkey={this.props.pkey}
                                                             tag="button"
-                                                            subaccount="ACCT_s1hnbe5hq53ak0c"
+                                                            subaccount={subaccount}
                                                             bearer="subaccount"
                                                             metadata={display_name}
                                                         />

@@ -6,19 +6,25 @@ import { setTimeout } from 'timers';
 class SetFunLimitFB extends React.Component{
     constructor(props){
         super(props);
-        this.state={start_amount:0,end_amount:0,fun_amount:0,savedSettings:false,user_settings:[]}
+        this.state={start_amount:'',end_amount:'',fun_amount:'',savedSettings:false,user_settings:[],user_id:''}
     }
 
     componentDidMount(){
         this.props.firebase.auth.onAuthStateChanged(authUser=>{
-            this.props.firebase.funSettings().orderByChild("userId").equalTo(authUser.uid).on('value',snapShot=>{
+
+            this.props.firebase.funSettings().on('value',snapShot=>{
                 const userFunSettingsObj=snapShot.val();
                 if(userFunSettingsObj){
                     const userFunSettingsArr=Object.keys(userFunSettingsObj).map(key=>({
-                        ...userFunSettingsObj,uid:key
-                    }))
-                    this.setState({user_settings:userFunSettingsArr})
-                }
+                        ...userFunSettingsObj[key],uid:key
+                }))
+
+                
+                    const user_settings=userFunSettingsArr.filter(fun_settings=>fun_settings.userId===authUser.uid)
+                
+                    this.setState({user_settings:user_settings})
+                   
+                }  
                 else{
                     this.setState({user_settings:[]})
                 }
@@ -64,13 +70,23 @@ class SetFunLimitFB extends React.Component{
     }
 
     render(){
-        const {start_amount,end_amount,fun_amount, savedSettings,user_settings}=this.state
+        const {start_amount,end_amount,fun_amount,savedSettings,user_settings}=this.state
+        
 
         return(
             <AuthUserContext>
                 {authUser => (
             <div id="set_fun_limit">
-                
+                        <div className="section">
+                            <div className="banner">
+
+                            </div>
+                            <div className="banner-text">
+                                <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
+                                <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
+                                
+                            </div>
+                        </div>
                     <div className="container mt-3">
                         <div className="row">
                             <div className="col-lg-12 sm-12">
@@ -105,6 +121,17 @@ class SetFunLimitFB extends React.Component{
                     </div>
 
                     <div className="container mt-3">
+                            {/* {(() => {
+                                for (let i = 0; i < user_settings.length; i++) {
+                                    return (
+                                        <div>
+                                            <h5 className="text-display text-center bg-dark text-white">From - {user_settings[i].start_amount}</h5>
+                                            <h5 className="text-display text-center text-white">To - {user_settings[i].end_amount}</h5>
+                                            <h5 className="text-display text-center text-white">Rate(%) -  {user_settings[i].fun_amount}</h5>
+                                        </div>
+                                    )
+                                }
+                            })}     */}
                         <UserSettings user_settings={user_settings} onRemoveSetting={this.onRemoveSetting}/>
                     </div>
                 </div> 
@@ -116,8 +143,9 @@ class SetFunLimitFB extends React.Component{
 
 const UserSettings = ({ user_settings, onRemoveSetting }) => (
     <div>
-        {user_settings.map(user_setting => (
-            <SettingTemplate key={user_setting.uid} user_setting={user_setting} onRemoveSetting={onRemoveSetting} />
+        {user_settings.map(user_setting =>(
+            <SettingTemplate key={user_setting.uid} user_settings={user_settings} user_setting={user_setting} onRemoveSetting={onRemoveSetting} />
+            
         ))}
     </div>
 )
@@ -125,12 +153,11 @@ const UserSettings = ({ user_settings, onRemoveSetting }) => (
 class SettingTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { user_setting: this.props.user_setting }
+    
     }
 
 
     render() {
-        const { user_setting } = this.state
 
 
         return (
@@ -139,19 +166,13 @@ class SettingTemplate extends React.Component {
                 <div className="card-title">
                     <span className="text-right text-sm text-display"><i className="fa fa-remove mx-2 text-red" onClick={(() => this.props.onRemoveSetting(this.props.user_setting.uid))}></i></span>
                     <div className="card-body">
-                    {(() => {
-                        for (let i = 0; i < user_setting.length; i++) {
-                            return (
-                                <div>
-                            <h5 className="text-display text-center bg-dark text-white">From - {user_setting[i].start_amount}</h5>
-                            <h5 className="text-display text-center text-white">To - {user_setting[i].end_amount}</h5>
-                            <h5 className="text-display text-center text-white">Rate(%) -  {user_setting[i].fun_amount}</h5>
-                            </div>
-                            )
-                        }
-                    })()}
-                   
-                        
+                       
+                                   <div>
+                                       <h5 className="text-display text-center bg-dark text-white">From - {this.props.user_setting.start_amount}</h5>
+                                       <h5 className="text-display text-center text-white">To - {this.props.user_setting.end_amount}</h5>
+                                       <h5 className="text-display text-center text-white">Rate(%) -  {this.props.user_setting.fun_amount}</h5>
+                                   </div>
+                              
                     </div>
 
                 </div>

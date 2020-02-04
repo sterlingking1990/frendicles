@@ -63,11 +63,34 @@ class SetFunTypeFB extends React.Component {
 
     }
 
+    onRemoveFun=uid=>{
+        this.props.firebase.FunTypes(uid).remove()
+        //update the container
+        const new_settings_detail = this.state.fun_type_db.filter((fun) => fun.uid !== uid)
+        if (new_settings_detail.length > 0) {
+            this.setState({ fun_type_db: new_settings_detail })
+        }
+        else {
+            this.setState({ fun_type_db: [] })
+        }
+        
+    }
+
     render() {
         const { fun_type_db,fun_type, unit_cost, savedSettings,empty_fun_data,loading_fun_data,already_exists } = this.state
 
         return (
             <div id="set_fun_limit">
+                <div className="section">
+                    <div className="banner">
+
+                    </div>
+                    <div className="banner-text">
+                        <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
+                        <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
+                       
+                    </div>
+                </div>
             <AuthUserContext>
                 {authUser => (
                         <div className="container mt-3">
@@ -112,7 +135,7 @@ class SetFunTypeFB extends React.Component {
                 </div>
             </div>
             <div className="container mt-3">
-                <FunType fun_type_db={fun_type_db}/>
+                <FunType fun_type_db={fun_type_db} onRemoveFun={this.onRemoveFun}/>
             </div>
             
         </div>
@@ -120,9 +143,9 @@ class SetFunTypeFB extends React.Component {
     }
 }
 
-const FunType=({fun_type_db})=>(
+const FunType=({fun_type_db,onRemoveFun})=>(
     <div>
-        {fun_type_db.map(fun_type => (<FunTypeTemplate key={fun_type.uid} fun={fun_type}/> ))}
+        {fun_type_db.map(fun_type => (<FunTypeTemplate key={fun_type.uid} fun={fun_type} onRemoveFun={onRemoveFun}/> ))}
     </div>
 )
 
@@ -137,6 +160,8 @@ class FunTypeTemplate extends React.Component{
                 <div className="row" id="display_fun">
                     <div className="col-lg-12 sm-12">
                         <div className="card bg-dark">
+                        <span className="text-right text-sm text-display"><i className="fa fa-remove mx-2 text-red" onClick={(() => this.props.onRemoveFun(this.props.fun.uid))}></i></span>
+
                             <div className="card-title">
                                 <h3 className="display-4 text-center text-display text-success my-3">{this.props.fun.fun_type}</h3>
                                 <p className="text-display text-center text-white text mt-3">{this.props.fun.unit_cost}</p>
