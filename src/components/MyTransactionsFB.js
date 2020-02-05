@@ -33,10 +33,12 @@ class MyTransactionsFB extends React.Component{
 
         return (
             <div id="my_transactions">
-                <div className="banner-body-text1">
-                    <span className="logo-name" id="app-name">ofatri</span>
-                    <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
-                    
+                <div className="banner-body-background">
+                    <div className="banner-body-text1">
+                        <span className="logo-name" id="app-name">ofatri</span>
+                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
+
+                    </div>
                 </div>
             {user_transaction_fun_list.length<=0 ? <h3 className="display-4 text-center text-white bg-dark">You have not made any transactions yet!</h3> : 
             <FirebaseContext.Consumer>

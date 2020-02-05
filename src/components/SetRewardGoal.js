@@ -117,6 +117,7 @@ class SetRewardGoal extends React.Component{
                 </div>
 
                 <div className="goal-container">
+                    <p className="display-text text-center text-white bg-dark">{user_goal_choice.length} Goals Selected</p>
                     <div className="goal-controls">
                         <div className="grid-control">                            
                             <div><label for="goal-control">Select all</label> <input type="checkbox" value={select_all_goal} checked={select_all_goal} onChange={this.handleSelectAllGoal}/></div>

@@ -50,7 +50,6 @@ class PlacesToJoinFB extends React.Component {
                         ...joinObject[key], uid: key
                     }))
                     this.setState({ joinPlaces: joinList,user_id:authUser.uid,username:authUser.username,email:authUser.email })
-                    console.log(this.state.joinPlaces)
                 }
             })
         
@@ -59,7 +58,7 @@ class PlacesToJoinFB extends React.Component {
                 const allJoinedObject=snapShotAllJoin.val()
                 if(allJoinedObject){
                     const allJoinedArr=Object.keys(allJoinedObject).map(key=>({
-                        ...allJoinedObject,uid:key
+                        ...allJoinedObject[key],uid:key
                     }))
                     
                     this.setState({allJoined:allJoinedArr})
@@ -210,7 +209,7 @@ const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_re
 class PlaceTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {subaccount:this.props.place.subaccount,display_name:'',view_more_images:false,make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, ig_acct:this.props.place.ig_acct,place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
+        this.state = {allJoined:this.props.allJoined,subaccount:this.props.place.subaccount,display_name:'',view_more_images:false,make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, ig_acct:this.props.place.ig_acct,place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
 
     }
 
@@ -274,8 +273,7 @@ class PlaceTemplate extends React.Component {
 
 
     render() {
-        const { ig_acct,place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount,subaccount} = this.state
-
+        const { ig_acct,place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount,subaccount,allJoined} = this.state
         return (
             <AuthUserContext>
             {authUser=>(
@@ -308,7 +306,7 @@ class PlaceTemplate extends React.Component {
                                         var count_users=0
                                             var is_present=this.props.allJoined.filter(all_join=>all_join.place_id===this.props.place_id);
                                             if(is_present){
-                                                count_users+=1;
+                                                count_users=is_present.length;
                                             }
                                         //checking if the current place has been joined by the current user
                                         if(this.props.joinPlaces){
