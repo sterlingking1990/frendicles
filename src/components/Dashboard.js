@@ -35,23 +35,22 @@ class Dashboard extends React.Component{
         const {username}=this.state;
         return(
                     <div>
-                        <div className="section">
-                            <div className="banner">
-
-                            </div>
-                            <div className="banner-text">
-                        <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
-                                {username ? <p>Welcome to Ofatri, {username}</p> : <p>Welcome to Ofatri {username}</p>}
-                            </div>
-                        </div>
+                <div className="banner-body-background">
+                    <div className="banner-body-text1">
+                        <span className="logo-name" id="app-name">ofatri</span>
+                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
+                        <br/>
+                        <p className="text-center text-display text-center" id="welcome-text">welcome {username}</p>
+                    </div>
+                </div>
 
                         <div className="container" id="intro">
                             <div className="row mt-4">
                                 <div className="col-lg-12 sm-12">
-                                    <p className="text-display display-4 text-center bg-light text-success">About Us</p>
+                                <p className="text-display text-center" id="about-us">About Us</p>
                                 </div>
                                 <div className="col">
-                                    <div id="about-us">
+                                    <div id="about-us-body">
                                         <div className="card bg-white">
                                             <div className="card-title">
                                                 <div className="media">
@@ -69,10 +68,8 @@ class Dashboard extends React.Component{
 
                             <div className="row my-3">
                                 <div className="col-lg-12 sm-12">
-                                    <p className="text-display display-4 text-center bg-light">How it works!</p>
+                                <p className="text-display text-center" id="how-it-works">How it works</p>
                                 </div>
-                            </div>
-                            <div className="row">
                                 <div className="col-lg-4">
                                     <div className="card bg-white mt-2">
                                         <div className="card-image text-center">
@@ -103,18 +100,15 @@ class Dashboard extends React.Component{
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div className="row my-3">
                                 <div className="col-lg-12 sm-12">
-                                    <p className="text-display display-4 text-center text-white bg-dark">
+                                    <p className="text-display text-center" id="faq">
                                         Frequently Aksed Questions
                                     </p>
                                 </div>
-                            </div>
 
-                            <div className="row">
                                 <div className="col-lg-12">
                                     <div id="accordion">
                                         {/* question 1 */}
@@ -242,10 +236,8 @@ class Dashboard extends React.Component{
 
                             <div className="row my-3">
                                 <div className="col-lg-12 sm-12">
-                                    <p className="text-display display-4 text-center bg-light">Ofatri Business</p>
+                                <p className="text-display text-center" id="ofatri-business">Ofatri Business</p>
                                 </div>
-                            </div>
-                            <div className="row">
                                 {/* <div className="col-lg-6">
 
                                     <div className="card bg-white mt-2">

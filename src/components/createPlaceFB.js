@@ -129,12 +129,11 @@ class CreatePlaceFB extends React.Component{
         return(
                 
                 <div id="create-place">
-                <div className="section">
-                    <div className="banner">
-
-                    </div>
-                    <div className="banner-text">
-                        <h3>Make transactions, Get Rewarded, Reach your Goals</h3>
+                <div className="banner-body-background">
+                    <div className="banner-body-text1">
+                        <span className="logo-name" id="app-name">ofatri</span>
+                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
+                        
                     </div>
                 </div>
                 <AuthUserContext>

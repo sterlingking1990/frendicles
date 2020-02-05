@@ -64,42 +64,42 @@ class SignUpHOC extends Component {
         return (
 
             <div className="signup">
-                <div className="section">
-                    <div className="banner">
-
+               <div className="banner-body-background">
+                    <div className="banner-body-text1">
+                        <span className="logo-name" id="app-name">ofatri</span>
+                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
                     </div>
-                    <div className="banner-text">
-                        <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
-                        <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
+                    <div className="sign-up-flow">
+                        <div className="container mt-3">
+                            <div className="row">
+                                <div className="col-lg-12 sm-12">
+                                    {error && <h3 className="text-display text-white bg-dark">{error}</h3>}
+                                    {send_mail && <h3 className="text-display text-white bg-dark">Successfully signed up, check your email for more on getting rewards</h3>}
+                                    <div className="form-group">
+                                        <input name="username" className="form-control" type="text" placeholder="enter username" onChange={this.onChange} value={username} />
+                                    </div>
+                                    <div className="form-group">
+                                        <input name="email" className="form-control" type="email" placeholder="enter your valid email address" onChange={this.onChange} value={email} />
+                                    </div>
+                                    <div className="form-group">
+                                        <input name="password" className="form-control" type="password" placeholder="enter your password" onChange={this.onChange} value={password} />
+                                    </div>
+                                    <div className="form-group">
+                                        <input name="confirmPassword" className="form-control" type="password" placeholder="re-enter password to confirm" onChange={this.onChange} value={confirmPassword} />
+                                    </div>
+                                    <div className="form-group">
+                                        <button type="submit" className="form-control btn-success text-white" disabled={isInvalid} onClick={this.onSubmit}>Sign Up</button>
+                                    </div>
+                                    <div className="form-group">
+                                        {error && <p className="text-muted text-red bg-white">{error.message}</p>}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-            <div className="container mt-3">
-                <div className="row">
-                    <div className="col-lg-12 sm-12">
-                            {error && <h3 className="text-display text-white bg-dark">{error}</h3> }
-                        {send_mail && <h3 className="text-display text-white bg-dark">Successfully signed up, check your email for more on getting rewards</h3>}
-                        <div className="form-group">
-                            <input name="username" className="form-control" type="text" placeholder="enter username" onChange={this.onChange} value={username} />
-                        </div>
-                        <div className="form-group">
-                            <input name="email" className="form-control" type="email" placeholder="enter your valid email address" onChange={this.onChange} value={email} />
-                        </div>
-                        <div className="form-group">
-                            <input name="password" className="form-control" type="password" placeholder="enter your password" onChange={this.onChange} value={password} />
-                        </div>
-                        <div className="form-group">
-                            <input name="confirmPassword" className="form-control" type="password" placeholder="re-enter password to confirm" onChange={this.onChange} value={confirmPassword} />
-                        </div>
-                        <div className="form-group">
-                            <button type="submit" className="form-control btn-success text-white" disabled={isInvalid} onClick={this.onSubmit}>Sign Up</button>
-                        </div>
-                        <div className="form-group">
-                            {error && <p className="text-muted text-red bg-white">{error.message}</p>}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         )
 

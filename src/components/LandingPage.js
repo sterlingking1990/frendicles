@@ -6,16 +6,26 @@ import { NavLink } from 'react-router-dom'
 
 const LandingPage = () => (
     <div className="landing">
-        <div className="section">
+        <div className="banner-body-background">
+                    <div className="banner-body-text1">
+                        <span className="logo-name" id="app-name">ofatri</span>
+                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
+                <p className="banner-button"><NavLink to="/signin" exact={true}><button className="btn btn-success btn-large" id="action_button" >Begin Here </button></NavLink></p>
+                    </div>
+        </div>
+        {/* <div className="section">
             <div className="banner">
+                <div className="banner-text">
+                    <div className="banner-text-flow">
+                    <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
+                    <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
+                    <p><button className="btn-success"><NavLink to="/signin" exact={true}>Begin Here </NavLink></button></p>
+                    </div>
+                </div>
 
             </div>
-            <div className="banner-text">
-                <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
-                <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
-                <p><button id="begin-here"><NavLink to="/signin" exact={true}>Begin Here </NavLink></button></p>
-            </div>
-        </div>
+            
+        </div> */}
 
         <div className="first-body">
             <div className="first-body-items">
@@ -31,24 +41,32 @@ const LandingPage = () => (
             </div>
         </div>
 
-        <div className="second-body">
-            <div className="second-body-text1">
-                <h3>During this festives...</h3>
-                <p>Here are several offers that comes with rewards</p>
-            </div>
-            <div className="second-body-pic1">
-                <div className="offers">
-                    <div>Cake4Val</div>
-                    <div>DressNRock</div>
-                    <div>KingsRide</div>
-                    <div>OwnALand</div>
-                    <div>Shop4Val</div>
+        <div className="second-body-background">
+            <div className="second-body-background-flow">
+                <div className="second-body">
+                    <div className="second-body-text1">
+                        <h3>During this festives...</h3>
+                        <p>Here are several offers that comes with rewards</p>
+                    </div>
+                    <div className="second-body-pic1">
+                        <div className="offers">
+                            <div>Cake4Val</div>
+                            <div>DressNRock</div>
+                            <div>KingsRide</div>
+                            <div>OwnALand</div>
+                            <div>Shop4Val</div>
+                        </div>
+                    </div>
+                    <div className="second-body-text2">
+                        <p>And Much More...</p>
+                    </div>
                 </div>
+
             </div>
-            <div className="second-body-text2">
-                <p>And Much More...</p>
-            </div>
+
         </div>
+
+       
 
         <div className="third-body">
             <div className="third-body-text1">
@@ -95,26 +113,33 @@ const LandingPage = () => (
             </div>
         </div>
 
-        <div className="fourth-body">
-            <div className="fourth-body-headline">
-                <h3>Ofatri Business Plan</h3>
-            </div>
-            <div className="fourth-body-text">
-                <ul>
-                <li>Do you run a business?</li>
-                <li>Are you on Instagram?</li>
-                <li>Do you have at least 60 Insta pics of your product or service?</li>
-                </ul>
-                <div>Then your business have what it takes to get listed on Ofatri</div>
-            </div>
-            <div className="fourth-body-button">
-                <button id="contact-ofatri"><a href="https://forms.gle/BP4iTq6nFZfqdjxc6">Contact Ofatri Now!!!</a></button>
+        <div className="fourth-body-background">
+            <div className="fourth-body-background-flow">
+                <div className="fourth-body">
+                    <div className="fourth-body-headline">
+                        <h3>Ofatri Business Plan</h3>
+                    </div>
+                    <div className="fourth-body-text">
+                        <ul>
+                            <li>Do you run a business?</li>
+                            <li>Are you on Instagram?</li>
+                            <li>Do you have at least 60 Insta pics of your product or service?</li>
+                        </ul>
+                        <div>Then your business have what it takes to get listed on Ofatri</div>
+                    </div>
+                    <div className="fourth-body-button">
+                        <button id="contact-ofatri"><a href="https://forms.gle/BP4iTq6nFZfqdjxc6">Contact Ofatri Now!!!</a></button>
+                    </div>
+                </div>
+
             </div>
         </div>
+
+      
         
         <div className="fifth-body">
             <div className="fifth-body-headline">
-                <h3>Business Using Ofatri</h3>
+                <h3>Businesses Using Ofatri</h3>
             </div>
             <div className="fifth-body-text">
                 <div className="fifth-body-logo">
@@ -138,17 +163,17 @@ const LandingPage = () => (
                     </div>
                     <br/>
                     <div className="sixth-body-socials">
-
-                            <div>whatsApp: 08060456301</div>
-                            <div>IG,Twitter: @ofatri</div>
-                            <div>Email: izundukingsleyemeka@gmail.com</div>
-
+                        <div><i className="fa fa-instagram"></i>&nbsp; &nbsp;<i className="fa fa-twitter"></i>&nbsp; &nbsp; <i className="fa fa-phone"></i> &nbsp; &nbsp; <i className="fa fa-envelope-open-o"></i> </div>
+                    </div>
+                    <br/>
+                    <div className="work-with">
+                        <a href="https://forms.gle/L7DiqXXGXSrhNPqVA"><div><i className="fa fa-briefcase"></i>&nbsp;&nbsp;become Ofatri business manager</div></a>
                     </div>
                 </div>
             </div>
             
             <div className="sixth-body-copy">
-                <div>copyright (c) ofatri 2020</div>
+                <div><i className="fa fa-copyright"></i>ofatri 2020</div>
             </div>
         </div>
     </div>

@@ -108,13 +108,11 @@ class SetRewardGoal extends React.Component{
         const {goal,user_goal_choice,saved,select_all_goal} = this.state;
         return(
             <div className="set-goal">
-                <div className="section">
-                    <div className="banner">
-
-                    </div>
-                    <div className="banner-text">
-                        <h3>Let us help you meet any of these goals as you continue to make transactions</h3>
-                        <p>Select goals that you look forward to and we will help you reach them</p>
+                <div className="banner-body-background">
+                    <div className="banner-body-text1">
+                        <span className="logo-name" id="app-name">ofatri</span>
+                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
+                        
                     </div>
                 </div>
 
@@ -170,7 +168,7 @@ class GoalTemplate extends React.Component{
         return(
             <div className="goal-type" style={style} onClick={()=>this.props.handleSelectGoal(goal_id,this.props.goal.goal_type,this.props.goal.unit_cost)}>
                 <h3 id="goal">{this.props.goal.goal_type}</h3>
-                <div id="cost">{this.props.goal.unit_cost}</div>
+                <div id="cost" className="text-display text-white">{this.props.goal.unit_cost}</div>
             </div>
         )
     }

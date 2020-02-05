@@ -172,12 +172,11 @@ class PlacesToJoinFB extends React.Component {
 
         return(
             <div>
-                <div className="section">
-                    <div className="banner">
-
-                    </div>
-                    <div className="banner-text">
-                        <h3>Make transactions, Get Rewarded, Reach your Goals</h3>
+                <div className="banner-body-background">
+                    <div className="banner-body-text1">
+                        <span className="logo-name" id="app-name">ofatri</span>
+                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
+                        
                     </div>
                 </div>
             <div className="container mt-3">
@@ -282,7 +281,7 @@ class PlaceTemplate extends React.Component {
             {authUser=>(
                 <div>
                     <div className="card bg-dark">
-                            <span className="text-right text-sm text-display"><i className="fa fa-image mx-2 text-green" id="view_gallery" onClick={this.setViewGallery}></i></span>
+                            <span className="text-right text-sm text-display"><i className="fa fa-instagram mx-2 text-white" id="view_gallery" onClick={this.setViewGallery}></i></span>
                     
                         {this.props.isToUnJoin && <p className="text-danger text-center">sorry you cannot unjoin an offer you have already made transaction on</p>}
 

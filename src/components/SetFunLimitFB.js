@@ -77,13 +77,10 @@ class SetFunLimitFB extends React.Component{
             <AuthUserContext>
                 {authUser => (
             <div id="set_fun_limit">
-                        <div className="section">
-                            <div className="banner">
-
-                            </div>
-                            <div className="banner-text">
-                                <p>Welcome to Ofatri a platform that rewards you for every penny you spend on transactions.</p>
-                                <span><strong>Make Transactions </strong></span> <strong> Get Rewarded</strong> <span><strong>Achieve Goals</strong></span>
+                        <div className="banner-body-background">
+                            <div className="banner-body-text1">
+                                <span className="logo-name" id="app-name">ofatri</span>
+                                <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
                                 
                             </div>
                         </div>
