@@ -21,6 +21,9 @@ class Firebase {
     this.auth=app.auth();
     //database
     this.db=app.database();
+
+    this.fbdata=app.database;
+    
     //functions
     // this.function=app.functions();
   }
@@ -73,6 +76,8 @@ class Firebase {
   
   
 //define user API
+
+getCurrentTime=()=>this.fbdata.ServerValue.TIMESTAMP;
 
 
 user=uid=>this.db.ref(`users/${uid}`)

@@ -13,13 +13,22 @@ const UserHeader = () => (
                 <div className="collapse navbar-collapse" id="NavbarMenu">
                     <ul className="navbar-nav ml-auto">
                     <li className="nav-item"><NavLink className="nav-link" to="/" activeClassName="is-active" exact={true}>Home</NavLink></li>
-                    <li className="nav-item"><NavLink className="nav-link" to="/places" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
-                    <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Rewards</NavLink></li>
                         <li className="dropdown" id="menu-anchor">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">My Goal
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Offer
                                 <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu">
+                                <li className="nav-item"><NavLink className="nav-link" to="/offer" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
+                                <li><NavLink className="nav-link" to="/offer-analytics" activeClassName="is-active" exact={true}>Offer Analytics</NavLink></li>
+                            </ul>
+                        </li>
+                    
+                        <li className="dropdown" id="menu-anchor">
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">RewardnGoal
+                                <span className="caret"></span>
+                            </a>
+                            <ul className="dropdown-menu">
+                                <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Rewards</NavLink></li>
                                 <li><NavLink className="nav-link" to="/set-reward-goal" activeClassName="is-active" exact={true}>Set Reward Goal</NavLink></li>
                                 <li><NavLink className="nav-link" to="/check-milestone" activeClassName="is-active" exact={true}>Check Milestone</NavLink></li>
                             </ul>

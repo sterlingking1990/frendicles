@@ -1,9 +1,10 @@
 import React from 'react'
-import {withFirebase, FirebaseContext} from '../firebase'
+import {withFirebase} from '../firebase'
 import { AuthUserContext } from '../session';
 import moment from 'moment';
 import PaystackButton from 'react-paystack';
 import InstragramGallery from './InstragramGallery';
+
 
 const THUMBNAIL_WIDTH=640;
 const PHOTO_COUNT=60;
@@ -96,6 +97,7 @@ class PlacesToJoinFB extends React.Component {
             token:place_name_join + moment().dayOfYear() + '-' + moment().second() + '-' + moment().hour() + '-' + moment().minute() + '-' + (this.state.joinPlaces.length ? this.state.joinPlaces.length : 0),
             place_id,
             userId:authUser.uid,
+            date_joined:this.props.firebase.getCurrentTime(),
         })
 
         this.setState({join_ref:joinRef.key,isToJoin:false})
@@ -274,10 +276,15 @@ class PlaceTemplate extends React.Component {
 
     render() {
         const { ig_acct,place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount,subaccount,allJoined} = this.state
+        var count_users = 0
+        var is_present = this.props.allJoined.filter(all_join => all_join.place_id === this.props.place_id);
+        if (is_present) {
+            count_users = is_present.length;
+        }
         return (
             <AuthUserContext>
             {authUser=>(
-                <div>
+                <div className="offer-display">
                     <div className="card bg-dark">
                             <span className="text-right text-sm text-display"><i className="fa fa-instagram mx-2 text-white" id="view_gallery" onClick={this.setViewGallery}></i></span>
                     
@@ -299,15 +306,12 @@ class PlaceTemplate extends React.Component {
                                     <span className="mx-2"><label className="mx-1 text-white" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" checked={place_hooks.includes(hook.uid) ? true : false} /></span>)}
                             </div> */}
                         </div>
+                        <span className="text-left text-sm text-display text-white mx-1"><i className="fa fa-user-circle-o text-white"></i>&nbsp;{count_users}</span>
                     </div>
 
                         <div className="form-group mt-2">
                                     {(()=>{
-                                        var count_users=0
-                                            var is_present=this.props.allJoined.filter(all_join=>all_join.place_id===this.props.place_id);
-                                            if(is_present){
-                                                count_users=is_present.length;
-                                            }
+                                       
                                         //checking if the current place has been joined by the current user
                                         if(this.props.joinPlaces){
                                             var array_status=[]  //array that keeps wether this current place has already been joined by the current user joinPlaces
@@ -322,12 +326,12 @@ class PlaceTemplate extends React.Component {
                                         if(array_status.some(t=>t===true)){
                                             return(
                                             <div className="offer_payment">
-                                            <button className="form-control btn-danger text-dark" onClick={() => this.props.onUnJoinPlace(joinedPlaceID,authUser)}>{count_users} joined <span>Unjoin</span> </button>
+                                            <button className="form-control btn btn-danger text-dark" onClick={() => this.props.onUnJoinPlace(joinedPlaceID,authUser)}><span>Unjoin Offer</span> </button>
 
                                             
-                                            <p className="text-display text-white bg-dark"> [reward token- {token}]</p>
+                                            <p className="text-display text-white bg-dark text-center"> [reward token- {token}]</p>
                                             <div className="form-check-inline">
-                                            <span className="mx-2"><label className="mx-1 text-red" for="ready_for_payment">make payment</label><input className="form-check-input" name="make_payment" value={make_payment} type="checkbox" checked={make_payment} onChange={this.readyPayment}/></span></div>
+                                            <span className="mx-2 text-green"><label className="mx-1 text-red" for="ready_for_payment"><i className="fa fa-credit-card"></i>&nbsp;make payment</label><input className="form-check-input" name="make_payment" value={make_payment} type="checkbox" checked={make_payment} onChange={this.readyPayment}/></span></div>
                                             {make_payment && <div className="paystack_window"><div className="form-group mt-1"><input className="form-control" placeholder="Enter the amount negotiated" type="number" value={nego_amount} onChange={this.setNegotiationPay}/></div>
                                             <div>
                                                     <p>
@@ -356,11 +360,11 @@ class PlaceTemplate extends React.Component {
                                         }
                                         if(array_status.every(t=>t===false)){
                                             return(
-                                                <button className="form-control btn-success text-dark" onClick={() => this.props.onJoinPlace(place_id, place_name, authUser)}>{count_users} joined <span>Join this offer</span></button>)
+                                                <button className="form-control btn btn-success text-dark" onClick={() => this.props.onJoinPlace(place_id, place_name, authUser)}><span>Join Offer</span></button>)
                                         }
                                         }else{
                                             return(
-                                                <button className="form-control btn-success text-dark" onClick={() => this.props.onJoinPlace(place_id, place_name, authUser)}>{count_users}joined <span>Join this offer</span></button>)
+                                                <button className="form-control btn btn-success text-dark" onClick={() => this.props.onJoinPlace(place_id, place_name, authUser)}><span>Join Offer</span></button>)
                                         }
                                     })()}
 

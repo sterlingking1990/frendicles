@@ -764,6 +764,32 @@ ul{
 
 
 
+#analysis-row{
+  background-color:hsla(60, 66%, 94%, 0.63);
+  border: 2px solid white;
+  box-shadow: inset 10 15 25 #ffccdd;
+  margin:5px;
+  text-align: center;
+  
+}
+
+#analysis-row>div{
+  color:rgb(48, 42, 42)
+}
+
+#ofatri-analysis-header{
+    background-color:hsla(60, 66%, 94%, 0.63);
+  border: 2px solid white;
+  box-shadow: inset 10 15 25 #ffccdd;
+  margin:5px;
+  text-align: center;
+}
+
+.offer-display{
+  border: 2px solid hsla(60, 36%, 85%, 0.63);
+  background-color: hsla(60, 87%, 75%, 0.63);
+  margin:2px;
+}
 
 
 
@@ -785,6 +811,8 @@ ul{
   body,html{
     width:fit-content;
   }
+
+
 
 
 .signup{
