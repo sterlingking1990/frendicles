@@ -16,8 +16,8 @@ import VerifyTransaction from './VerifyTransaction';
 const UserRouter = () => (
     <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route exact path="/create-place" component={createPlaceFB} />
-        <Route exact path="/places" component={PlacesToJoinFB} />
+        <Route exact path="/create-offer" component={createPlaceFB} />
+        <Route exact path="/offer" component={PlacesToJoinFB} />
         <Route exact path="/my-transactions" component={MyTransactionsFB} />
         <Route exact path="/accept-transaction" component={AcceptTransactionFB} />
         <Route exact path="/verify-transaction" component={VerifyTransaction} />

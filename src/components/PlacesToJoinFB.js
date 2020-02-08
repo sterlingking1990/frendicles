@@ -8,7 +8,6 @@ import InstragramGallery from './InstragramGallery';
 
 const THUMBNAIL_WIDTH=640;
 const PHOTO_COUNT=60;
-// const INSTAGRAM_ID="3468531814"
 
 
 const INITIALS = {
@@ -275,7 +274,7 @@ class PlaceTemplate extends React.Component {
 
 
     render() {
-        const { ig_acct,place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,charge_amount,payment_reference,main_nego_amount,subaccount,allJoined} = this.state
+        const { ig_acct,place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,payment_reference,main_nego_amount,subaccount} = this.state
         var count_users = 0
         var is_present = this.props.allJoined.filter(all_join => all_join.place_id === this.props.place_id);
         if (is_present) {

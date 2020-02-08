@@ -25,7 +25,8 @@ class Firebase {
     this.fbdata=app.database;
     
     //functions
-    // this.function=app.functions();
+    //this.fbfnc=app;
+    this.fbfnc=app.functions();
   }
 
 //create user and save user data 
@@ -74,6 +75,13 @@ class Firebase {
       })
   }
   
+
+  //send mail of new offer
+
+  sendEmail=(subject,offer_name,image,description)=>{
+    const callabale=this.fbfnc.httpsCallable('genericEmail');
+    return callabale({subject:subject,offer_name:offer_name,image:image,description:description}).then(console.log)
+  }
   
 //define user API
 

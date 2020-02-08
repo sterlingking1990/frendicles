@@ -2,6 +2,8 @@ import React from 'react'
 import {withFirebase} from '../firebase'
 import { AuthUserContext } from '../session';
 
+const subject="Ofatri - New Offer Available"
+const update_subject="Ofatri - Offer Update"
 
 const INITIALS={
     places:[],
@@ -19,6 +21,7 @@ const INITIALS={
     count:0,
     loading_hooks:false,
     loading_places:false,
+    user_id:'',
 }
 
 class CreatePlaceFB extends React.Component{
@@ -35,11 +38,15 @@ class CreatePlaceFB extends React.Component{
                     ...placeObject[key], uid: key
                 }))
                 const places_you_created = placeList.filter(place => place.userId === authUser.uid)
-                this.setState({ places: places_you_created })
+                this.setState({ places: places_you_created,user_id:authUser.uid})
                 console.log(places_you_created)
             })
 
         })
+
+        
+
+        
 
         this.setState({ loading_hooks: true, loading_places: true, isCreated: false })
         this.props.firebase.hooks().once("value", snapShot => {
@@ -92,6 +99,7 @@ class CreatePlaceFB extends React.Component{
             place_hooks:place_hooks,
             
         })
+        this.props.firebase.sendEmail(update_subject, place_name, image, description);
 
     }
 
@@ -117,6 +125,9 @@ class CreatePlaceFB extends React.Component{
                 place_hooks:place_hooks,
             })
             this.setState({isCreated:true})
+            //send mail to all registered users about new created place
+            this.props.firebase.sendEmail(subject, place_name, image, description);
+            
         }
         else{
             this.setState({isCreated:false})
@@ -124,7 +135,7 @@ class CreatePlaceFB extends React.Component{
     }
 
     render(){
-        const {place_name,description,contact,ig_acct,email,subaccount,image,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
+        const {user_id,place_name,description,contact,ig_acct,email,subaccount,image,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
         console.log(places)
         return(
                 
@@ -186,7 +197,7 @@ class CreatePlaceFB extends React.Component{
                         <div className="col-lg-12 sm-12">
                         {places.length>0 ? <div><p className="card-title text-center text-white mt-2">Offers You Created</p>
                         {loading_places && <p className="text-center bg-dark text-white">loading...</p>}
-                        <Places places={places} hooks={hooks} onDeletePlace={this.onDeletePlace} onPlaceUpdate={this.onPlaceUpdate}/></div>
+                        <Places places={places} hooks={hooks} onDeletePlace={this.onDeletePlace} onPlaceUpdate={this.onPlaceUpdate} user_id={user_id}/></div>
                         : <h3 className="display-4 text-center text-dark mt-2">You Have not created any Offer Yet, Create Promotional Offer And Start Getting Closed Deals From Customers</h3>}
                         </div>
                     </div>
@@ -202,10 +213,10 @@ class CreatePlaceFB extends React.Component{
 
 }
 
-const Places=({places,hooks,onDeletePlace,onPlaceUpdate})=>(
+const Places=({places,hooks,onDeletePlace,onPlaceUpdate,user_id})=>(
     <div>
         {places.map(place=>(
-            <PlaceTemplate key={place.uid} place_id={place.uid} place={place} hooks={hooks} onDeletePlace={onDeletePlace} onPlaceUpdate={onPlaceUpdate}/>
+            <PlaceTemplate key={place.uid} place_id={place.uid} place={place} hooks={hooks} onDeletePlace={onDeletePlace} onPlaceUpdate={onPlaceUpdate} user_id={user_id}/>
         ))}
     </div>
 )
@@ -213,7 +224,7 @@ const Places=({places,hooks,onDeletePlace,onPlaceUpdate})=>(
 class PlaceTemplate extends React.Component{
     constructor(props){
         super(props);
-        this.state={isToEdit:false,place_name:this.props.place.place_name,user_id:this.props.place.userId,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0}
+        this.state={userId:this.props.user_id,isToEdit:false,place_name:this.props.place.place_name,user_id:this.props.place.userId,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0}
 
     }
 
@@ -254,9 +265,9 @@ class PlaceTemplate extends React.Component{
         this.setState({isToEdit:false})
     }
 
-    handleReset=event=>{
-        this.setState({place_name:this.props.place.place_name,description:this.props.place.description,image:this.props.place.image,place_hooks:this.props.place.place_hooks,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,email:this.props.place.email,subaccount:this.props.place.subaccount})
-        event.preventDefault()
+    handleReset=()=>{
+        this.setState({isToEdit:false})
+        
     }
 
     render(){

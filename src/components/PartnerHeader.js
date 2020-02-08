@@ -14,9 +14,9 @@ const UserHeader = () => (
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item"><NavLink className="nav-link" to="/" activeClassName="is-active" exact={true}>Home</NavLink></li>
                         <li className="nav-item">
-                            <NavLink to="/create-place" className="nav-link">Create Offer</NavLink>
+                            <NavLink to="/create-offer" className="nav-link">Create Offer</NavLink>
                         </li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/places" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
+                        <li className="nav-item"><NavLink className="nav-link" to="/offer" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Rewards</NavLink></li>
 
                         <li className="dropdown" id="menu-anchor">

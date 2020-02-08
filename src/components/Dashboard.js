@@ -213,7 +213,7 @@ class Dashboard extends React.Component{
 
                                             </div>
                                             <div id="faq7" className="collapse" data-parent="#accordion">
-                                                Yes!, as you earn Reward Reward Coins, you can set your Goals from the Goals menu and Check Goal Milestone to see how your reward is helping you reach your goal
+                                                Yes!, the more you make transactions, the more Reward Coins you earn and the closer you are to Achieving your Goals
                                             </div>
                                         </div>
 
@@ -221,12 +221,29 @@ class Dashboard extends React.Component{
                                         <div className="card">
                                             <div className="card-header">
                                                 <a href="#faq8" className="collapsed card-link" data-toggle="collapse">
-                                                Can I sell My Reward Coins
-                                                </a>
+                                                    I like an Offer and I have bargained with the Business Owner, How Do I Pay for the Product
+                                                        </a>
                                             </div>
                                             <div id="faq8" className="collapse" data-parent="#accordion">
-                                                It is possible we let you be able to transfer reward coins to any one you choose to and make money of it, but this feature is not currently supported until we have a wider audience request for this.
-                                                Reach us via social media to request for this feature and if we get higher number of same positive response we could consider adding this feature.
+                                                Immediately you click on Join Offer, a <strong>Make Payment</strong> check button is displayed, after bargaining with the business owner,<br />Click on the <strong>Make Payment</strong> check button then enter your payments information to make payment to the Business Owner.<br />
+                                                Payments made this way earns you 2x Reward Coin than Payment made in cash to the Business Owner or direct transfer to the Business Owner.
+                                                <br />
+                                                However you can contact Ofatri for more details on making payment for the product after bargaining with the Business Owner
+                                                    </div>
+                                        </div>
+
+                                        {/* question 9 */}
+                                        <div className="card">
+                                            <div className="card-header">
+                                                <a href="#faq9" className="collapsed card-link" data-toggle="collapse">
+                                                    I subscribed to Ofatri for my business, how do I know Customers who show Interest in My Offer
+                                                </a>
+                                            </div>
+                                            <div id="faq9" className="collapse" data-parent="#accordion">
+                                                As soon as you subscribe to Ofatri business, Ofatri assigns to you a dedicated Business Manager who manages your offer.<br/> Your Offer ID is given to you
+                                                by your Business Manager.<br/> Go to offer menu and Click on Offer Analytics. <br/> provide the ID given to you by your Business Manager Then select the Date you will 
+                                                like to see customers who showed Interest in your Offer.<br/>
+                                                You can choose to call and follow up with them for more business engagement.
                                             </div>
                                         </div>
                                     </div>
@@ -271,6 +288,7 @@ class Dashboard extends React.Component{
                                                 <li>Getting you new customers at higher rate</li>
                                                 <li>Increasing your customer to product purchases</li>
                                                 <li>Increasing your business revenue</li>
+                                                <li>Provide your business with Analytics of customers who show interest on your product Offer</li>
                                             </ul>
                                             <p className="text-justify text-center mx-3 my-4"><strong>To get listed, ensure you...</strong></p>
                                             <ul>

@@ -785,10 +785,11 @@ ul{
   text-align: center;
 }
 
+
 .offer-display{
   border: 2px solid hsla(60, 36%, 85%, 0.63);
   background-color: hsla(60, 87%, 75%, 0.63);
-  margin:2px;
+  margin:5px;
 }
 
 

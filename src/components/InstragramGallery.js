@@ -10,6 +10,7 @@ export default class extends Component {
                 `https://www.instagram.com/graphql/query?query_id=17888483320059182&variables={"id":"${this.props.userId}","first":${this.props.photoCount},"after":null}`
             );
             const {data} = await response.json();
+            console.log(data)
             const photos = data.user.edge_owner_to_timeline_media.edges.map(
                 ({ node }) =>{
                     const {id} = node;
