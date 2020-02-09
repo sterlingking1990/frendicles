@@ -12,6 +12,7 @@ const INITIALS={
     description:'',
     contact:'',
     ig_acct:'',
+    youtube_term:'',
     email:'',
     subaccount:'',
     image:'',
@@ -86,13 +87,14 @@ class CreatePlaceFB extends React.Component{
         this.props.firebase.place(uid).remove()
     }
 
-    onPlaceUpdate=(userId,place_name,description,image,place_hooks,place_id,contact,ig_acct,email,subaccount)=>{
+    onPlaceUpdate=(userId,place_name,description,image,place_hooks,place_id,contact,ig_acct,youtube_term,email,subaccount)=>{
         this.props.firebase.place(place_id).set({
             userId:userId,
             place_name:place_name,
             description:description,
             contact:contact,
             ig_acct:ig_acct,
+            youtube_term:youtube_term,
             email:email,
             subaccount:subaccount,
             image:image,
@@ -104,7 +106,7 @@ class CreatePlaceFB extends React.Component{
     }
 
     handleSubmit=authUser=>{
-        const {place_name,description,contact,ig_acct,email,subaccount,image,place_hooks}=this.state
+        const {place_name,description,contact,ig_acct,youtube_term,email,subaccount,image,place_hooks}=this.state
         const isPlaceName=place_name!==""
         const isDescription=description!==""
         const isContact=contact!==""
@@ -119,6 +121,7 @@ class CreatePlaceFB extends React.Component{
                 description:description,
                 contact:contact,
                 ig_acct:ig_acct,
+                youtube_term:youtube_term,
                 email:email,
                 subaccount:subaccount,
                 image:image,
@@ -135,7 +138,7 @@ class CreatePlaceFB extends React.Component{
     }
 
     render(){
-        const {user_id,place_name,description,contact,ig_acct,email,subaccount,image,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
+        const {user_id,place_name,description,contact,ig_acct,youtube_term,email,subaccount,image,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
         console.log(places)
         return(
                 
@@ -165,6 +168,9 @@ class CreatePlaceFB extends React.Component{
                             </div>
                                     <div className="form-group">
                                         <input type="text" name="ig_acct" placeholder="enter ID id" value={ig_acct} className="form-control" onChange={this.onChange} />
+                                    </div>
+                                    <div className="form-group">
+                                        <input type="text" name="youtube_term" placeholder="enter youtube term" value={youtube_term} className="form-control" onChange={this.onChange} />
                                     </div>
                             <div className="form-group">
                                 <input type="text" name="email" placeholder="enter email address" value={email} className="form-control" onChange={this.onChange} />
@@ -224,7 +230,7 @@ const Places=({places,hooks,onDeletePlace,onPlaceUpdate,user_id})=>(
 class PlaceTemplate extends React.Component{
     constructor(props){
         super(props);
-        this.state={userId:this.props.user_id,isToEdit:false,place_name:this.props.place.place_name,user_id:this.props.place.userId,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0}
+        this.state={userId:this.props.user_id,isToEdit:false,place_name:this.props.place.place_name,user_id:this.props.place.userId,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,youtube_term:this.props.place.youtube_term,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0}
 
     }
 
@@ -260,8 +266,8 @@ class PlaceTemplate extends React.Component{
     }
 
     updatePlace=()=>{
-        const {userId,place_name,description,image,place_hooks,place_id,contact,ig_acct,email,subaccount}=this.state
-        this.props.onPlaceUpdate(userId,place_name,description,image,place_hooks,place_id,contact,ig_acct,email,subaccount)
+        const {userId,place_name,description,image,place_hooks,place_id,contact,ig_acct,youtube_term,email,subaccount}=this.state
+        this.props.onPlaceUpdate(userId,place_name,description,image,place_hooks,place_id,contact,ig_acct,youtube_term,email,subaccount)
         this.setState({isToEdit:false})
     }
 
@@ -271,7 +277,7 @@ class PlaceTemplate extends React.Component{
     }
 
     render(){
-        const {place_name,description,image,contact,ig_acct,email,subaccount,isToEdit,place_hooks,hooks}=this.state
+        const {place_name,description,image,contact,ig_acct,youtube_term,email,subaccount,isToEdit,place_hooks,hooks}=this.state
 
         return(
                 <div>
@@ -289,6 +295,9 @@ class PlaceTemplate extends React.Component{
                     <div className="form-group">
                         <input type="text" name="ig_acct" placeholder="enter IG id" value={ig_acct} className="form-control" onChange={this.onChange} />
                     </div>
+                        <div className="form-group">
+                            <input type="text" name="youtube_term" placeholder="enter youtube term" value={youtube_term} className="form-control" onChange={this.onChange} />
+                        </div>
                     <div className="form-group">
                         <input type="text" name="email" placeholder="enter email" value={email} className="form-control" onChange={this.onChange} />
                     </div>
@@ -321,6 +330,7 @@ class PlaceTemplate extends React.Component{
                             <p className="card-text text-white">{description}</p>
                             <p className="card-text text-white">{contact}</p>
                             <p className="card-text text-white">{ig_acct}</p>
+                            <p className="card-text text-white">{youtube_term}</p>
                             <p className="card-text text-white">{email}</p>
                             <p className="card-text text-white">{subaccount}</p>
                             <div className="form-check-inline">

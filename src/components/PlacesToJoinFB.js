@@ -4,6 +4,14 @@ import { AuthUserContext } from '../session';
 import moment from 'moment';
 import PaystackButton from 'react-paystack';
 import InstragramGallery from './InstragramGallery';
+import VideoList from './VideoList';
+import VideoDetail from './VideoDetail'
+import YTSearch from 'youtube-api-search';
+import { Icon, notification } from 'antd';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 
 const THUMBNAIL_WIDTH=640;
@@ -37,8 +45,9 @@ class PlacesToJoinFB extends React.Component {
     constructor(props){
         super(props);
         this.state={...INITIALS}
-
     }
+
+  
 
     componentDidMount(){
         this.setState({ loading_hooks: true, loading_places: true })
@@ -210,7 +219,9 @@ const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_re
 class PlaceTemplate extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {allJoined:this.props.allJoined,subaccount:this.props.place.subaccount,display_name:'',view_more_images:false,make_payment:false,nego_amount:0,main_nego_amount:0,charge_amount:7000,payment_reference:'',isJoined: false, ig_acct:this.props.place.ig_acct,place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces:this.props.joinPlaces,place_hooks: this.props.place.place_hooks?this.props.place.place_hooks:[], place_id: this.props.place_id, isToJoin:this.props.isToJoin,join_ref:this.props.join_ref}
+        this.state = {
+            allJoined: this.props.allJoined, subaccount: this.props.place.subaccount, display_name: '', view_more_images: false, make_payment: false, nego_amount: 0, main_nego_amount: 0, charge_amount: 7000, payment_reference: '', isJoined: false, ig_acct: this.props.place.ig_acct, place_name: this.props.place.place_name, description: this.props.place.description, image: this.props.place.image, contact: this.props.place.contact, hooks: this.props.hooks, joinPlaces: this.props.joinPlaces, place_hooks: this.props.place.place_hooks ? this.props.place.place_hooks : [], place_id: this.props.place_id, isToJoin: this.props.isToJoin, join_ref: this.props.join_ref,videos: [],
+            selectedVideo: {}, view_youtube:false, video_term:this.props.place.youtube_term}
 
     }
 
@@ -220,6 +231,34 @@ class PlaceTemplate extends React.Component {
             offer:this.props.place.place_name
         }
         this.setState({display_name:display_name})
+    }
+
+    setViewYoutube=()=>{
+        const view_youtube=this.state.view_youtube;
+        const video_term=this.state.video_term;
+
+        if(view_youtube){
+            this.setState({view_youtube:false})
+        }
+        else{
+        this.setState({view_youtube:true})
+        YTSearch({ key: API_KEY, term:video_term }, (data) => {
+                try {
+                    if (data && data.data && data.data.error.message) {
+                        console.log(data);
+                        throw ('error')
+                    }
+                    this.setState({ videos: data, selectedVideo: data[0] });
+                    console.log(this.state.videos);
+                } catch (err) {
+                    notification['error']({
+                        message: "Daily Limit Exceeded",
+                        description: "Youtube data API daily limit have exceeded. Quota will be recharged at 1:30pm IST. Wait till then.",
+                    })
+                }
+
+            });
+        }
     }
 
     setNegotiationPay=event=>{
@@ -270,11 +309,8 @@ class PlaceTemplate extends React.Component {
         }
     }
 
-
-
-
     render() {
-        const { ig_acct,place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,payment_reference,main_nego_amount,subaccount} = this.state
+        const { ig_acct,place_name,view_more_images, description, display_name, image, contact,place_id,nego_amount,make_payment,payment_reference,main_nego_amount,subaccount,selectedVideo,videos,view_youtube} = this.state
         var count_users = 0
         var is_present = this.props.allJoined.filter(all_join => all_join.place_id === this.props.place_id);
         if (is_present) {
@@ -285,13 +321,24 @@ class PlaceTemplate extends React.Component {
             {authUser=>(
                 <div className="offer-display">
                     <div className="card bg-dark">
-                            <span className="text-right text-sm text-display"><i className="fa fa-instagram mx-2 text-white" id="view_gallery" onClick={this.setViewGallery}></i></span>
+                            <span className="text-right text-sm text-display"><i className="fa fa-youtube-play mx-2 text-white" id="view_youtube" onClick={this.setViewYoutube}></i>&nbsp;<i className="fa fa-instagram mx-2 text-white" id="view_gallery" onClick={this.setViewGallery}></i></span>
                     
                         {this.props.isToUnJoin && <p className="text-danger text-center">sorry you cannot unjoin an offer you have already made transaction on</p>}
 
                         <div className="card-body">
                         
-                        {view_more_images ? <InstragramGallery userId={ig_acct} thumbnailWidth={THUMBNAIL_WIDTH} photoCount={PHOTO_COUNT}/> : 
+                        {view_more_images ? <InstragramGallery userId={ig_acct} thumbnailWidth={THUMBNAIL_WIDTH} photoCount={PHOTO_COUNT}/> : view_youtube ? 
+                                    <div>
+                                        <div style={{ "display": "flex", "flexDirection": "column" }}>
+                                            <div style={{ "display": "flex" }}>
+                                                <VideoDetail video={selectedVideo} />
+                                                <VideoList
+                                                    videos={videos}
+                                                    onVideoSelect={(userSelected) => { this.setState({ selectedVideo: videos[userSelected] }) }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div> : 
                                 <div>
                                 <h3 className="card-title text-white">{place_name}</h3>
                                 <img src={image} className="card-img img-responsive img-fluid" />
@@ -299,6 +346,7 @@ class PlaceTemplate extends React.Component {
                             <p className="card-text text-white">{contact}</p>
                             </div>
                         }
+
                             {/* <div className="form-check-inline">
                                 {this.props.loading_hooks && <p className="text-center bg-dark text-white">loading hooks...</p>}
                                 {hooks.map((hook) =>
