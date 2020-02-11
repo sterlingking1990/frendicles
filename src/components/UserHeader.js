@@ -39,7 +39,9 @@ const UserHeader = () => (
                                 <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu">
+                                <li><NavLink className="nav-link" to="/set-notification" activeClassName="is-active" exact={true}>Notification</NavLink></li>
                                 <li><NavLink className="nav-link" to="/change-password" activeClassName="is-active" exact={true}>Change Password</NavLink></li>
+                                <li><NavLink className="nav-link" to="/change-phone" activeClassName="is-active" exact={true}>Update Contact</NavLink></li>
                                 <li>
                                 <SignOutUser />
                                 </li>

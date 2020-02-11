@@ -13,6 +13,7 @@ const SignUpPage=()=>(
 const INITIAL_DETAILS = {
     username:'',
     email: '',
+    phone:'',
     password: '',
     confirmPassword: '',
     error: null,
@@ -30,10 +31,10 @@ class SignUpHOC extends Component {
     }
 
     onSubmit = event => {
-        const { username,email, password } = this.state;
+        const { username,email,phone,password } = this.state;
         
       this.props.firebase
-      .doCreateUserWithEmailAndPassword(username,email, password)
+      .doCreateUserWithEmailAndPassword(username,email,phone,password)
       .then(()=>{
           this.setState({ ...INITIAL_DETAILS,send_mail:true}); 
           //set time out before redirecting to home page---after 2000 secs, then redirect...by then you must have used the send mail(true) to notify user that email
@@ -53,13 +54,14 @@ class SignUpHOC extends Component {
         const {
             username,
             email,
+            phone,
             password,
             confirmPassword,
             error,
             send_mail,
         } = this.state;
 
-        const isInvalid = password !== confirmPassword || password === '' || email === '' || username ==='';
+        const isInvalid = password !== confirmPassword || password === '' || email === '' || phone === '' || username ==='';
 
         return (
 
@@ -76,19 +78,22 @@ class SignUpHOC extends Component {
                                     {error && <h3 className="text-display text-white bg-dark">{error}</h3>}
                                     {send_mail && <h3 className="text-display text-white bg-dark">Successfully signed up, check your email for more on getting rewards</h3>}
                                     <div className="form-group">
-                                        <input name="username" className="form-control" type="text" placeholder="enter username" onChange={this.onChange} value={username} />
+                                        <input name="username" className="form-control" type="text" placeholder="enter username" onChange={this.onChange} value={username} required />
                                     </div>
                                     <div className="form-group">
-                                        <input name="email" className="form-control" type="email" placeholder="enter your valid email address" onChange={this.onChange} value={email} />
+                                        <input name="email" className="form-control" type="email" placeholder="enter your valid email address" onChange={this.onChange} value={email} required />
                                     </div>
                                     <div className="form-group">
-                                        <input name="password" className="form-control" type="password" placeholder="enter your password" onChange={this.onChange} value={password} />
+                                        <input name="phone" className="form-control" type="number" placeholder="enter your valid phone number" onChange={this.onChange} value={phone} required/>
                                     </div>
                                     <div className="form-group">
-                                        <input name="confirmPassword" className="form-control" type="password" placeholder="re-enter password to confirm" onChange={this.onChange} value={confirmPassword} />
+                                        <input name="password" className="form-control" type="password" placeholder="enter your password" onChange={this.onChange} value={password} required/>
                                     </div>
                                     <div className="form-group">
-                                        <button type="submit" className="form-control btn-success text-white" disabled={isInvalid} onClick={this.onSubmit}>Sign Up</button>
+                                        <input name="confirmPassword" className="form-control" type="password" placeholder="re-enter password to confirm" onChange={this.onChange} value={confirmPassword} required/>
+                                    </div>
+                                    <div className="form-group">
+                                        <button className="form-control btn btn-success text-white" disabled={isInvalid} onClick={this.onSubmit}>Sign Up</button>
                                     </div>
                                     <div className="form-group">
                                         {error && <p className="text-muted text-red bg-white">{error.message}</p>}

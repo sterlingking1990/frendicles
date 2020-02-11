@@ -30,7 +30,7 @@ class Firebase {
   }
 
 //create user and save user data 
-  doCreateUserWithEmailAndPassword=(username,email,password)=>{
+  doCreateUserWithEmailAndPassword=(username,email,phone,password)=>{
     return this.auth
     .createUserWithEmailAndPassword(email,password)
 
@@ -40,6 +40,8 @@ class Firebase {
         .set({
           username,
           email,
+          phone,
+          notification:"enabled",
         })
       })
   }

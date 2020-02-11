@@ -8,6 +8,8 @@ import MyTransactionsFB from './MyTransactionsFB';
 import SetRewardGoal from './SetRewardGoal';
 import CheckMilestone from './CheckMilestone';
 import OfferAnalytics from './OfferAnalytics';
+import SetNotification from './SetNotification';
+import ChangePhone from './ChangePhone';
 
 const UserRouter = () => (
             <Switch>
@@ -15,6 +17,8 @@ const UserRouter = () => (
                 <Route exact path="/offer" component={PlacesToJoinFB} />
                 <Route exact path="/my-transactions" component={MyTransactionsFB} />
                 <Route exact path="/change-password" component={ChangePasswordPage} />
+                <Route exact path="/change-phone" component={ChangePhone} />
+                <Route exact path="/set-notification" component={SetNotification}/>
                 <Route exact path="/set-reward-goal" component={SetRewardGoal} />
                 <Route exact path="/check-milestone" component={CheckMilestone} />
                 <Route exact path="/offer-analytics" component={OfferAnalytics} />
