@@ -341,7 +341,7 @@ class PlaceTemplate extends React.Component {
                                     </div> : 
                                 <div>
                                 <h3 className="card-title text-white">{place_name}</h3>
-                                <img src={image} className="card-img img-responsive img-fluid" />
+                                <img src={image} className="card-img img-responsive img-fluid" loading="lazy" />
                             <p className="card-text text-white">{description}</p>
                             <p className="card-text text-white">{contact}</p>
                             </div>

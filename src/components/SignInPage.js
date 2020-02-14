@@ -74,6 +74,7 @@ class SignInHOC extends React.Component{
                              <PasswordRecoveryLink/>
                             <SignUpLink/>
                             </div>
+                            
                         </div>
                        
                     </div>
@@ -84,6 +85,8 @@ class SignInHOC extends React.Component{
     }
 }
 
+
+
 const SignUpLink=()=>(
             <div className="col-lg-12 sm-12">
                 <div className="form-group">
@@ -91,6 +94,8 @@ const SignUpLink=()=>(
                 </div>
             </div>
 )
+
+
 
 const SignInHandler= withFirebase(SignInHOC)
 

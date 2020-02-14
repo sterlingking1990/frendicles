@@ -27,6 +27,9 @@ class Firebase {
     //functions
     //this.fbfnc=app;
     this.fbfnc=app.functions();
+
+    //implemtn fb login
+    this.facebookProvider = new app.auth.FacebookAuthProvider();
   }
 
 //create user and save user data 
@@ -61,6 +64,26 @@ class Firebase {
     // .then(response=>console.log(response))
     // .catch(error=>console.log(error))
   }
+
+  //sign in with fb
+  doSignInWithFacebook = () =>
+    this.auth.signInWithPopup(this.facebookProvider).then(socialAuthUser => {
+        const {accessToken} = socialAuthUser
+        initUser(accessToken)
+        })
+  
+  initUser(token){
+    fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
+    .then((response)=>response.json())
+    .then((json)=>{
+      this.user(json.id).set({
+        username:json.name,
+        email:json.email,
+        notification:"enabled"
+      })
+    })
+  }
+
   
   doSignOut = () => this.auth.signOut().then(() => {
     history.push('/')

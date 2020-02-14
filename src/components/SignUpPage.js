@@ -100,6 +100,9 @@ class SignUpHOC extends Component {
                                     </div>
                                 </div>
                             </div>
+                            <div className="row">
+                                <SignInFacebook/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +114,40 @@ class SignUpHOC extends Component {
     }
 }
 
+class SignInFacebookBase extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { error: null };
+    }
+    onSubmit = event => {
+        this.props.firebase
+            .doSignInWithFacebook()
+            .then(() => {
+                this.setState({ ...INITIAL_DETAILS })
+                history.push('/')
+            })
+            .catch(error => {
+                this.setState({ error });
+            });
+        event.preventDefault();
+    };
+    render() {
+        const { error } = this.state;
+        return (
+                <div className="col-lg-12">
+                    <form onSubmit={this.onSubmit}>
+                        <button className="btn btn-success" type="submit">Sign In with Facebook</button>
+                        {error && <p>{error.message}</p>}
+                    </form>
+                    
+                </div>
+            
+        );
+    }
+}
+
 const SignUpTemplate = withRouter(withFirebase(SignUpHOC))
+const SignInFacebook=withRouter(withFirebase(SignInFacebookBase))
 export default SignUpPage;
-export {SignUpTemplate};
+export {SignUpTemplate,SignInFacebook};
 
