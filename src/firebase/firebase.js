@@ -72,7 +72,7 @@ class Firebase {
         initUser(accessToken)
         })
   
-  initUser(token){
+  initUser=token=>{
     fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
     .then((response)=>response.json())
     .then((json)=>{
