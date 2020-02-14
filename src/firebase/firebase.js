@@ -69,20 +69,19 @@ class Firebase {
   doSignInWithFacebook = () =>
     this.auth.signInWithPopup(this.facebookProvider).then(socialAuthUser => {
         const {accessToken} = socialAuthUser
-        initUser(accessToken)
+        fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + accessToken)
+        .then((response) => response.json())
+        .then((json) => {
+          this.user(json.id).set({
+            username: json.name,
+            email: json.email,
+            notification: "enabled"
+          })
         })
-  
-  initUser=token=>{
-    fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
-    .then((response)=>response.json())
-    .then((json)=>{
-      this.user(json.id).set({
-        username:json.name,
-        email:json.email,
-        notification:"enabled"
       })
-    })
-  }
+  
+ 
+    
 
   
   doSignOut = () => this.auth.signOut().then(() => {
