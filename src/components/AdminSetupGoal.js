@@ -1,5 +1,6 @@
 import React from 'react'
 import {withFirebase} from '../firebase'
+import { AuthUserContext } from '../session';
 
 
 const INITIALS={
@@ -22,10 +23,13 @@ class AdminSetupGoal extends React.Component{
 
     }
 
-    saveGoal=()=>{
+    saveGoal=(e,authUser)=>{
         const goal_type=this.state.goal_type;
         const unit_cost=this.state.unit_cost;
         const goal_image=this.state.goal_image;
+        const goal_owner_id=authUser.uid;
+        const goal_owner=authUser.username;
+        
 
         const is_error= goal_type===''  || unit_cost==='' || goal_image===''
         if(is_error){
@@ -40,7 +44,9 @@ class AdminSetupGoal extends React.Component{
             this.props.firebase.adminGoalSettings().push({
                 goal_type,
                 unit_cost,
-                goal_image
+                goal_image,
+                goal_owner_id,
+                goal_owner
             })
             this.setState({saved:true})
 
@@ -51,6 +57,8 @@ class AdminSetupGoal extends React.Component{
 
 
         }
+
+        e.preventDefault()
 
     }
 
@@ -67,7 +75,9 @@ class AdminSetupGoal extends React.Component{
                     </div>
                 </div>
 
-                <div className="container mt-3">
+                <AuthUserContext>
+                    {authUser=>(
+                    <div className="container mt-3">
                     <div className="row">
                         <div className="col-lg-12 sm-12">
                             {saved && <h3 className="display-text text-success bg-dark">Saved successfully</h3>}
@@ -82,12 +92,13 @@ class AdminSetupGoal extends React.Component{
                                 <input type="text" name="goal_image" value={goal_image} className="form-control" placeholder="input image url for further explanation" onChange={this.onChange}/>
                             </div>
                             <div className="form-group">
-                                <button className="form-control btn-success" onClick={this.saveGoal}>Save</button>
+                                <button className="form-control btn-success" onClick={(e)=>this.saveGoal(e,authUser)}>Save</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                    )}
+                </AuthUserContext>
             </div>
         )
     }

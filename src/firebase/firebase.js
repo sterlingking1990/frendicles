@@ -69,7 +69,7 @@ class Firebase {
   doSignInWithFacebook = () =>
     this.auth.signInWithPopup(this.facebookProvider).then(socialAuthUser => {
         const {accessToken} = socialAuthUser
-        fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + accessToken)
+        fetch('https://graph.facebook.com/me?fields=email,name&access_token=' + accessToken)
         .then((response) => response.json())
         .then((json) => {
           this.user(json.id).set({

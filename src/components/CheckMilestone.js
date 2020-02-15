@@ -1,6 +1,7 @@
 import React from 'react';
 import {withFirebase} from '../firebase';
 import ProgressBar from './ProgressBar'
+import { setTimeout } from 'timers';
 
 //steps
 //1- sum the total for funbee amount from funSlots for this particualr user
@@ -14,7 +15,7 @@ import ProgressBar from './ProgressBar'
 class CheckMilestone extends React.Component{
     constructor(props){
         super(props);
-        this.state={user_fun_list:[],users_goal_choice:[],percentage:0, user_id:''}
+        this.state={user_fun_list:[],users_goal_choice:[],users_all_goal_choice:[],percentage:0, user_id:'',all_goal:[],selected_business:''}
     }
     componentDidMount() {
         //get all the fun list user has as his ofatri rewards
@@ -32,6 +33,20 @@ class CheckMilestone extends React.Component{
                 }
             })
 
+            //get all the goals on mount
+
+            this.props.firebase.adminGoalSettings().on('value', adminGoalSnapShot => {
+                const adminGoalObj = adminGoalSnapShot.val()
+                if (adminGoalObj) {
+                    const adminGoalArr = Object.keys(adminGoalObj).map(key => ({
+                        ...adminGoalObj[key], uid: key
+                    }))
+
+                    //filter based on selected goal owner
+                    this.setState({ all_goal: adminGoalArr })
+                }
+            })
+
             //get the users goal list
             this.props.firebase.goalSettings().on('value', snapShot => {
                 const userGoalSettingArr = snapShot.val(); //because we use set to store the data, it will be retrieved as an object with the parameter used 
@@ -40,7 +55,7 @@ class CheckMilestone extends React.Component{
                 if (userGoalSettingArr) {  //means there was some record of users gaol setting found
                     //getting the current user goal setting
                     const current_user_goal_settings = userGoalSettingArr[authUser.uid]
-                    this.setState({ users_goal_choice: current_user_goal_settings, user_id: authUser.uid })
+                    this.setState({ users_all_goal_choice: current_user_goal_settings, user_id: authUser.uid })
                 }
                 else {
                     this.setState({ user_id: authUser.uid })
@@ -49,9 +64,25 @@ class CheckMilestone extends React.Component{
         })
     }
 
+    handleChange=event=>{
+        this.setState({selected_business:event.target.value})
+
+        setTimeout(function(){
+            const { users_all_goal_choice, selected_business } = this.state
+            //getting goal according to the selected business
+            const users_goal_choice = users_all_goal_choice.filter(each_goal => each_goal.goal_owner_id === selected_business)
+
+            this.setState({ users_goal_choice: users_goal_choice })
+
+        }.bind(this),1500)
+        
+    }
+  
+
     render(){
         //calculate the sum of the unit cost
-        const {user_fun_list,users_goal_choice,percentage}=this.state;
+        const {user_fun_list,users_goal_choice,percentage,all_goal,selected_business}=this.state;
+        console.log(all_goal)
         let sum_total_reward=0;
         let no_transaction=''
         if(user_fun_list.length>0){
@@ -74,6 +105,19 @@ class CheckMilestone extends React.Component{
                         <span className="logo-name" id="app-name">ofatri</span>
                         <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
                         
+                    </div>
+                </div>
+
+                <div className="container mt-3">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="form-group">
+                                <label for="business">Select Business</label>
+                                    <select className="form-control" id="business" value={selected_business} onChange={this.handleChange}>
+                                    {all_goal.map(each_goal=>(<option value={each_goal.goal_owner_id}>{each_goal.goal_owner}</option>))}
+                                    </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

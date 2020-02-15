@@ -1,16 +1,20 @@
 import React from 'react';
 import { withFirebase } from '../firebase';
 import { AuthUserContext } from '../session';
+import { setTimeout } from 'timers';
 
 //use goal.uid to get all the goal settings for a particular user logged in o.e goal.uid===user_id(saved on mount)
 
 const INITIALS={
     goal: [],
+    all_goal:[],
     user_goal_choice:[],
+    user_all_goal_choice:[],
     added:false,
     saved:false,
     user_id:'',
     select_all_goal:false,
+    selected_business:''
 }
 class SetRewardGoal extends React.Component{
     constructor(props){
@@ -26,10 +30,11 @@ class SetRewardGoal extends React.Component{
                 const adminGoalArr=Object.keys(adminGoalObj).map(key=>({
                     ...adminGoalObj[key],uid:key
                 }))
-                this.setState({goal:adminGoalArr})
+
+                //filter based on selected goal owner
+                this.setState({all_goal:adminGoalArr})
             }
         })
-
 
         this.props.firebase.auth.onAuthStateChanged(authUser=>{
             //get all goal setting for everybody
@@ -40,7 +45,7 @@ class SetRewardGoal extends React.Component{
                 if(userGoalSettingArr){  //means there was some record of users gaol setting found
                 //getting the current user goal setting
                 const current_user_goal_settings=userGoalSettingArr[authUser.uid]
-                this.setState({user_goal_choice:current_user_goal_settings,user_id:authUser.uid})
+                this.setState({user_all_goal_choice:current_user_goal_settings,user_id:authUser.uid})
             }
             else{
                 this.setState({user_id:authUser.uid})
@@ -49,7 +54,22 @@ class SetRewardGoal extends React.Component{
         })
     }
 
-    handleSelectGoal=(goal_id,type,cost)=>{
+    handleChange = event => {
+        this.setState({ selected_business: event.target.value })
+       
+        //getting goal according to the selected business
+        setTimeout(function(){
+        const { user_all_goal_choice, selected_business, all_goal } = this.state
+        const user_goal_choice = user_all_goal_choice.filter(each_goal => each_goal.goal_owner_id === selected_business)
+        const goal = all_goal.filter(goal => goal.goal_owner_id === selected_business)
+        this.setState({ user_goal_choice: user_goal_choice, goal: goal })
+        }.bind(this), 1500);
+
+    }
+
+   
+
+    handleSelectGoal=(goal_id,type,cost,goal_owner,goal_owner_id)=>{
         const goal_choice=[];
         const user_id=this.state.user_id;
         const is_goal_in_choice=this.state.user_goal_choice.filter(goal=>goal.uid===goal_id);
@@ -67,6 +87,8 @@ class SetRewardGoal extends React.Component{
                 user_id:user_id,
                 type:type,
                 cost:cost,
+                goal_owner:goal_owner,
+                goal_owner_id:goal_owner_id
             }
 
             goal_choice.push(...this.state.user_goal_choice,goal_to_add)
@@ -105,7 +127,9 @@ class SetRewardGoal extends React.Component{
 
 
     render(){
-        const {goal,user_goal_choice,saved,select_all_goal} = this.state;
+        const {goal,all_goal,user_goal_choice,saved,select_all_goal,selected_business} = this.state
+        console.log(all_goal)
+        
         return(
             <div className="set-goal">
                 <div className="banner-body-background">
@@ -113,6 +137,18 @@ class SetRewardGoal extends React.Component{
                         <span className="logo-name" id="app-name">ofatri</span>
                         <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
                         
+                    </div>
+                </div>
+                <div className="container mt-3">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="form-group">
+                                <label for="business_name">Select Business</label>
+                                <select className="form-control" id="business_name" value={selected_business} onChange={this.handleChange}>
+                                {all_goal.map(each_goal=>(<option value={each_goal.goal_owner_id}>{each_goal.goal_owner}</option>))}
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -167,7 +203,7 @@ class GoalTemplate extends React.Component{
         }
         
         return(
-            <div className="goal-type" style={style} onClick={()=>this.props.handleSelectGoal(goal_id,this.props.goal.goal_type,this.props.goal.unit_cost)}>
+            <div className="goal-type" style={style} onClick={()=>this.props.handleSelectGoal(goal_id,this.props.goal.goal_type,this.props.goal.unit_cost,this.props.goal.goal_owner,this.props.goal.goal_owner_id)}>
                 <h3 id="goal">{this.props.goal.goal_type}</h3>
                 <div id="cost" className="text-display text-white">{this.props.goal.unit_cost}</div>
             </div>
