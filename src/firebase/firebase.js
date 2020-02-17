@@ -2,6 +2,7 @@ import app  from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/functions'
+import 'firebase/storage'
 import {history} from '../routers/AppRouter'
 // Your web app's Firebase configuration
 var config = {
@@ -23,6 +24,7 @@ class Firebase {
     this.db=app.database();
 
     this.fbdata=app.database;
+    this.storage=app.storage();
     
     //functions
     //this.fbfnc=app;
@@ -127,6 +129,7 @@ place=uid=>this.db.ref(`places/${uid}`)
 
 places=()=>this.db.ref('places')
 
+
 //join api
 joinPlace=uid=>this.db.ref(`join-places/${uid}`)
 joinPlaces=()=> this.db.ref('join-places')
@@ -148,6 +151,12 @@ goalSettings = () =>this.db.ref('goal-settings')
 
 adminGoalSetting=uid=>this.db.ref(`admin-goal-settings/${uid}`)
 adminGoalSettings=()=>this.db.ref('admin-goal-settings')
+
+//image store
+//single image
+imageStore=image_name=>this.storage.ref(`images/${image_name}`)
+//all images
+imageStores=()=>this.storage.ref('images')
 
 }
 
