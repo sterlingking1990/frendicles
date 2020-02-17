@@ -16,8 +16,8 @@ const UserHeader = () => (
                         <li className="nav-item">
                             <NavLink to="/create-offer" className="nav-link">Create Offer</NavLink>
                         </li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/offer" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Rewards</NavLink></li>
+                        {/* <li className="nav-item"><NavLink className="nav-link" to="/offer" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
+                        <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Rewards</NavLink></li> */}
 
                         <li className="dropdown" id="menu-anchor">
                             <a className="dropdown-toggle" data-toggle="dropdown" href="#">Reward Customer
@@ -30,13 +30,13 @@ const UserHeader = () => (
                         </li>
 
                         <li className="dropdown" id="menu-anchor">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Reward Settings
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Settings
                                 <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu">
-                                <li className="nav-item"><NavLink className="nav-link" to="/set-fun-limit" activeClassName="is-active" exact={true}>Set Fun Limit</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/set-fun-type" activeClassName="is-active" exact={true}>Set Fun Type</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/fun-slots" activeClassName="is-active" exact={true}>Fun Slots</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/set-reward-limit" activeClassName="is-active" exact={true}>Set Reward Limit</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/set-reward-type" activeClassName="is-active" exact={true}>Set Reward Type</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/admin-setup-goal" activeClassName="is-active" exact={true}>Set Goal</NavLink></li>
                             </ul>
                         </li>
 
