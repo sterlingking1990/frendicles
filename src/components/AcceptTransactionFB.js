@@ -205,6 +205,7 @@ class AcceptTransactionFB extends React.Component{
                                         funbees_won,
                                         fun_types_offered: fun_types_offered,
                                         transaction_by: authUser.uid,
+                                        transaction_owner:authUser.username
                                     })
 
                                     this.setState({ transaction_completed: true })
