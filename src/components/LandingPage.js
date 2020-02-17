@@ -105,7 +105,7 @@ const LandingPage = () => (
                     <div className="row">
                         <div className="col">
                             <div className="card bg-dark">
-                                <h3 className="card-title text-center text-white">Welcome to your Dashboard</h3>
+                                <h3 className="card-title text-center text-white">Dashboard</h3>
                                 <div className="card-body">
                                     <img src={pic1} className="card-img img-fluid img-responsive" />
                                 </div>
