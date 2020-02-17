@@ -12,6 +12,7 @@ import MyTransactionsFB from './MyTransactionsFB';
 import OfatriBalanceFB from './OfatriBalanceFB';
 import VerifyTransaction from './VerifyTransaction';
 import AdminSetupGoal from './AdminSetupGoal';
+import ConfirmFunCodeFB from './ConfirmFunCodeFB';
 
 const UserRouter = () => (
     <Switch>
@@ -19,8 +20,9 @@ const UserRouter = () => (
         <Route exact path="/create-offer" component={createPlaceFB} />
         <Route exact path="/offer" component={PlacesToJoinFB} />
         <Route exact path="/my-transactions" component={MyTransactionsFB} />
-        <Route exact path="/accept-transaction" component={AcceptTransactionFB} />
-        <Route exact path="/verify-transaction" component={VerifyTransaction} />
+        <Route exact path="/offer-reward" component={AcceptTransactionFB} />
+        <Route exact path="/close-reward" component={ConfirmFunCodeFB} />
+        <Route exact path="/verify-payment" component={VerifyTransaction} />
         <Route exact path="/admin-setup-goal" component={AdminSetupGoal} />
         <Route exact path="/set-reward-limit" component={SetRewardLimitFB} />
         <Route exact path="/set-reward-type" component={SetRewardTypeFB} />
