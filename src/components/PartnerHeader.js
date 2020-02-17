@@ -24,8 +24,9 @@ const UserHeader = () => (
                                 <span className="caret"></span>
                             </a>
                             <ul className="dropdown-menu">
-                                <li className="nav-item"><NavLink className="nav-link" to="/accept-transaction" activeClassName="is-active" exact={true}>Accept Tranzact</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/verify-transaction" activeClassName="is-active" exact={true}>Verify Tranzact</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/offer-reward" activeClassName="is-active" exact={true}>Offer Reward</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/close-reward" activeClassName="is-active" exact={true}>Close Reward</NavLink></li>
+                                <li className="nav-item"><NavLink className="nav-link" to="/verify-payment" activeClassName="is-active" exact={true}>Verify Payment</NavLink></li>
                             </ul>
                         </li>
 
