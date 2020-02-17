@@ -15,7 +15,7 @@ import { setTimeout } from 'timers';
 class CheckMilestone extends React.Component{
     constructor(props){
         super(props);
-        this.state={user_fun_list:[],users_goal_choice:[],users_all_goal_choice:[],percentage:0, user_id:'',all_goal:[],selected_business:''}
+        this.state={users:[],user_fun_list:[],users_goal_choice:[],users_all_goal_choice:[],percentage:0, user_id:'',all_goal:[],unique_goal:[],selected_business:''}
     }
     componentDidMount() {
         //get all the fun list user has as his ofatri rewards
@@ -43,7 +43,13 @@ class CheckMilestone extends React.Component{
                     }))
 
                     //filter based on selected goal owner
-                    this.setState({ all_goal: adminGoalArr })
+                    let unique_details=[]
+                    adminGoalArr.map(each=>{
+                        if(!unique_details.includes(each.goal_owner)){
+                            unique_details.push(each.goal_owner)
+                        }
+                    })
+                    this.setState({ all_goal: adminGoalArr,unique_goal:unique_details })
                 }
             })
 
@@ -54,12 +60,21 @@ class CheckMilestone extends React.Component{
                 //so others will follow as [key1:[{},{},{}],key2:[{},{}],...keyn:[{},...]]
                 if (userGoalSettingArr) {  //means there was some record of users gaol setting found
                     //getting the current user goal setting
-                    const current_user_goal_settings = userGoalSettingArr[authUser.uid]
-                    this.setState({ users_all_goal_choice: current_user_goal_settings, user_id: authUser.uid })
+                    // const current_user_goal_settings = userGoalSettingArr[authUser.uid]
+                    this.setState({ users_all_goal_choice: userGoalSettingArr, user_id: authUser.uid })
                 }
                 else {
                     this.setState({ user_id: authUser.uid })
                 }
+            })
+
+            //get users
+            this.props.firebase.users().on('value', snapShot => {
+                const userObj = snapShot.val()
+                const userArr = Object.keys(userObj).map(key => ({
+                    ...userObj[key], uid: key
+                }))
+                this.setState({ users: userArr })
             })
         })
     }
@@ -68,11 +83,14 @@ class CheckMilestone extends React.Component{
         this.setState({selected_business:event.target.value})
 
         setTimeout(function(){
-            const { users_all_goal_choice, selected_business } = this.state
-            //getting goal according to the selected business
-            const users_goal_choice = users_all_goal_choice.filter(each_goal => each_goal.goal_owner_id === selected_business)
+            const { users_all_goal_choice, selected_business,users,user_id} = this.state
+            const selected_business_user=users.filter(user=>user.username===selected_business)
+            const selected_business_user_id=selected_business_user[0].uid;
+            const user_goal=users_all_goal_choice[user_id+selected_business_user_id]
 
-            this.setState({ users_goal_choice: users_goal_choice })
+            //getting goal according to the selected business
+            // const users_goal_choice = users_all_goal_choice.filter(each_goal => each_goal.goal_owner === selected_business)
+            this.setState({ users_goal_choice: user_goal })
 
         }.bind(this),1500)
         
@@ -81,19 +99,21 @@ class CheckMilestone extends React.Component{
 
     render(){
         //calculate the sum of the unit cost
-        const {user_fun_list,users_goal_choice,percentage,all_goal,selected_business}=this.state;
+        const {user_fun_list,users_goal_choice,percentage,all_goal,selected_business,unique_goal}=this.state;
+        console.log(users_goal_choice)
+        let reward_won=user_fun_list.filter(fun_list=>fun_list.transaction_owner===selected_business)
         console.log(all_goal)
         let sum_total_reward=0;
         let no_transaction=''
-        if(user_fun_list.length>0){
-            for(let i=0;i<user_fun_list.length;i++){
-                sum_total_reward+=user_fun_list[i].status?0:parseInt(user_fun_list[i].funbees_won)
+        if(reward_won.length>0){
+            for(let i=0;i<reward_won.length;i++){
+                sum_total_reward+=reward_won[i].status?0:parseInt(reward_won[i].funbees_won)
             }
         }
         if(sum_total_reward===0){
             no_transaction="error"
         }
-
+        console.log(no_transaction)
 
 
 
@@ -112,9 +132,10 @@ class CheckMilestone extends React.Component{
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="form-group">
-                                <label for="business">Select Business</label>
+                                <label for="business">Select Business you Buy from</label>
                                     <select className="form-control" id="business" value={selected_business} onChange={this.handleChange}>
-                                    {all_goal.map(each_goal=>(<option value={each_goal.goal_owner_id}>{each_goal.goal_owner}</option>))}
+                                    <option value=""></option>
+                                    {unique_goal.map(each_goal=>(<option value={each_goal}>{each_goal}</option>))}
                                     </select>
                             </div>
                         </div>
