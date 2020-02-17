@@ -4,58 +4,94 @@ import {withFirebase} from '../firebase';
 class ConfirmFunCodeFB extends React.Component{
     constructor(props){
         super(props);
-        this.state={fun_code:"",fun_slot_array:[],user:[],place:[],error_verified:false,funcode_processed:false}
+        this.state={admin_id:'',reward_token:"",fun_slot_array:[],user:[],place:[],all_join_rec:[],error_verified:false,funcode_processed:false,wrong_token:false}
         this.saveFunCode=this.saveFunCode.bind(this)
 
     }
 
     saveFunCode=event=>{
-        const fun_code=event.target.value
-        this.setState({fun_code})
+        const reward_token=event.target.value
+        this.setState({reward_token})
     }
 
     componentDidMount(){
+
+        this.props.firebase.auth.onAuthStateChanged(authUser=>{
+            this.props.firebase.users().on('value', snapShot => {
+                const userObject = snapShot.val()
+                const userArr = Object.keys(userObject).map(key => ({
+                    ...userObject[key], uid: key
+                }))
+                this.setState({ user: userArr,admin_id:authUser.uid })
+            })
+
+            this.props.firebase.places().on('value', snapShot => {
+                const placeObject = snapShot.val()
+                const placeArr = Object.keys(placeObject).map(key => ({
+                    ...placeObject[key], uid: key
+                }))
+
+                //get place according to this user
+                const place_by_current_user=placeArr.filter(place=>place.userId===authUser.uid)
+                this.setState({ place: place_by_current_user })
+            })
+
+            this.props.firebase.joinPlaces().on('value',snapShot=>{
+                const joinObj=snapShot.val()
+                const joinArr=Object.keys(joinObj).map(key=>({
+                    ...joinObj[key],uid:key
+                }))
+                this.setState({all_join_rec:joinArr})
+
+            })
+
+        })
         
-        this.props.firebase.users().on('value',snapShot=>{
-            const userObject=snapShot.val()
-            const userArr=Object.keys(userObject).map(key=>({
-                ...userObject[key],uid:key
-            }))
-            this.setState({user:userArr})
-        })
-
-        this.props.firebase.places().on('value',snapShot=>{
-            const placeObject=snapShot.val()
-            const placeArr=Object.keys(placeObject).map(key=>({
-                ...placeObject[key],uid:key
-            }))
-            this.setState({place:placeArr})
-        })
-
-
+        
     }
 
     verifyCode=()=>{
-        const fun_code = this.state.fun_code
-        this.props.firebase.funSlots().orderByChild('user_id').equalTo(fun_code).on('value', snapShot => {
+        const {reward_token,all_join_rec,place,admin_id} = this.state
+        console.log(place.uid)
+        console.log(place)
+        //checking if reward token belongs to current admin
+        //get the join_data for the current token entered
+        const join_by_reward_token=all_join_rec.filter(join=>join.token===reward_token)
+        //get the place_id for the join_data - the place that owns this token
+        const {place_id}=join_by_reward_token[0]
+        //use place_id for the join data to get the place detail so we confirm if the userId(owner of the place) from this place is same as authUid
+        const place_detail=place.filter(place=>place.uid===place_id)
+
+        //check if userId for the place that owns the token is same as the current user(admin) id 
+        const isForAdmin=place_detail[0].userId===admin_id
+        
+        if(isForAdmin){
+        this.props.firebase.funSlots().orderByChild('reward_token').equalTo(reward_token).on('value', snapShot => {
             const funSlotObject = snapShot.val()
             if(funSlotObject){
             const funSlotArr = Object.keys(funSlotObject).map(key => ({
                 ...funSlotObject[key], uid: key
             }))
+            //check if the reward token belongs to this person
+
             this.setState({ fun_slot_array: funSlotArr })
         }
         else{
             this.setState({error_verified:true})
         }
         })
+        }
+        else{
+            this.setState({wrong_token:true})
+        }
 
     }
 
     confirmCode=(e,uid)=>{
         console.log(uid)
         this.props.firebase.funSlot(uid).update({
-            status:'processed'
+            status:'processed',
+            closed_on:this.props.firebase.getCurrentTime()
         })
             this.setState({funcode_processed:true,error_verified:false})
         e.preventDefault()
@@ -63,7 +99,7 @@ class ConfirmFunCodeFB extends React.Component{
 
 
     render(){
-        const {fun_code,fun_slot_array,user,place,error_verified,funcode_processed}=this.state
+        const {fun_code,fun_slot_array,user,place,error_verified,funcode_processed,wrong_token}=this.state
         return(
             <div id="confirm_transaction_code">
                 <div className="banner-body-background">
@@ -79,7 +115,7 @@ class ConfirmFunCodeFB extends React.Component{
                             {funcode_processed && <h5 className="display-4 text-center text-white bg-dark">Updated successfully</h5>}
 
                             <div className="form-group">
-                                <input className="form-control" type="text" placeholder="enter transaction fun code to confirm" onChange={this.saveFunCode} value={fun_code}/>
+                                <input className="form-control" type="text" placeholder="enter reward token to confirm" onChange={this.saveFunCode} value={fun_code}/>
                             </div>
                             <div className="form-group">
                                 <button className="form-control bg-success" onClick={this.verifyCode}>Verify</button>
@@ -110,7 +146,8 @@ class ConfirmFunCodeFB extends React.Component{
                                     }
                                 }
                                 })()} 
-                                {error_verified && <h3 className="display-4 text-center text-white bg-dark">Could not verify fun code, wrong code entered</h3>}
+                                {error_verified && <h3 className="display-4 text-center text-white bg-dark">Could not verify fun code, wrong token entered</h3>}
+                                {wrong_token && <h3 className="display-4 text-center text-white bg-dark">The Token entered is not for your business, please enter valid token</h3>}
                         </div>
                     </div>
                 </div>
