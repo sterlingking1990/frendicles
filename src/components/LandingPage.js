@@ -103,7 +103,7 @@ const LandingPage = () => (
             <div className="how-to-gallery">
                 <div className="gallery-plane">
                     <div className="row">
-                        <div className="col">
+                        <div className="col-lg-4 sm-12">
                             <div className="card bg-dark">
                                 <h3 className="card-title text-center text-white">Dashboard</h3>
                                 <div className="card-body">
@@ -114,7 +114,7 @@ const LandingPage = () => (
                                 </div>
                             </div>
                         </div>
-                        <div className="col">
+                        <div className="col-lg-4 sm-12">
                             <div className="card bg-dark mt-2">
                                 <h3 className="card-title text-center text-white">Search An Offer</h3>
                                 <div className="card-body">
@@ -126,7 +126,7 @@ const LandingPage = () => (
                             </div>
                         </div>
 
-                        <div className="col">
+                        <div className="col-lg-4 sm-12">
 
                             <div className="card bg-dark mt-2">
                                 <h3 className="card-title text-center text-white">Get Rewarded</h3>
@@ -139,7 +139,7 @@ const LandingPage = () => (
                             </div>
                         </div>
 
-                        <div className="col">
+                        <div className="col-lg-4 sm-12">
                             <div className="card bg-dark mt-2">
                                 <h3 className="card-title text-center text-white">Set Goals</h3>
                                 <div className="card-body">
@@ -151,7 +151,7 @@ const LandingPage = () => (
                             </div>
                         </div>
 
-                        <div className="col">
+                        <div className="col-lg-4 sm-12">
                             <div className="card bg-dark mt-2">
                                 <h3 className="card-title text-center text-white">Check Milestone</h3>
                                 <div className="card-body">
