@@ -14,7 +14,9 @@ const INITIALS={
     saved:false,
     user_id:'',
     select_all_goal:false,
-    selected_business:''
+    selected_business:'',
+    unique:[],
+    users:[]
 }
 class SetRewardGoal extends React.Component{
     constructor(props){
@@ -31,9 +33,25 @@ class SetRewardGoal extends React.Component{
                     ...adminGoalObj[key],uid:key
                 }))
 
-                //filter based on selected goal owner
-                this.setState({all_goal:adminGoalArr})
+                //get the unique business names
+                let unique_details=adminGoalArr.map(each_goal=>each_goal.goal_owner)
+                let item_unique=[]
+                unique_details.map(each=>{
+                if(!item_unique.includes(each)){
+                    item_unique.push(each)
+                }    
+                })
+                console.log(item_unique)
+                this.setState({all_goal:adminGoalArr,unique:item_unique})
             }
+        })
+
+        this.props.firebase.users().on('value',snapShot=>{
+            const userObj=snapShot.val()
+            const userArr=Object.keys(userObj).map(key=>({
+                ...userObj[key],uid:key
+            }))
+            this.setState({users:userArr})
         })
 
         this.props.firebase.auth.onAuthStateChanged(authUser=>{
@@ -44,8 +62,16 @@ class SetRewardGoal extends React.Component{
                 //so others will follow as [key1:[{},{},{}],key2:[{},{}],...keyn:[{},...]]
                 if(userGoalSettingArr){  //means there was some record of users gaol setting found
                 //getting the current user goal setting
-                const current_user_goal_settings=userGoalSettingArr[authUser.uid]
-                this.setState({user_all_goal_choice:current_user_goal_settings,user_id:authUser.uid})
+                //const current_user_goal_settings=userGoalSettingArr[authUser.uid]
+                // const userGoal=Object.keys(userGoalSettingArr).map(key=>({
+                //     ...userGoalSettingArr[key],uid:key
+                // }))
+
+                // const current_user_goal=Object.keys(userGoal[0]).map(key=>({
+                //     ...userGoal[0][key]
+                // }))
+                console.log(userGoalSettingArr)
+                this.setState({user_all_goal_choice:userGoalSettingArr,user_id:authUser.uid})
             }
             else{
                 this.setState({user_id:authUser.uid})
@@ -59,10 +85,13 @@ class SetRewardGoal extends React.Component{
        
         //getting goal according to the selected business
         setTimeout(function(){
-        const { user_all_goal_choice, selected_business, all_goal } = this.state
-        const user_goal_choice = user_all_goal_choice.filter(each_goal => each_goal.goal_owner_id === selected_business)
-        const goal = all_goal.filter(goal => goal.goal_owner_id === selected_business)
-        this.setState({ user_goal_choice: user_goal_choice, goal: goal })
+        const { user_all_goal_choice, selected_business, all_goal,user_id,users } = this.state
+        const selected_business_user=users.filter(each_user=>each_user.username===selected_business)
+        const selected_business_user_id=selected_business_user[0].uid
+        const goal_choice = user_all_goal_choice[user_id+selected_business_user_id]
+        // const user_goal_choice=goal_choice?goal_choice.filter(goal=>goal.goal_owner===selected_business):[]
+        const goal = all_goal.filter(each_goal => each_goal.goal_owner === selected_business)
+        this.setState({ user_goal_choice: goal_choice, goal: goal })
         }.bind(this), 1500);
 
     }
@@ -96,10 +125,11 @@ class SetRewardGoal extends React.Component{
         }
         }
 
-    saveGoalSettings=(authUser)=>{
-        const user_id=authUser.uid;
-       
-        this.props.firebase.goalSetting(user_id).set({
+    saveGoalSettings=()=>{
+        const {selected_business,users,user_id}=this.state
+        const selected_business_id=users.filter(user=>user.username===selected_business)
+        const business_id=selected_business_id[0].uid
+        this.props.firebase.goalSetting(user_id+business_id).set({
             ...this.state.user_goal_choice
         })
         this.setState({saved:true})
@@ -127,7 +157,7 @@ class SetRewardGoal extends React.Component{
 
 
     render(){
-        const {goal,all_goal,user_goal_choice,saved,select_all_goal,selected_business} = this.state
+        const {goal,all_goal,user_goal_choice,saved,select_all_goal,selected_business,unique} = this.state
         console.log(all_goal)
         
         return(
@@ -143,9 +173,10 @@ class SetRewardGoal extends React.Component{
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="form-group">
-                                <label for="business_name">Select Business</label>
+                                <label for="business_name">Select Business you Buy from</label>
                                 <select className="form-control" id="business_name" value={selected_business} onChange={this.handleChange}>
-                                {all_goal.map(each_goal=>(<option value={each_goal.goal_owner_id}>{each_goal.goal_owner}</option>))}
+                                <option value=""></option>
+                                {unique.map(each_goal=>(<option value={each_goal}>{each_goal}</option>))}
                                 </select>
                             </div>
                         </div>
@@ -158,7 +189,7 @@ class SetRewardGoal extends React.Component{
                         <div className="grid-control">                            
                             <div><label for="goal-control">Select all</label> <input type="checkbox" value={select_all_goal} checked={select_all_goal} onChange={this.handleSelectAllGoal}/></div>
                             {saved && <div>Your Reward Goal Have Been Saved Successfully</div>}
-                            <div><AuthUserContext>{authUser => (<button id="submit-goal-setting" onClick={()=>this.saveGoalSettings(authUser)}>Save Settings</button>)}</AuthUserContext></div>
+                            <div><button id="submit-goal-setting" onClick={this.saveGoalSettings}>Save Settings</button></div>
                         </div>
                     </div>
                 </div>
