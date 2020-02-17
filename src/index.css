@@ -263,6 +263,19 @@ code {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+#goal{
+  background-color: hsla(60, 2%, 25%, 0.63);
+
+  box-shadow: inset 5 5 20px rgb(94, 93, 93);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+#cost{
+  background-color: hsla(60, 2%, 25%, 0.63);
+  box-shadow: inset 5 5 20px rgb(94, 93, 93);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
 #faq{
   background-color: hsla(60, 66%, 94%, 0.63);
   font-size: 2.5em;
@@ -338,7 +351,6 @@ code {
   display: grid;
   grid-template-columns: repeat(12,minmax(1fr));
   grid-template-rows: repeat(5,minmax(1fr));
-  margin: 5%;
   background-color: #343A40;
 }
 
@@ -395,7 +407,6 @@ code {
   display: grid;
   grid-template-columns: repeat(12,minmax(1fr));
   grid-template-rows: repeat(5,minmax(1fr));
-  margin: 5%;
   
 }
 
@@ -419,13 +430,14 @@ code {
 .offers>div{
 flex:1 1 auto;
 border-radius: 50px;
-width: 200px;
-height: 200px;
+width: 400px;
+height: 400px;
 border: 2px solid white;
 background-color: #343A40;
 color: white;
 padding-top:70px ;
 text-align: center;
+margin: 20px;
 
 }
 
@@ -439,7 +451,6 @@ text-align: center;
   display:grid;
   grid-template-columns: repeat(12,minmax(1fr));
   grid-template-rows: repeat(5,minmax(1fr));
-  margin: 5%;
   background-color:#343A40;
   border: 3px solid white;
   border-style: ridge;
@@ -510,7 +521,6 @@ text-align:center
   display:grid;
   grid-template-columns: repeat(12,minmax(1fr));
   grid-template-rows: repeat(4,minmax(1fr));
-  margin: 5%;
   background-color: #DAD4F7
 }
 
@@ -546,7 +556,6 @@ text-align:center
   display: grid;
   grid-template-columns: repeat(12,minmax(1fr));
   grid-template-rows: repeat(5,minmax(1fr));
-  margin: 5%;
   background-color: #DAD4F7;
 }
 
@@ -794,6 +803,23 @@ ul{
   border: 2px solid hsla(60, 36%, 85%, 0.63);
   background-color: hsla(60, 87%, 75%, 0.63);
   margin:5px;
+}
+
+.how-to-gallery{
+  display: grid;
+  grid-template-columns: repeat(12,minmax(1fr));
+  grid-template-rows: auto;
+  margin:5%;
+}
+
+.gallery-pane{
+  grid-column: 1/12;
+
+}
+
+.gallery-pics{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
@@ -1195,6 +1221,20 @@ background-color: hsl(249, 48%, 89%);
   font-size: 1em;
   box-shadow: inset 5 5 20px #ccc;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#goal{
+  background-color: hsla(60, 2%, 25%, 0.63);
+
+  box-shadow: inset 5 5 20px rgb(94, 93, 93);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+#cost{
+  background-color: hsla(60, 2%, 25%, 0.63);
+  box-shadow: inset 5 5 20px rgb(94, 93, 93);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
 }
 
 #faq{
