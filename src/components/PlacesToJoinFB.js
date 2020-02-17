@@ -327,7 +327,7 @@ class PlaceTemplate extends React.Component {
 
                         <div className="card-body">
                         
-                        {view_more_images ? <InstragramGallery userId={ig_acct} thumbnailWidth={THUMBNAIL_WIDTH} photoCount={PHOTO_COUNT}/> : view_youtube ? 
+                        {(view_more_images && ig_acct) ? <InstragramGallery userId={ig_acct} thumbnailWidth={THUMBNAIL_WIDTH} photoCount={PHOTO_COUNT}/> : (view_youtube && videos) ? 
                                     <div>
                                         <div style={{ "display": "flex", "flexDirection": "column" }}>
                                             <div style={{ "display": "flex" }}>
