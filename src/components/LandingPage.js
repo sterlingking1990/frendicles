@@ -202,7 +202,7 @@ const LandingPage = () => (
                         <div className="offers">
                             <div>
                                 <h4>Dedicated Rewards Manager</h4>
-                                <p className="text-center text-white">Ofatri assigns a human dedicated Reward and Goal Manger who helps set up and manages every activity for you while you concentrate on your business</p>
+                                <p className="text-center text-white">Ofatri assigns a human dedicated Reward and Goal Manager who helps set up and manages every activity for you while you concentrate on your business</p>
                             </div>
                             <div>
                                 <h4>Customer Analytics</h4>
