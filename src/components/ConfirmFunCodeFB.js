@@ -101,7 +101,7 @@ class ConfirmFunCodeFB extends React.Component{
     render(){
         const {fun_code,fun_slot_array,user,place,error_verified,funcode_processed,wrong_token}=this.state
         return(
-            <div id="confirm_transaction_code">
+                <div>
                 <div className="banner-body-background">
                     <div className="banner-body-text1">
                         <span className="logo-name" id="app-name">ofatri</span>
@@ -131,10 +131,10 @@ class ConfirmFunCodeFB extends React.Component{
                                                     <h5 className="text-display text-center bg-dark text-white">offer - {place_detail[i].place_name}</h5>
                                                     <h5 className="text-display text-center bg-dark text-white">by <i className="fa fa-user"></i> {user_detail[i].username}</h5>
                                                     <div className="card-body">
-                                                        <h5 className="text-display text-center text-white">funcoin award <i className="fa fa-money"></i> {fun_slot_array[i].funbees}</h5>
+                                                        <h5 className="text-display text-center text-white">funcoin reward <i className="fa fa-money"></i> {fun_slot_array[i].funbees_won}</h5>
                                                     </div>
                                                 </div>
-                                                <p className="text-center text-white text-display">funbees earned</p>
+                                                <p className="text-center text-white text-display">redeem according to the funcoin reward</p>
                                                 <div className="form-check-inline">
                                                     {fun_slot_array[i].fun_types_offered.map((fun_type) =>
                                                         <span className="mx-2"><label className="mx-1 text-white" for={fun_type.fun_type}>{fun_type.fun_type}({fun_type.unit_cost})</label><input className="form-check-input text-white" name={fun_type} type="checkbox" value={fun_type} checked="true" /></span>)}
