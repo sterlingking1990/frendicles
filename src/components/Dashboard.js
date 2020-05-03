@@ -152,7 +152,7 @@ class Dashboard extends React.Component{
                                             <div id="faq3" className="collapse" data-parent="#accordion">
                                                 <div className="card-body">
                                                     As soon as you JOIN an Offer, a Reward Token is shown to you. After making Transaction and It is sent to Us by the Business for Verification, 
-                                                    You will instantly get your reward and can verify this by checking on My Rewards Menu
+                                                    You will instantly get your reward notification and can verify this by checking on 'My Rewards' Menu
                                                 </div>
                                             </div>
                                         </div>
@@ -166,8 +166,7 @@ class Dashboard extends React.Component{
                                             </div>
                                             <div className="collapse" data-parent="#accordion" id="faq4">
                                                 <div className="card-body">
-                                                    First, you can ask for proof that they already sent it by letting them screenshot their conversation on whatsAPP or you ask them to send it on our IG where you can confirm for yourself that the Reward Token was successfully sent to Ofatri.
-                                                    However, It is unethical for any Business that prooves to be reliable to have the intention to fraud you or bridge partnership with Ofatri. 
+                                                    It is unethical for any Business that prooves to be reliable to have the intention to fraud you or bridge partnership with Ofatri. 
                                                     If there happens to be such cases, the business will be Unlisted and further sanction taken over a bridge of partnership.
                                                     That is why we are ensure to List only Businesses that we verify to be genuine and that consumers trust to be reliable.
                                                 </div>
@@ -183,8 +182,7 @@ class Dashboard extends React.Component{
                                             </div>
                                             <div className="collapse" id="faq5" data-parent="#accordion">
                                                 <div className="card-body">
-                                                    As businesses are reaching their goal when you make transactions with them, Ofatri wants you to reach your goals too. Hence paying to get rewarded sounds awkward. You should not pay to redeem any reward offered to you.
-                                                    Ofatri is free and will always be free
+                                                    It is expected that you Redeem your Rewards from the business that Rewarded you. Hence Rewards are not supposed to be paid for since you already merit it by fulfilling the transaction Offer
                                                 </div>
                                             </div>
                                         </div>
@@ -198,7 +196,7 @@ class Dashboard extends React.Component{
                                             </div>
                                             <div id="faq6" className="collapse" data-parent="#accordion">
                                                 <div className="card-body">
-                                                    Ofatri believes that buying should be fun and rewarding. Our core is The Business and the Consumer, The Reward Coin can get you things that conform with the business brand or culture. 
+                                                    Ofatri believes that buying should be fun and rewarding. <br/>Our core is The Business and the Consumer, The Reward Coin can get you things that conform with the business brand or culture.<br/>
                                                     However, The coins can help you achieve goals which are generic and ubiquituous so as to let you experience and enjoy what you long for with your Reward Coin.
                                                 </div>
                                             </div>
@@ -213,7 +211,7 @@ class Dashboard extends React.Component{
 
                                             </div>
                                             <div id="faq7" className="collapse" data-parent="#accordion">
-                                                Yes!, the more you make transactions, the more Reward Coins you earn and the closer you are to Achieving your Goals
+                                                Yes!, the more you make transactions, the more Reward Coins you earn. <br/> If you do not want to Redeem the Rewards, you can let it accumulate until you reach the Goal you aspire for
                                             </div>
                                         </div>
 
@@ -226,7 +224,7 @@ class Dashboard extends React.Component{
                                             </div>
                                             <div id="faq8" className="collapse" data-parent="#accordion">
                                                 Immediately you click on Join Offer, a <strong>Make Payment</strong> check button is displayed, after bargaining with the business owner,<br />Click on the <strong>Make Payment</strong> check button then enter your payments information to make payment to the Business Owner.<br />
-                                                Payments made this way earns you 2x Reward Coin than Payment made in cash to the Business Owner or direct transfer to the Business Owner.
+                                                Payments should only be made this way if the Business is comfortable accepting online payments.
                                                 <br />
                                                 However you can contact Ofatri for more details on making payment for the product after bargaining with the Business Owner
                                                     </div>
@@ -236,14 +234,11 @@ class Dashboard extends React.Component{
                                         <div className="card">
                                             <div className="card-header">
                                                 <a href="#faq9" className="collapsed card-link" data-toggle="collapse">
-                                                    I subscribed to Ofatri for my business, how do I know Customers who show Interest in My Offer
+                                                    I own a Business, I would love Ofatri to List My Business so I can Reward my Customers
                                                 </a>
                                             </div>
                                             <div id="faq9" className="collapse" data-parent="#accordion">
-                                                As soon as you subscribe to Ofatri business, Ofatri assigns to you a dedicated Business Manager who manages your offer.<br/> Your Offer ID is given to you
-                                                by your Business Manager.<br/> Go to offer menu and Click on Offer Analytics. <br/> provide the ID given to you by your Business Manager Then select the Date you will 
-                                                like to see customers who showed Interest in your Offer.<br/>
-                                                You can choose to call and follow up with them for more business engagement.
+                                                It has been proved that Rewarding Customers help you gain new customers in a more cheaper way and Increase your sales.<br/>Contact Ofatri on <i>izundukingsleyemeka@gmail.com</i> to get Your Business Listed as well as an assigned Reward Manager<br/> Your Manager helps plan everything, while you focus on your business<br/>
                                             </div>
                                         </div>
                                     </div>
@@ -283,18 +278,18 @@ class Dashboard extends React.Component{
                                             <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
                                         </div>
                                         <div className="card-content">
-                                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri Business</strong> will provide your business with a dedicated Ofatri business manager who will handle everything relating to</p>
+                                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri Business</strong> will offer you the following features when you get listed</p>
                                             <ul>
-                                                <li>Getting you new customers at higher rate</li>
-                                                <li>Increasing your customer to product purchases</li>
-                                                <li>Increasing your business revenue</li>
-                                                <li>Provide your business with Analytics of customers who show interest on your product Offer</li>
+                                                <li>Dedicated Rewaard Manager- A customer friendly and passionate Ofatri Reward Manager</li>
+                                                <li>Customer Notifications- When Your Promotional Offer is Created and Rewards given to Your Customers</li>
+                                                <li>Consultation- Relate with Our Expert on Rewarding for Business Growth</li>
+                                                <li>Wider Coverage- Promoting your Offer across our social platforms</li>
                                             </ul>
-                                            <p className="text-justify text-center mx-3 my-4"><strong>To get listed, ensure you...</strong></p>
+                                            <p className="text-justify text-center mx-3 my-4"><strong>either of the following features are integrated on Upgrade</strong></p>
                                             <ul>
-                                                <li>Have an Instagram account for your business</li>
-                                                <li>At least 20 pics of product or service in your Instagram business account </li>
-                                                <li>Can allow your customers pay online using trusted payment gateway i.e paystack</li>
+                                                <li>Your Instagram Pictures- To let users see latest pics of your products</li>
+                                                <li>Your Youtube Videos- Are you also making youtube videos of your products, Upgrade to get this feature on your Promotional Offer</li>
+                                                <li>Ofatri Designer- Use our Designers to get Stunning Promotional Offer Cover</li>
                                             </ul>
                                             <p className="text-justify text-center mx-3 my-4"><strong>Click on subscribe now and a business manager will contact you...</strong></p>
                                             <div className="form-group">
