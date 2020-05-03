@@ -16,8 +16,11 @@ const INITIAL_DETAILS={
     users: [], 
     places: [], 
     joinedPlaces: [], 
-    user_id: '', 
+    user_id: '',
+    user_email:'', 
     place_id: '', 
+    place_name:'',
+    image:'',
     user_verified: null, 
     place_verified: null, 
     token: '', 
@@ -26,6 +29,9 @@ const INITIAL_DETAILS={
     error_fetching_fun_types:false,
     error_getting_range:false,
 }
+
+//set subject for reward email
+const subject="Ofatri- Reward from Your Latest Transaction"
 class AcceptTransactionFB extends React.Component{
     constructor(props){
         super(props);
@@ -124,7 +130,11 @@ class AcceptTransactionFB extends React.Component{
                 this.setState({user_verified:user_joined_detail[0].username})
                 this.setState({place_verified:place_joined_detail[0][joinedPlaces[i].place_id].place_name})
                 this.setState({user_id:user_joined_detail[0].uid})
+                this.setState({user_email:user_joined_detail[0].email})
                 this.setState({place_id:place_joined_detail[0].uid})
+                this.setState({ image: place_joined_detail[0][joinedPlaces[i].place_id].image})
+                
+                
                 
             }
             //consider adding break so that it doesnt try to look for another scenerio where the token exist twice in the joined
@@ -149,7 +159,7 @@ class AcceptTransactionFB extends React.Component{
     }
 
     processFunbees=(e,authUser)=>{
-        const {user_id,users,place_id,transaction_amount,funbees_won,token}=this.state
+        const {user_id,image,user_email,users,place_id,transaction_amount,funbees_won,token}=this.state
         const admin=users.filter(user=>user.uid===authUser.uid)
         //commented code uses fun settings however, no need for that since we are a reward processing company 
             // this.props.firebase.funSettings().orderByChild('userId').equalTo(authUser.uid).on('value',snapShotSettings=>{
@@ -217,6 +227,7 @@ class AcceptTransactionFB extends React.Component{
                                     })
 
                                     this.setState({ transaction_completed: true })
+                                    this.props.firebase.sendEmailOnReward(subject,user_email,admin[0].username,image,funbees_won)
 
                                     setTimeout(function () {
                                         this.setState({ transaction_completed: false })
