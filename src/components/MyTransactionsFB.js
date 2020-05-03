@@ -94,12 +94,12 @@ class TransactionTemplate extends React.Component{
                             }
                         })()}
                         <div className="card-body">
-                            <h5 className="text-display text-center text-white">funcoin award: <i className="fa fa-money"></i> {this.props.transaction.funbees_won}</h5>
+                            <h5 className="text-display text-center text-white">funcoin reward: <i className="fa fa-money"></i> {this.props.transaction.funbees_won}</h5>
                         </div>
 
                     </div>
                     <p className="text-center text-white text-display">Congratulations, your transaction has earned the following funbees</p>
-                    <p className="text-center text-white text-display">Be creative in choosing which to enjoy!</p>
+                    <p className="text-center text-white text-display">Redeem according to the funcoin reward!</p>
                     <div className="form-check-inline">
                         {this.props.transaction.fun_types_offered.map((fun_type) =>
                             <span className="mx-2"><label className="mx-1 text-white" for={fun_type.fun_type}>{fun_type.fun_type}({fun_type.unit_cost})</label><input className="form-check-input text-white" name={fun_type} type="checkbox" value={fun_type} checked="true" /></span>)}
