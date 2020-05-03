@@ -108,6 +108,13 @@ class Firebase {
     const callabale=this.fbfnc.httpsCallable('genericEmail');
     return callabale({subject:subject,offer_name:offer_name,image:image,description:description}).then(console.log)
   }
+
+  //send email of rewarding customer
+
+  sendEmailOnReward=(subject,email,offer_name,image,fun_cost)=>{
+    const callable=this.fbfnc.httpsCallable('emailOnReward');
+    return callable({subject:subject,email:email,offer_name:offer_name,image:image,fun_cost:fun_cost}).then(console.log)
+  }
   
 //define user API
 
