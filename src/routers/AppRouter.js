@@ -26,12 +26,18 @@ const HOCHeader = (Component1, Component2, Component3, Component4) => {
                     if(authUser.email==='izundukingsleyemeka@gmail.com'){
                         return <Component1 />
                     }
-                    else if (authUser.email === 'uche@gmail.com' || authUser.email === 'cakelegend@gmail.com' || authUser.email === 'kingstan4christ@yahoo.com' || authUser.email === 'asabe@gmail.com' ){ //partner emails
-                        return <Component4 />
-                    }
-                    else{
-                        return <Component2 />
-                    }
+                    else if (
+                           authUser.email === "uche@gmail.com" ||
+                           authUser.email === "izunduchiomaij@gmail.com" ||
+                           authUser.email === "cakelegend@gmail.com" ||
+                           authUser.email === "kingstan4christ@yahoo.com" ||
+                           authUser.email === "asabe@gmail.com"
+                         ) {
+                           //partner emails
+                           return <Component4 />;
+                         } else {
+                           return <Component2 />;
+                         }
                 }
                 else{
                     return <Component3 />
