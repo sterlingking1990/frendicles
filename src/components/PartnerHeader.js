@@ -3,62 +3,177 @@ import { NavLink } from 'react-router-dom'
 import { withFirebase } from '../firebase'
 import SignOutUser from './SignOutUser'
 const UserHeader = () => (
-    <div id="header">
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
-            <div className="container">
-                <button className="navbar-toggler" data-toggle="collapse" data-target="#NavbarMenu">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <a href="/" className="navbar-brand"><span className="navbar-logo">ofatri Standard</span></a>
-                <div className="collapse navbar-collapse" id="NavbarMenu">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item"><NavLink className="nav-link" to="/" activeClassName="is-active" exact={true}>Home</NavLink></li>
-                        <li className="nav-item">
-                            <NavLink to="/create-offer" className="nav-link">Create Offer</NavLink>
-                        </li>
-                        {/* <li className="nav-item"><NavLink className="nav-link" to="/offer" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
+  <div id="header">
+    <nav className="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+      <div className="container">
+        <button
+          className="navbar-toggler"
+          data-toggle="collapse"
+          data-target="#NavbarMenu"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <a href="/" className="navbar-brand">
+          <span className="navbar-logo">ofatri Standard</span>
+        </a>
+        <div className="collapse navbar-collapse" id="NavbarMenu">
+          <ul className="navbar-nav ml-auto">
+            <li>
+              <NavLink
+                className="nav-link"
+                data-toggle="collapse"
+                data-target="#NavbarMenu"
+                to="/"
+                activeClassName="is-active"
+                exact={true}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/create-offer"
+                data-toggle="collapse"
+                data-target="#NavbarMenu"
+                className="nav-link"
+              >
+                Create Offer
+              </NavLink>
+            </li>
+            {/* <li className="nav-item"><NavLink className="nav-link" to="/offer" activeClassName="is-active" exact={true}>Join Offer</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" to="/my-transactions" activeClassName="is-active" exact={true}>My Rewards</NavLink></li> */}
 
-                        <li className="dropdown" id="menu-anchor">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Reward Customer
-                                <span className="caret"></span>
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li className="nav-item"><NavLink className="nav-link" to="/offer-reward" activeClassName="is-active" exact={true}>Offer Reward</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/close-reward" activeClassName="is-active" exact={true}>Close Reward</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/verify-payment" activeClassName="is-active" exact={true}>Verify Payment</NavLink></li>
-                            </ul>
-                        </li>
+            <li className="dropdown" id="menu-anchor">
+              <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                Reward Customer
+                <span className="caret"></span>
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    data-toggle="collapse"
+                    data-target="#NavbarMenu"
+                    to="/offer-reward"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Offer Reward
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    data-toggle="collapse"
+                    data-target="#NavbarMenu"
+                    to="/close-reward"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Close Reward
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    data-toggle="collapse"
+                    data-target="#NavbarMenu"
+                    to="/verify-payment"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Verify Payment
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
 
-                        <li className="dropdown" id="menu-anchor">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Settings
-                                <span className="caret"></span>
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li className="nav-item"><NavLink className="nav-link" to="/set-reward-limit" activeClassName="is-active" exact={true}>Set Reward Limit</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/set-reward-type" activeClassName="is-active" exact={true}>Set Reward Type</NavLink></li>
-                                <li className="nav-item"><NavLink className="nav-link" to="/admin-setup-goal" activeClassName="is-active" exact={true}>Set Goal</NavLink></li>
-                            </ul>
-                        </li>
+            <li className="dropdown" id="menu-anchor">
+              <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                Settings
+                <span className="caret"></span>
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    data-toggle="collapse"
+                    data-target="#NavbarMenu"
+                    to="/set-reward-limit"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Set Reward Limit
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    data-toggle="collapse"
+                    data-target="#NavbarMenu"
+                    to="/set-reward-type"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Set Reward Type
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    data-toggle="collapse"
+                    data-target="#NavbarMenu"
+                    to="/admin-setup-goal"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Set Goal
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
 
-                        <li className="dropdown" id="menu-anchor">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Account
-                                <span className="caret"></span>
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li><NavLink className="nav-link" to="/ofatri-balance" activeClassName="is-active" exact={true}>Ofatri Balance</NavLink></li>
-                                <li></li>
-                                <li><NavLink className="nav-link" to="/change-password" activeClassName="is-active" exact={true}>Change Password</NavLink></li>
-                                <li>
-                                    <SignOutUser />
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-)
+            <li className="dropdown" id="menu-anchor">
+              <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                Account
+                <span className="caret"></span>
+              </a>
+              <ul className="dropdown-menu">
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    data-toggle="collapse"
+                    data-target="#NavbarMenu"
+                    to="/ofatri-balance"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Ofatri Balance
+                  </NavLink>
+                </li>
+                <li></li>
+                <li>
+                  <NavLink
+                    className="nav-link"
+                    data-toggle="collapse"
+                    data-target="#NavbarMenu"
+                    to="/change-password"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Change Password
+                  </NavLink>
+                </li>
+                <li>
+                  <SignOutUser />
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+);
 
 export default withFirebase(UserHeader)
