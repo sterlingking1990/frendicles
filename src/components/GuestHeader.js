@@ -16,11 +16,9 @@ const GuestHeader = () => (
         </a>
         <div className="collapse navbar-collapse" id="NavbarMenu">
           <ul className="navbar-nav ml-auto">
-            <li>
+            <li data-toggle="collapse" data-target="#NavbarMenu">
               <NavLink
                 className="nav-link"
-                data-toggle="collapse"
-                data-target="#NavbarMenu"
                 to="/signup"
                 activeClassName="is-active"
                 exact={true}
@@ -28,11 +26,9 @@ const GuestHeader = () => (
                 Sign Up
               </NavLink>
             </li>
-            <li>
+            <li data-toggle="collapse" data-target="#NavbarMenu">
               <NavLink
                 className="nav-link"
-                data-toggle="collapse"
-                data-target="#NavbarMenu"
                 to="/signin"
                 activeClassName="is-active"
                 exact={true}
