@@ -317,109 +317,218 @@ class PlaceTemplate extends React.Component {
             count_users = is_present.length;
         }
         return (
-            <AuthUserContext>
-            {authUser=>(
-                <div className="offer-display">
-                    <div className="card bg-dark">
-                            <span className="text-right text-sm text-display"><i className="fa fa-youtube-play mx-2 text-white" id="view_youtube" onClick={this.setViewYoutube}></i>&nbsp;<i className="fa fa-instagram mx-2 text-white" id="view_gallery" onClick={this.setViewGallery}></i></span>
-                    
-                        {this.props.isToUnJoin && <p className="text-danger text-center">sorry you cannot unjoin an offer you have already made transaction on</p>}
+          <AuthUserContext>
+            {authUser => (
+              <div className="offer-display">
+                <div className="card bg-dark">
+                  <span className="text-right text-sm text-display">
+                    <i
+                      className="fa fa-youtube-play mx-2 text-white"
+                      id="view_youtube"
+                      onClick={this.setViewYoutube}
+                    ></i>
+                    &nbsp;
+                    <i
+                      className="fa fa-instagram mx-2 text-white"
+                      id="view_gallery"
+                      onClick={this.setViewGallery}
+                    ></i>
+                  </span>
 
-                        <div className="card-body">
-                        
-                        {(view_more_images && ig_acct) ? <InstragramGallery userId={ig_acct} thumbnailWidth={THUMBNAIL_WIDTH} photoCount={PHOTO_COUNT}/> : (view_youtube && videos) ? 
-                                    <div>
-                                        <div style={{ "display": "flex", "flexDirection": "column" }}>
-                                            <div style={{ "display": "flex" }}>
-                                                <VideoDetail video={selectedVideo} />
-                                                <VideoList
-                                                    videos={videos}
-                                                    onVideoSelect={(userSelected) => { this.setState({ selectedVideo: videos[userSelected] }) }}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div> : 
-                                <div>
-                                <h3 className="card-title text-white">{place_name}</h3>
-                                <img src={image} className="card-img img-responsive img-fluid" loading="lazy" />
-                            <p className="card-text text-white">{description}</p>
-                            <p className="card-text text-white">{contact}</p>
-                            </div>
-                        }
+                  {this.props.isToUnJoin && (
+                    <p className="text-danger text-center">
+                      sorry you cannot unjoin an offer you have already made
+                      transaction on
+                    </p>
+                  )}
 
-                            {/* <div className="form-check-inline">
+                  <div className="card-body">
+                    {view_more_images && ig_acct ? (
+                      <InstragramGallery
+                        userId={ig_acct}
+                        thumbnailWidth={THUMBNAIL_WIDTH}
+                        photoCount={PHOTO_COUNT}
+                      />
+                    ) : view_youtube && videos ? (
+                      <div>
+                        <div
+                          style={{ display: "flex", flexDirection: "column" }}
+                        >
+                          <div style={{ display: "flex" }}>
+                            <VideoDetail video={selectedVideo} />
+                            <VideoList
+                              videos={videos}
+                              onVideoSelect={userSelected => {
+                                this.setState({
+                                  selectedVideo: videos[userSelected]
+                                });
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <h3 className="card-title text-white">{place_name}</h3>
+                        <img
+                          src={image}
+                          className="card-img img-responsive img-fluid"
+                          loading="lazy"
+                          style={{ width: "100%",height: "auto"}}
+                        />
+                        <p className="card-text text-white">{description}</p>
+                        <p className="card-text text-white">{contact}</p>
+                      </div>
+                    )}
+
+                    {/* <div className="form-check-inline">
                                 {this.props.loading_hooks && <p className="text-center bg-dark text-white">loading hooks...</p>}
                                 {hooks.map((hook) =>
                                     <span className="mx-2"><label className="mx-1 text-white" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" checked={place_hooks.includes(hook.uid) ? true : false} /></span>)}
                             </div> */}
-                        </div>
-                        <span className="text-left text-sm text-display text-white mx-1"><i className="fa fa-user-circle-o text-white"></i>&nbsp;{count_users}</span>
-                    </div>
+                  </div>
+                  <span className="text-left text-sm text-display text-white mx-1">
+                    <i className="fa fa-user-circle-o text-white"></i>&nbsp;
+                    {count_users}
+                  </span>
+                </div>
 
-                        <div className="form-group mt-2">
-                                    {(()=>{
-                                       
-                                        //checking if the current place has been joined by the current user
-                                        if(this.props.joinPlaces){
-                                            var array_status=[]  //array that keeps wether this current place has already been joined by the current user joinPlaces
-                                        for(let i=0;i<this.props.joinPlaces.length;i++){
-                                            array_status.push(this.props.place_id===this.props.joinPlaces[i].place_id)
-                                            if(this.props.place_id===this.props.joinPlaces[i].place_id){
+                <div className="form-group mt-2">
+                  {(() => {
+                    //checking if the current place has been joined by the current user
+                    if (this.props.joinPlaces) {
+                      var array_status = []; //array that keeps wether this current place has already been joined by the current user joinPlaces
+                      for (let i = 0; i < this.props.joinPlaces.length; i++) {
+                        array_status.push(
+                          this.props.place_id ===
+                            this.props.joinPlaces[i].place_id
+                        );
+                        if (
+                          this.props.place_id ===
+                          this.props.joinPlaces[i].place_id
+                        ) {
+                          var joinedPlaceID = this.props.joinPlaces[i].uid;
+                          var token = this.props.joinPlaces[i].token;
+                        }
+                      }
+                      if (array_status.some(t => t === true)) {
+                        return (
+                          <div className="offer_payment">
+                            <button
+                              className="form-control btn btn-danger text-dark"
+                              onClick={() =>
+                                this.props.onUnJoinPlace(
+                                  joinedPlaceID,
+                                  authUser
+                                )
+                              }
+                            >
+                              <span>Unjoin Offer</span>{" "}
+                            </button>
 
-                                                var joinedPlaceID=this.props.joinPlaces[i].uid
-                                                var token =this.props.joinPlaces[i].token
-                                            }
-                                        }
-                                        if(array_status.some(t=>t===true)){
-                                            return(
-                                            <div className="offer_payment">
-                                            <button className="form-control btn btn-danger text-dark" onClick={() => this.props.onUnJoinPlace(joinedPlaceID,authUser)}><span>Unjoin Offer</span> </button>
-
-                                            
-                                            <p className="text-display text-white bg-dark text-center"> [reward token- {token}]</p>
-                                            <div className="form-check-inline">
-                                            <span className="mx-2 text-green"><label className="mx-1 text-red" for="ready_for_payment"><i className="fa fa-credit-card"></i>&nbsp;make payment</label><input className="form-check-input" name="make_payment" value={make_payment} type="checkbox" checked={make_payment} onChange={this.readyPayment}/></span></div>
-                                            {make_payment && <div className="paystack_window"><div className="form-group mt-1"><input className="form-control" placeholder="Enter the amount negotiated" type="number" value={nego_amount} onChange={this.setNegotiationPay}/></div>
-                                            <div>
-                                                    <p>
-                                                        <PaystackButton
-                                                            text="Make Payment"
-                                                            class="payButton"
-                                                            callback={this.callback}
-                                                            close={this.close}
-                                                            disabled={true} 
-                                                            embed={true} 
-                                                            reference={this.getReference()}
-                                                            email={this.props.email}
-                                                            amount={main_nego_amount}
-                                                            paystackkey={this.props.pkey}
-                                                            tag="button"
-                                                            subaccount={subaccount}
-                                                            bearer="subaccount"
-                                                            metadata={display_name}
-                                                        />
-                                                    </p>
-                                                </div>
-                                                {payment_reference && <p className="text-display text-white bg-dark">[send payment code- {payment_reference} for verification</p>}
-                                                </div>
-                                            }
-                                            </div> )
-                                        }
-                                        if(array_status.every(t=>t===false)){
-                                            return(
-                                                <button className="form-control btn btn-success text-dark" onClick={() => this.props.onJoinPlace(place_id, place_name, authUser)}><span>Join Offer</span></button>)
-                                        }
-                                        }else{
-                                            return(
-                                                <button className="form-control btn btn-success text-dark" onClick={() => this.props.onJoinPlace(place_id, place_name, authUser)}><span>Join Offer</span></button>)
-                                        }
-                                    })()}
-
+                            <p className="text-display text-white bg-dark text-center">
+                              {" "}
+                              [reward token- {token}]
+                            </p>
+                            <div className="form-check-inline">
+                              <span className="mx-2 text-green">
+                                <label
+                                  className="mx-1 text-red"
+                                  for="ready_for_payment"
+                                >
+                                  <i className="fa fa-credit-card"></i>
+                                  &nbsp;make payment
+                                </label>
+                                <input
+                                  className="form-check-input"
+                                  name="make_payment"
+                                  value={make_payment}
+                                  type="checkbox"
+                                  checked={make_payment}
+                                  onChange={this.readyPayment}
+                                />
+                              </span>
                             </div>
-                        </div>
+                            {make_payment && (
+                              <div className="paystack_window">
+                                <div className="form-group mt-1">
+                                  <input
+                                    className="form-control"
+                                    placeholder="Enter the amount negotiated"
+                                    type="number"
+                                    value={nego_amount}
+                                    onChange={this.setNegotiationPay}
+                                  />
+                                </div>
+                                <div>
+                                  <p>
+                                    <PaystackButton
+                                      text="Make Payment"
+                                      class="payButton"
+                                      callback={this.callback}
+                                      close={this.close}
+                                      disabled={true}
+                                      embed={true}
+                                      reference={this.getReference()}
+                                      email={this.props.email}
+                                      amount={main_nego_amount}
+                                      paystackkey={this.props.pkey}
+                                      tag="button"
+                                      subaccount={subaccount}
+                                      bearer="subaccount"
+                                      metadata={display_name}
+                                    />
+                                  </p>
+                                </div>
+                                {payment_reference && (
+                                  <p className="text-display text-white bg-dark">
+                                    [send payment code- {payment_reference} for
+                                    verification
+                                  </p>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      }
+                      if (array_status.every(t => t === false)) {
+                        return (
+                          <button
+                            className="form-control btn btn-success text-dark"
+                            onClick={() =>
+                              this.props.onJoinPlace(
+                                place_id,
+                                place_name,
+                                authUser
+                              )
+                            }
+                          >
+                            <span>Join Offer</span>
+                          </button>
+                        );
+                      }
+                    } else {
+                      return (
+                        <button
+                          className="form-control btn btn-success text-dark"
+                          onClick={() =>
+                            this.props.onJoinPlace(
+                              place_id,
+                              place_name,
+                              authUser
+                            )
+                          }
+                        >
+                          <span>Join Offer</span>
+                        </button>
+                      );
+                    }
+                  })()}
+                </div>
+              </div>
             )}
-            </AuthUserContext>
-        )
+          </AuthUserContext>
+        );
     }
 }
 
