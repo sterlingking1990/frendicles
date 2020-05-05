@@ -22,23 +22,17 @@ const AdminHeader = () => (
             {/* <li className="nav-item">
                         <NavLink to="/hooks-page" className="nav-link">Hooks Page </NavLink>
                         </li> */}
-            <li>
+            <li data-toggle="collapse" data-target="#Navmenu">
               <NavLink
                 to="/confirm-funcode"
                 className="nav-link"
-                data-toggle="collapse"
-                data-target="#Navmenu"
+                activeClassName="is-active"
               >
                 Confirm FunCode
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/redeem-coin"
-                className="nav-link"
-                data-toggle="collapse"
-                data-target="#Navmenu"
-              >
+            <li data-toggle="collapse" data-target="#Navmenu">
+              <NavLink to="/redeem-coin" className="nav-link">
                 Redeem Coin
               </NavLink>
             </li>
@@ -48,13 +42,8 @@ const AdminHeader = () => (
             {/* <li className="nav-item">
                             <NavLink to="/create-hook" className="nav-link">Create Hook</NavLink>
                         </li> */}
-            <li>
-              <NavLink
-                to="/admin-setup-goal"
-                className="nav-link"
-                data-toggle="collapse"
-                data-target="#Navmenu"
-              >
+            <li data-toggle="collapse" data-target="#Navmenu">
+              <NavLink to="/admin-setup-goal" className="nav-link">
                 Setup Goals
               </NavLink>
             </li>
@@ -65,11 +54,9 @@ const AdminHeader = () => (
                 <span className="caret"></span>
               </a>
               <ul className="dropdown-menu">
-                <li>
+                <li data-toggle="collapse" data-target="#Navmenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#Navmenu"
                     to="/update-ofatri-account"
                     activeClassName="is-active"
                     exact={true}
@@ -77,11 +64,9 @@ const AdminHeader = () => (
                     Update Ofatri Account
                   </NavLink>
                 </li>
-                <li>
+                <li data-toggle="collapse" data-target="#Navmenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#Navmenu"
                     to="/users-info"
                     activeClassName="is-active"
                     exact={true}
