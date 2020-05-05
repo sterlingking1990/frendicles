@@ -18,11 +18,9 @@ const UserHeader = () => (
         </a>
         <div className="collapse navbar-collapse" id="NavbarMenu">
           <ul className="navbar-nav ml-auto">
-            <li>
+            <li data-toggle="collapse" data-target="#NavbarMenu">
               <NavLink
                 className="nav-link"
-                data-toggle="collapse"
-                data-target="#NavbarMenu"
                 to="/"
                 activeClassName="is-active"
                 exact={true}
@@ -30,13 +28,8 @@ const UserHeader = () => (
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/create-offer"
-                data-toggle="collapse"
-                data-target="#NavbarMenu"
-                className="nav-link"
-              >
+            <li data-toggle="collapse" data-target="#NavbarMenu">
+              <NavLink to="/create-offer" className="nav-link">
                 Create Offer
               </NavLink>
             </li>
@@ -49,11 +42,9 @@ const UserHeader = () => (
                 <span className="caret"></span>
               </a>
               <ul className="dropdown-menu">
-                <li>
+                <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#NavbarMenu"
                     to="/offer-reward"
                     activeClassName="is-active"
                     exact={true}
@@ -61,11 +52,9 @@ const UserHeader = () => (
                     Offer Reward
                   </NavLink>
                 </li>
-                <li>
+                <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#NavbarMenu"
                     to="/close-reward"
                     activeClassName="is-active"
                     exact={true}
@@ -73,11 +62,9 @@ const UserHeader = () => (
                     Close Reward
                   </NavLink>
                 </li>
-                <li>
+                <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#NavbarMenu"
                     to="/verify-payment"
                     activeClassName="is-active"
                     exact={true}
@@ -94,11 +81,9 @@ const UserHeader = () => (
                 <span className="caret"></span>
               </a>
               <ul className="dropdown-menu">
-                <li>
+                <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#NavbarMenu"
                     to="/set-reward-limit"
                     activeClassName="is-active"
                     exact={true}
@@ -106,11 +91,9 @@ const UserHeader = () => (
                     Set Reward Limit
                   </NavLink>
                 </li>
-                <li>
+                <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#NavbarMenu"
                     to="/set-reward-type"
                     activeClassName="is-active"
                     exact={true}
@@ -118,11 +101,9 @@ const UserHeader = () => (
                     Set Reward Type
                   </NavLink>
                 </li>
-                <li>
+                <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#NavbarMenu"
                     to="/admin-setup-goal"
                     activeClassName="is-active"
                     exact={true}
@@ -139,11 +120,9 @@ const UserHeader = () => (
                 <span className="caret"></span>
               </a>
               <ul className="dropdown-menu">
-                <li>
+                <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#NavbarMenu"
                     to="/ofatri-balance"
                     activeClassName="is-active"
                     exact={true}
@@ -152,11 +131,9 @@ const UserHeader = () => (
                   </NavLink>
                 </li>
                 <li></li>
-                <li>
+                <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    data-toggle="collapse"
-                    data-target="#NavbarMenu"
                     to="/change-password"
                     activeClassName="is-active"
                     exact={true}
