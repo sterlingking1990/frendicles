@@ -14,7 +14,8 @@ export default class extends Component {
             const photos = data.user.edge_owner_to_timeline_media.edges.map(
                 ({ node }) =>{
                     const {id} = node;
-                    const caption = node.edge_media_to_caption.edges[0].node.text;
+                    const caption="nothing"
+                    // const caption = node.edge_media_to_caption.edges[0].node.text;
                     const thumbnail = node.thumbnail_resources.find(thumbnail=>thumbnail.config_width===this.props.thumbnailWidth
                         );
                     const {src,config_width:width,config_height:height} = thumbnail;
