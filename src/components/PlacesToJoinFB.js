@@ -430,7 +430,7 @@ class PlaceTemplate extends React.Component {
                               {" "}
                               [reward token- {token}]
                             </p>
-                            <div className="form-check-inline">
+                            {/* <div className="form-check-inline">
                               <span className="mx-2 text-green">
                                 <label
                                   className="mx-1 text-red"
@@ -448,7 +448,7 @@ class PlaceTemplate extends React.Component {
                                   onChange={this.readyPayment}
                                 />
                               </span>
-                            </div>
+                            </div> */}
                             {make_payment && (
                               <div className="paystack_window">
                                 <div className="form-group mt-1">
@@ -460,7 +460,7 @@ class PlaceTemplate extends React.Component {
                                     onChange={this.setNegotiationPay}
                                   />
                                 </div>
-                                <div>
+                                {/* <div>
                                   <p>
                                     <PaystackButton
                                       text="Make Payment"
@@ -479,7 +479,7 @@ class PlaceTemplate extends React.Component {
                                       metadata={display_name}
                                     />
                                   </p>
-                                </div>
+                                </div> */}
                                 {payment_reference && (
                                   <p className="text-display text-white bg-dark">
                                     [send payment code- {payment_reference} for
