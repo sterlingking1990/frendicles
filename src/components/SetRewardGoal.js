@@ -101,7 +101,7 @@ class SetRewardGoal extends React.Component{
     handleSelectGoal=(goal_id,type,cost,goal_owner,goal_owner_id)=>{
         const user_id = this.state.user_id;
         const user_goal_choice = this.state.user_goal_choice;
-        const goal_choice=Array.from(user_goal_choice);
+        const goal_choice=user_goal_choice ? Array.from(user_goal_choice) : [];
         const is_goal_in_choice = user_goal_choice ? user_goal_choice.filter(goal => goal.uid === goal_id) : [];
         const goal_to_add={
                 uid:goal_id,
@@ -129,14 +129,14 @@ class SetRewardGoal extends React.Component{
                 this.setState({ user_goal_choice: goal_choice, added: true });
         }
 
-        if(!user_goal_choice){
+        // if(!user_goal_choice){
 
-            console.log("not goal choice")
-            //adding for the first time
+        //     console.log("not goal choice")
+        //     //adding for the first time
 
-            goal_choice.push(goal_to_add)
-            this.setState({ user_goal_choice: goal_choice, added: true });
-        }
+        //     goal_choice.push(goal_to_add)
+        //     this.setState({ user_goal_choice: goal_choice, added: true });
+        // }
 
         console.log(user_goal_choice)
     }
@@ -183,6 +183,7 @@ class SetRewardGoal extends React.Component{
     render(){
         const {goal,all_goal,user_goal_choice,saved,select_all_goal,selected_business,unique} = this.state
         console.log(all_goal)
+        console.log(user_goal_choice)
         
         return(
             <div className="set-goal">
