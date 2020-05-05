@@ -99,19 +99,11 @@ class SetRewardGoal extends React.Component{
    
 
     handleSelectGoal=(goal_id,type,cost,goal_owner,goal_owner_id)=>{
-        const goal_choice=[];
-        const user_id=this.state.user_id;
-        const is_goal_in_choice=this.state.user_goal_choice.filter(goal=>goal.uid===goal_id);
-        if(is_goal_in_choice.length>0) {
-            //means the goal already has been added
-            //hence the user meant remove the goal
-            const updated_goal=this.state.user_goal_choice.filter(goal=>goal.uid!==goal_id)
-            this.setState({user_goal_choice:updated_goal,added:false,select_all_goal:false})
-        }
-        else{
-            //means the user wants to add to the goal
-            
-            const goal_to_add={
+        const user_id = this.state.user_id;
+        const user_goal_choice = this.state.user_goal_choice;
+        const goal_choice=Array.from(user_goal_choice);
+        const is_goal_in_choice = user_goal_choice ? user_goal_choice.filter(goal => goal.uid === goal_id) : [];
+        const goal_to_add={
                 uid:goal_id,
                 user_id:user_id,
                 type:type,
@@ -119,40 +111,72 @@ class SetRewardGoal extends React.Component{
                 goal_owner:goal_owner,
                 goal_owner_id:goal_owner_id
             }
+        console.log(goal_to_add)
+        console.log(user_goal_choice)
+        
+        if(is_goal_in_choice.length>0) {
+            console.log(is_goal_in_choice)
 
-            goal_choice.push(...this.state.user_goal_choice,goal_to_add)
-            this.setState({user_goal_choice:goal_choice,added:true})
+            //means the goal already has been added
+            //hence the user meant remove the goal
+            const updated_goal=user_goal_choice.filter(goal=>goal.uid!==goal_id)
+            this.setState({user_goal_choice:updated_goal,added:false,select_all_goal:false})
         }
+        else{
+            //it doesnt exisit the user wants to add it to the list of goals
+            //if adding for first time, push to goal_choice and set user goal choice
+                goal_choice.push(goal_to_add)
+                this.setState({ user_goal_choice: goal_choice, added: true });
         }
+
+        if(!user_goal_choice){
+
+            console.log("not goal choice")
+            //adding for the first time
+
+            goal_choice.push(goal_to_add)
+            this.setState({ user_goal_choice: goal_choice, added: true });
+        }
+
+        console.log(user_goal_choice)
+    }
 
     saveGoalSettings=()=>{
-        const {selected_business,users,user_id}=this.state
-        const selected_business_id=users.filter(user=>user.username===selected_business)
-        const business_id=selected_business_id[0].uid
-        this.props.firebase.goalSetting(user_id+business_id).set({
-            ...this.state.user_goal_choice
-        })
-        this.setState({saved:true})
+        const {selected_business,users,user_id,user_goal_choice}=this.state
+        if(selected_business && user_goal_choice){
+            const selected_business_id=users.filter(user=>user.username===selected_business)
+            const business_id=selected_business_id[0].uid
+            this.props.firebase.goalSetting(user_id+business_id).set({
+                ...user_goal_choice
+            })
+            this.setState({saved:true})
 
-        setTimeout(function() {
-            this.setState({saved:false})
-        }.bind(this), 2000);
-        
+            setTimeout(function() {
+                this.setState({saved:false})
+            }.bind(this), 2000);
+        }
     }
 
     handleSelectAllGoal=()=>{
         const user_goal=this.state.user_goal_choice;
+        const select_all_checked=this.state.select_all_goal
+        console.log(select_all_checked)
         const admin_goal=this.state.goal;
-        if(user_goal.length===admin_goal.length){
+        console.log(user_goal)
+        console.log(admin_goal)
+        if(user_goal){
+            if(user_goal.length===admin_goal.length){
             //means all have been selected before, user wants to deselect all
             this.setState({user_goal_choice:[],select_all_goal:false})
-
-        }
-        else{
+            }
+            else{
             //means the useer wants to select all item and make user goal choice same length with admin goal
             this.setState({select_all_goal:true,user_goal_choice:admin_goal})
+            }
         }
-        
+        else{
+            this.setState({select_all_goal:true,user_goal_choice:admin_goal})
+        }
     }
 
 
@@ -184,7 +208,7 @@ class SetRewardGoal extends React.Component{
                 </div>
 
                 <div className="goal-container">
-                    <p className="display-text text-center text-white bg-dark">{user_goal_choice.length} Goals Selected</p>
+                    <p className="display-text text-center text-white bg-dark">{user_goal_choice?user_goal_choice.length:0} Goals Selected</p>
                     <div className="goal-controls">
                         <div className="grid-control">                            
                             <div><label for="goal-control">Select all</label> <input type="checkbox" value={select_all_goal} checked={select_all_goal} onChange={this.handleSelectAllGoal}/></div>
@@ -215,7 +239,7 @@ class GoalTemplate extends React.Component{
         const imageUrl=this.props.goal.goal_image;
         const goal_id=this.props.goal_id;
         let color='white';
-        if(this.props.user_goal_choice.length>0){
+        if(this.props.user_goal_choice){
             //loop through the current user goal setting to check for wether the goal_id from user goal setting is same as the id of the goal set by admin
             //if the same hence the user added that goal to his goal setting record;;;make it green to indicat
             const is_goal_present=this.props.user_goal_choice.filter(goal=>goal.uid===goal_id)
