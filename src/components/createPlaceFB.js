@@ -317,7 +317,7 @@ class PlaceTemplate extends React.Component{
     }
 
     render(){
-        const {place_name,description,image,contact,ig_acct,youtube_term,email,subaccount,isToEdit,place_hooks,hooks}=this.state
+        const {place_name,description,image,contact,ig_acct,youtube_term,email,subaccount,isToEdit,place_hooks,hooks,place_id}=this.state
 
         return(
                 <div>
@@ -372,7 +372,9 @@ class PlaceTemplate extends React.Component{
                             <p className="card-text text-white">{ig_acct}</p>
                             <p className="card-text text-white">{youtube_term}</p>
                             <p className="card-text text-white">{email}</p>
-                            <p className="card-text text-white">{subaccount}</p>
+                            {/* <p className="card-text text-white">{subaccount}</p> */}
+                            <p className="card-text text-white">tracking code-{place_id}</p>
+
                             <div className="form-check-inline">
                                 {hooks.map((hook) =>
                                     <span className="mx-2"><label className="mx-1 text-white" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" checked={place_hooks.includes(hook.uid) ? true : false} /></span>)}
