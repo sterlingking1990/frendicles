@@ -20,8 +20,8 @@ class Dashboard extends React.Component{
                     const userArr=Object.keys(userObj).map(key=>({
                         ...userObj[key],uid:key
                     }))
-                    const user_rec=userArr.filter(user=>user.uid===authUser.uid)
-                    const username=user_rec[0].username;
+                    const user_rec=userArr?userArr.filter(user=>user.uid===authUser.uid):[]
+                    const username=user_rec?user_rec[0].username:'';
                     this.setState({username:username})
                 }
 
