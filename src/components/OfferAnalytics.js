@@ -66,6 +66,7 @@ class OfferAnalytics extends React.Component{
                 }))
                 //get only the users that join current users offer
                 const users_who_joined_offer=joinList.filter(join=>join.place_id===offer_id)
+                console.log(users_who_joined_offer)
                 if(users_who_joined_offer.length>0){
                     this.setState({ userJoin: users_who_joined_offer })
                 }
@@ -135,7 +136,7 @@ class OfferAnalytics extends React.Component{
                                     Name
                                 </div>
                                 <div className="col">
-                                    Offer
+                                    Phone
             
                                 </div>
                                 <div className="col">
@@ -163,19 +164,22 @@ class UserTemplate extends React.Component{
 
 
     render(){
-        const {token,users,places,user_id,place_id}=this.state
+        const {token,users,user_id}=this.state
+        
         
         const username=users.filter(user=>user.uid===user_id)
+        console.log(username)
         
-        const place_name=places.filter(place=>place.uid===place_id)
+        // const place_name=places.filter(place=>place.uid===place_id)
         
         return(
             <div className="row" id="analysis-row">
             <div className="col">
-            {username[0]?users[0].username:'anonymous'}
+            {username[0]?username[0].username:'anonymous'}
             </div>
             <div className="col">
-            {place_name[0].place_name}
+            {username[0]?username[0].phone?username[0].phone:'no-number':'anonymous'}
+            {/* {place_name[0].place_name} */}
             </div>
             <div className="col">
             {token}
