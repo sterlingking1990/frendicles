@@ -80,7 +80,7 @@ class PlacesToJoinFB extends React.Component {
                 const placeList = Object.keys(placeObject).map(key => ({
                     ...placeObject[key], uid: key
                 }))
-                const places_to_join = placeList.filter(place => place.userId !==authUser.uid)
+                const places_to_join = placeList.filter(place => place.userId !==authUser.uid && place.status==="open")
                 this.setState({ places: places_to_join })
             })
                 
