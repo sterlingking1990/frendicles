@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router} from 'react-router-dom'
+import {BrowserRouter, HashRouter,Router} from 'react-router-dom'
 import createHistory from 'history/createBrowserHistory';
 
 import GuestHeader from '../components/GuestHeader';
@@ -84,13 +84,15 @@ const HeaderHOC = HOCHeader(AdminHeader, UserHeader, GuestHeader,PartnerHeader)
 const RouterHOC=HOCRouter(AdminRouter,UserRouter,GuestRouter, PartnerRouter);
 
 
-const AppRouter=()=>(
-            <Router history={history}>
-                <div>
-                <HeaderHOC/>
-                <RouterHOC/>
-                </div>
-            </Router>
-        )
+const AppRouter = () => (
+  <Router history={history}>
+    <HashRouter basename="/">
+      <div>
+        <HeaderHOC />
+        <RouterHOC />
+      </div>
+    </HashRouter>
+  </Router>
+);
 
 export default withAuthentication(AppRouter);
