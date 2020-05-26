@@ -15,6 +15,7 @@
     "react": "^16.11.0",
     "react-dates": "^21.5.0",
     "react-dom": "^16.11.0",
+    "react-number-format": "^4.4.1",
     "react-payment": "^0.1.8",
     "react-paystack": "^2.0.2",
     "react-phone-number-input": "^3.0.17",
