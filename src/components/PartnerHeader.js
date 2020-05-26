@@ -19,12 +19,7 @@ const UserHeader = () => (
         <div className="collapse navbar-collapse" id="NavbarMenu">
           <ul className="navbar-nav ml-auto">
             <li data-toggle="collapse" data-target="#NavbarMenu">
-              <NavLink
-                className="nav-link"
-                to="/"
-                activeClassName="is-active"
-                exact={true}
-              >
+              <NavLink className="nav-link" to="/" activeClassName="is-active">
                 Home
               </NavLink>
             </li>
@@ -45,33 +40,30 @@ const UserHeader = () => (
                 <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
-                    to="/offer-reward"
+                    to="/offer-analytics"
                     activeClassName="is-active"
-                    exact={true}
                   >
-                    Offer Reward
+                    Your Customers
                   </NavLink>
                 </li>
-                <li data-toggle="collapse" data-target="#NavbarMenu">
+                {/* <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
                     to="/close-reward"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Close Reward
                   </NavLink>
-                </li>
-                <li data-toggle="collapse" data-target="#NavbarMenu">
+                </li> */}
+                {/* <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
                     to="/verify-payment"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Verify Payment
                   </NavLink>
-                </li>
+                </li> */}
               </ul>
             </li>
 
@@ -81,12 +73,11 @@ const UserHeader = () => (
                 <span className="caret"></span>
               </a>
               <ul className="dropdown-menu">
-                <li data-toggle="collapse" data-target="#NavbarMenu">
+                {/* <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
                     to="/set-reward-limit"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Set Reward Limit
                   </NavLink>
@@ -96,17 +87,15 @@ const UserHeader = () => (
                     className="nav-link"
                     to="/set-reward-type"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Set Reward Type
                   </NavLink>
-                </li>
+                </li> */}
                 <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
                     to="/admin-setup-goal"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Set Goal
                   </NavLink>
@@ -120,23 +109,21 @@ const UserHeader = () => (
                 <span className="caret"></span>
               </a>
               <ul className="dropdown-menu">
-                <li data-toggle="collapse" data-target="#NavbarMenu">
+                {/* <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
                     to="/ofatri-balance"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Ofatri Balance
                   </NavLink>
-                </li>
+                </li> */}
                 <li></li>
                 <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
                     to="/change-password"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Change Password
                   </NavLink>
