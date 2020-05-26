@@ -23,7 +23,6 @@ const UserHeader = () => (
                 className="nav-link"
                 to="/"
                 activeClassName="is-active"
-                exact={true}
               >
                 Home
               </NavLink>
@@ -39,21 +38,11 @@ const UserHeader = () => (
                     className="nav-link"
                     to="/offer"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Join Offer
                   </NavLink>
                 </li>
-                <li data-toggle="collapse" data-target="#NavbarMenu">
-                  <NavLink
-                    className="nav-link"
-                    to="/offer-analytics"
-                    activeClassName="is-active"
-                    exact={true}
-                  >
-                    Offer Analytics
-                  </NavLink>
-                </li>
+                
               </ul>
             </li>
 
@@ -63,7 +52,7 @@ const UserHeader = () => (
                 <span className="caret"></span>
               </a>
               <ul className="dropdown-menu">
-                <li data-toggle="collapse" data-target="#NavbarMenu">
+                {/* <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
                     to="/my-transactions"
@@ -72,13 +61,12 @@ const UserHeader = () => (
                   >
                     My Rewards
                   </NavLink>
-                </li>
+                </li> */}
                 <li data-toggle="collapse" data-target="#NavbarMenu">
                   <NavLink
                     className="nav-link"
                     to="/set-reward-goal"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Set Reward Goal
                   </NavLink>
@@ -88,7 +76,6 @@ const UserHeader = () => (
                     className="nav-link"
                     to="/check-milestone"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Check Milestone
                   </NavLink>
@@ -107,7 +94,6 @@ const UserHeader = () => (
                     className="nav-link"
                     to="/set-notification"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Notification
                   </NavLink>
@@ -117,7 +103,6 @@ const UserHeader = () => (
                     className="nav-link"
                     to="/change-password"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Change Password
                   </NavLink>
@@ -127,7 +112,6 @@ const UserHeader = () => (
                     className="nav-link"
                     to="/change-phone"
                     activeClassName="is-active"
-                    exact={true}
                   >
                     Update Contact
                   </NavLink>
