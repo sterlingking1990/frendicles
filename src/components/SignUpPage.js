@@ -42,6 +42,7 @@ class SignUpHOC extends Component {
           setTimeout(function(){
             this.setState({send_mail:false})
             history.push('/')
+            history.go(0)
           }.bind(this), 3000);
                  
       })
