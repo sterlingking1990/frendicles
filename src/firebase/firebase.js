@@ -17,39 +17,37 @@ var config = {
 // Initialize Firebase
 class Firebase {
   constructor() {
-    app.initializeApp(config)
+    app.initializeApp(config);
     //authentication
-    this.auth=app.auth();
+    this.auth = app.auth();
     //database
-    this.db=app.database();
+    this.db = app.database();
 
-    this.fbdata=app.database;
-    this.storage=app.storage();
-    
+    this.fbdata = app.database;
+    this.storage = app.storage();
+
     //functions
     //this.fbfnc=app;
-    this.fbfnc=app.functions();
+    this.fbfnc = app.functions();
 
     //implemtn fb login
     // this.facebookProvider = new app.auth.FacebookAuthProvider();
   }
 
-//create user and save user data 
-  doCreateUserWithEmailAndPassword=(username,email,phone,password)=>{
+  //create user and save user data
+  doCreateUserWithEmailAndPassword = (username, email, phone, password) => {
     return this.auth
-    .createUserWithEmailAndPassword(email,password)
+      .createUserWithEmailAndPassword(email, password)
 
       .then(authUser => {
-        return this
-        .user(authUser.user.uid)
-        .set({
+        return this.user(authUser.user.uid).set({
           username,
           email,
           phone,
-          notification:"enabled",
-        })
-      })
-  }
+          notification: "enabled"
+        });
+      });
+  };
 
   //send mail
 
@@ -59,13 +57,12 @@ class Firebase {
   //   return callable({text:'Sending email with react and node mailer',subject:'Hello React Nodemailer'}).then(console.log)
   // }
 
-  doSignInWithEmailAndPassword=(email,password)=>{
-    return this.auth
-    .signInWithEmailAndPassword(email,password)
+  doSignInWithEmailAndPassword = (email, password) => {
+    return this.auth.signInWithEmailAndPassword(email, password);
 
     // .then(response=>console.log(response))
     // .catch(error=>console.log(error))
-  }
+  };
 
   //sign in with fb
   // doSignInWithFacebook = () =>
@@ -81,90 +78,97 @@ class Firebase {
   //         })
   //       })
   //     })
-  
- 
-    
 
-  
-  doSignOut = () => this.auth.signOut().then(() => {
-    history.push('/')
-  })
+  doSignOut = () =>
+    this.auth.signOut().then(() => {
+      console.log(history)
+      history.push("/");
+      history.go(0)
+    });
 
-  doPasswordReset = email=>this.auth.sendPasswordResetEmail(email)
+  doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
 
-  doPasswordUpdate= password => this.auth.currentUser.updatePassword(password)
+  doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
 
-  getAuthStatus=()=>{
-    return this.auth
-      .onAuthStateChanged(authUser=>{
-        return authUser
-      })
-  }
-  
+  getAuthStatus = () => {
+    return this.auth.onAuthStateChanged(authUser => {
+      return authUser;
+    });
+  };
 
   //send mail of new offer
 
-  sendEmail=(subject,offer_name,image,description)=>{
-    const callabale=this.fbfnc.httpsCallable('genericEmail');
-    return callabale({subject:subject,offer_name:offer_name,image:image,description:description}).then(console.log)
-  }
+  sendEmail = (subject, offer_name, image, description) => {
+    const callabale = this.fbfnc.httpsCallable("genericEmail");
+    return callabale({
+      subject: subject,
+      offer_name: offer_name,
+      image: image,
+      description: description
+    }).then(console.log);
+  };
 
   //send email of rewarding customer
 
-  sendEmailOnReward=(subject,email,offer_name,image,fun_cost)=>{
-    const callable=this.fbfnc.httpsCallable('emailOnReward');
-    return callable({subject:subject,email:email,offer_name:offer_name,image:image,fun_cost:fun_cost}).then(console.log)
-  }
-  
-//define user API
+  sendEmailOnReward = (subject, email, offer_name, image, fun_cost) => {
+    const callable = this.fbfnc.httpsCallable("emailOnReward");
+    return callable({
+      subject: subject,
+      email: email,
+      offer_name: offer_name,
+      image: image,
+      fun_cost: fun_cost
+    }).then(console.log);
+  };
 
-getCurrentTime=()=>this.fbdata.ServerValue.TIMESTAMP;
+  //define user API
 
+  getCurrentTime = () => this.fbdata.ServerValue.TIMESTAMP;
 
-user=uid=>this.db.ref(`users/${uid}`)
+  user = uid => this.db.ref(`users/${uid}`);
 
-//get all users
-users=()=>this.db.ref('users')
+  //get all users
+  users = () => this.db.ref("users");
 
-//hook api
-hook=uid=>this.db.ref(`hooks/${uid}`)
+  //hook api
+  hook = uid => this.db.ref(`hooks/${uid}`);
 
-hooks=()=>this.db.ref('hooks')
+  hooks = () => this.db.ref("hooks");
 
-//place api
-place=uid=>this.db.ref(`places/${uid}`)
+  //place api
+  place = uid => this.db.ref(`places/${uid}`);
 
-places=()=>this.db.ref('places')
+  places = () => this.db.ref("places");
 
+  //join api
+  joinPlace = uid => this.db.ref(`join-places/${uid}`);
+  joinPlaces = () => this.db.ref("join-places");
 
-//join api
-joinPlace=uid=>this.db.ref(`join-places/${uid}`)
-joinPlaces=()=> this.db.ref('join-places')
+  funSlot = uid => this.db.ref(`fun-slots/${uid}`);
+  funSlotUpdate = (uid, place_id) => this.db.ref(`fun-slots/${uid}/${place_id}`);
+  funSlots = () => this.db.ref("fun-slots");
+  funSlotUpdates=()=>this.db.ref("fun-slots")
 
-funSlot=uid=>this.db.ref(`fun-slots/${uid}`)
-funSlots=()=>this.db.ref('fun-slots')
+  funType = uid => this.db.ref(`fun-types/${uid}`);
+  funTypes = () => this.db.ref("fun-types");
 
-funType=uid=>this.db.ref(`fun-types/${uid}`)
-funTypes=()=>this.db.ref('fun-types')
+  funSetting = uid => this.db.ref(`fun-settings/${uid}`);
+  funSettings = () => this.db.ref("fun-settings");
 
-funSetting = uid => this.db.ref(`fun-settings/${uid}`)
-funSettings = () => this.db.ref('fun-settings')
+  ofatriAccount = uid => this.db.ref(`ofatri-accounts/${uid}`);
+  ofatriAccounts = () => this.db.ref("ofatri-accounts");
 
-ofatriAccount = uid =>this.db.ref(`ofatri-accounts/${uid}`)
-ofatriAccounts = () => this.db.ref('ofatri-accounts')
+  goalSetting = uid => this.db.ref(`goal-settings/${uid}`);
+  goalSettings = () => this.db.ref("goal-settings");
 
-goalSetting = uid =>this.db.ref(`goal-settings/${uid}`)
-goalSettings = () =>this.db.ref('goal-settings')
+  adminGoalSetting = uid => this.db.ref(`admin-goal-settings/${uid}`);
+  adminGoalSettings = () => this.db.ref("admin-goal-settings");
 
-adminGoalSetting=uid=>this.db.ref(`admin-goal-settings/${uid}`)
-adminGoalSettings=()=>this.db.ref('admin-goal-settings')
-
-//image store
-//single image
-imageStore=image_name=>this.storage.ref(`images/${image_name}`)
-//all images
-imageStores=()=>this.storage.ref('images')
-
+  //image store
+  //single image
+  imageStore = image_name => this.storage.ref(`images/${image_name}`);
+  //all images
+  imageStores = () => this.storage.ref("images");
 }
 
 export default Firebase
