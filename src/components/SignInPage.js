@@ -32,8 +32,10 @@ class SignInHOC extends React.Component{
         this.props.firebase
         .doSignInWithEmailAndPassword(email,password)
         .then(()=>{
+            console.log(history)
             this.setState({...INITIAL_DETAILS})
             history.push('/')
+            history.go(0)
         })
         .catch(error=>this.setState({...INITIAL_DETAILS,error:error.message}))
     }
