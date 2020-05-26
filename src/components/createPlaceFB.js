@@ -116,6 +116,7 @@ class CreatePlaceFB extends React.Component{
                 subaccount:subaccount,
                 image:url,
                 place_hooks:place_hooks,
+                status:"open"
             
             })
             this.props.firebase.sendEmail(update_subject, place_name, url , description);
@@ -156,6 +157,7 @@ class CreatePlaceFB extends React.Component{
                     subaccount:subaccount,
                     image:url,
                     place_hooks:place_hooks,
+                    status:"open"
                 })
                 this.setState({isCreated:true})
                 //send mail to all registered users about new created place
