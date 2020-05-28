@@ -2,6 +2,7 @@ import React from 'react'
 import {withFirebase} from '../firebase'
 import { AuthUserContext } from '../session';
 import moment from 'moment';
+import Linkify from "react-linkify";
 import PaystackButton from 'react-paystack';
 import InstragramGallery from './InstragramGallery';
 import VideoList from './VideoList';
@@ -376,7 +377,7 @@ class PlaceTemplate extends React.Component {
                           loading="lazy"
                           style={{ width: "100%",height: "auto"}}
                         />
-                        <p className="card-text text-white">{description}</p>
+                        <Linkify><p className="card-text text-white">{description}</p></Linkify>
                         <p className="card-text text-white">{contact}</p>
                       </div>
                     )}
@@ -449,6 +450,8 @@ class PlaceTemplate extends React.Component {
                                 />
                               </span>
                             </div> */}
+
+                          
                             {make_payment && (
                               <div className="paystack_window">
                                 <div className="form-group mt-1">
