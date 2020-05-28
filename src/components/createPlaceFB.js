@@ -1,6 +1,7 @@
 import React from 'react'
 import {withFirebase} from '../firebase'
 import { AuthUserContext } from '../session';
+import Linkify from 'react-linkify';
 
 const subject="Ofatri - New Offer Available"
 const update_subject="Ofatri - Offer Update"
@@ -23,6 +24,7 @@ const INITIALS={
     loading_hooks:false,
     loading_places:false,
     user_id:'',
+    url:''
 }
 
 class CreatePlaceFB extends React.Component{
@@ -45,10 +47,6 @@ class CreatePlaceFB extends React.Component{
 
         })
 
-        
-
-        
-
         this.setState({ loading_hooks: true, loading_places: true, isCreated: false })
         this.props.firebase.hooks().once("value", snapShot => {
             const hookObject = snapShot.val()
@@ -59,7 +57,6 @@ class CreatePlaceFB extends React.Component{
         })
         
         this.setState({ loading_hooks: false, loading_places: false })
-
     }
 
     onChange=event=>{
@@ -119,6 +116,7 @@ class CreatePlaceFB extends React.Component{
                 status:"open"
             
             })
+            this.setState({url})
             this.props.firebase.sendEmail(update_subject, place_name, url , description);
         })
     })
@@ -159,9 +157,10 @@ class CreatePlaceFB extends React.Component{
                     place_hooks:place_hooks,
                     status:"open"
                 })
-                this.setState({isCreated:true})
+                this.setState({isCreated:true,url})
                 //send mail to all registered users about new created place
                 this.props.firebase.sendEmail(subject, place_name, url, description);
+                
                 })
             })   
         }
@@ -171,79 +170,169 @@ class CreatePlaceFB extends React.Component{
     }
 
     render(){
-        const {user_id,place_name,description,contact,ig_acct,youtube_term,email,subaccount,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
-        return(
-                
-                <div id="create-place">
-                <div className="banner-body-background">
-                    <div className="banner-body-text1">
-                        <span className="logo-name" id="app-name">ofatri</span>
-                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
-                        
-                    </div>
+        const {url,image,user_id,place_name,description,contact,ig_acct,youtube_term,email,subaccount,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
+        return (
+          <div id="create-place">
+            <div className="banner-body-background">
+              <div className="banner-body-text1">
+                <span className="logo-name" id="app-name">
+                  ofatri
+                </span>
+                <div className="text-display text-center">
+                  <strong id="first_heading">Make Transactions </strong> &nbsp;
+                  <strong id="second_heading"> Get Rewarded</strong>&nbsp;
+                  <strong id="third_heading"> Achieve Goals</strong>
                 </div>
-                <AuthUserContext>
-                    {authUser => (
+              </div>
+            </div>
+            <AuthUserContext>
+              {authUser => (
                 <div className="container mt-3">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            {isCreated && <p className="text-center text-white bg-dark">offer created successfully</p>}
-                            <p className="card-title text-success text-center">Create Promotional Offer</p>
-                            <div className="form-group">
-                                <input type="text" name="place_name" placeholder="enter offer name" value={place_name} className="form-control" onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <textarea cols="6" rows="5" name="description" placeholder="describe the offer" value={description} className="form-control" onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <input type="text" name="contact" placeholder="enter phone number(whatsApp)" value={contact} className="form-control" onChange={this.onChange} />
-                            </div>
-                                    <div className="form-group">
-                                        <input type="text" name="ig_acct" placeholder="enter ID id" value={ig_acct} className="form-control" onChange={this.onChange} />
-                                    </div>
-                                    <div className="form-group">
-                                        <input type="text" name="youtube_term" placeholder="enter youtube term" value={youtube_term} className="form-control" onChange={this.onChange} />
-                                    </div>
-                            <div className="form-group">
-                                <input type="text" name="email" placeholder="enter email address" value={email} className="form-control" onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <input type="text" name="subaccount" placeholder="enter subaccount number" value={subaccount} className="form-control" onChange={this.onChange} />
-                            </div>
-                            <div className="form-group">
-                                <input type="file" id="myFile" className="form-control" name="image" onChange={this.handleImageChange} />
-                                {/* <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} /> */}
-                            </div>
-                            <p className="bg-dark text-white">What hooks relate to this offer?</p>
+                  <div className="row">
+                    <div className="col-lg-12">
+                      {isCreated && (
+                        <p className="text-center text-white bg-dark">
+                          offer created successfully
+                        </p>
+                      )}
+                      <p className="card-title text-success text-center">
+                        Create Promotional Offer
+                      </p>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          name="place_name"
+                          placeholder="enter offer name"
+                          value={place_name}
+                          className="form-control"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <textarea
+                          cols="6"
+                          rows="5"
+                          name="description"
+                          placeholder="describe the offer"
+                          value={description}
+                          className="form-control"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          name="contact"
+                          placeholder="enter phone number(whatsApp)"
+                          value={contact}
+                          className="form-control"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          name="ig_acct"
+                          placeholder="enter ID id"
+                          value={ig_acct}
+                          className="form-control"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          name="youtube_term"
+                          placeholder="enter youtube term"
+                          value={youtube_term}
+                          className="form-control"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          name="email"
+                          placeholder="enter email address"
+                          value={email}
+                          className="form-control"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <input
+                          type="text"
+                          name="subaccount"
+                          placeholder="enter subaccount number"
+                          value={subaccount}
+                          className="form-control"
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <input
+                          type="file"
+                          id="myFile"
+                          className="form-control"
+                          name="image"
+                          onChange={this.handleImageChange}
+                        />
+                        {/* <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} /> */}
+                      </div>
+                      {/* <p className="bg-dark text-white">What hooks relate to this offer?</p>
                             <div className="form-check-inline">
                             {loading_hooks &&<p className="text-center bg-dark text-white"></p>}
                                 {hooks.map((hook) =>
                                     <span className="mx-2"><label className="mx-1" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" value={hook.uid} checked={place_hooks.includes(hook.uid) ? true : false} onChange={this.keepHookID} /></span>)}
                             </div>
-                            <div className="form-group mt-2">
-                                <button className="form-control btn-dark text-white" onClick={()=>this.handleSubmit(authUser)}>Submit</button>
-                            </div>
-
-                        </div>
+                       */}
+                      <div className="form-group mt-2">
+                        <button
+                          className="form-control btn-dark text-white"
+                          onClick={() => this.handleSubmit(authUser)}
+                        >
+                          Submit
+                        </button>
+                      </div>
                     </div>
+                  </div>
                 </div>
-                    )}
-                </AuthUserContext>
-              
-        
-                    <div className="container mt-3">
-                    <div className="row">
-                        <div className="col-lg-12 sm-12">
-                        {places.length>0 ? <div><p className="card-title text-center text-white mt-2">Offers You Created</p>
-                        {loading_places && <p className="text-center bg-dark text-white">loading...</p>}
-                        <Places places={places} hooks={hooks} onDeletePlace={this.onDeletePlace} onPlaceUpdate={this.onPlaceUpdate} user_id={user_id}/></div>
-                        : <h3 className="display-4 text-center text-dark mt-2">You Have not created any Offer Yet, Create Promotional Offer And Start Getting Closed Deals From Customers</h3>}
-                        </div>
+              )}
+            </AuthUserContext>
+
+            <div className="container mt-3">
+              <div className="row">
+                <div className="col-lg-12 sm-12">
+                  {places.length > 0 ? (
+                    <div>
+                      <p className="card-title text-center text-white mt-2">
+                        Offers You Created
+                      </p>
+                      {loading_places && (
+                        <p className="text-center bg-dark text-white">
+                          loading...
+                        </p>
+                      )}
+                      <Places
+                        places={places}
+                        hooks={hooks}
+                        onDeletePlace={this.onDeletePlace}
+                        onPlaceUpdate={this.onPlaceUpdate}
+                        user_id={user_id}
+                        url={url}
+                      />
                     </div>
-                    </div>
-                    </div>
-              
-        )
+                  ) : (
+                    <h3 className="display-4 text-center text-dark mt-2">
+                      You Have not created any Offer Yet, Create Promotional
+                      Offer And Start Getting Closed Deals From Customers
+                    </h3>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
     }
 
 
@@ -252,10 +341,10 @@ class CreatePlaceFB extends React.Component{
 
 }
 
-const Places=({places,hooks,onDeletePlace,onPlaceUpdate,user_id})=>(
+const Places=({places,hooks,onDeletePlace,onPlaceUpdate,user_id,url})=>(
     <div>
         {places.map(place=>(
-            <PlaceTemplate key={place.uid} place_id={place.uid} place={place} hooks={hooks} onDeletePlace={onDeletePlace} onPlaceUpdate={onPlaceUpdate} user_id={user_id}/>
+            <PlaceTemplate key={place.uid} place_id={place.uid} place={place} hooks={hooks} onDeletePlace={onDeletePlace} onPlaceUpdate={onPlaceUpdate} user_id={user_id} url={url}/>
         ))}
     </div>
 )
@@ -263,7 +352,7 @@ const Places=({places,hooks,onDeletePlace,onPlaceUpdate,user_id})=>(
 class PlaceTemplate extends React.Component{
     constructor(props){
         super(props);
-        this.state={userId:this.props.user_id,isToEdit:false,place_name:this.props.place.place_name,user_id:this.props.place.userId,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,youtube_term:this.props.place.youtube_term,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0}
+        this.state={userId:this.props.user_id,isToEdit:false,place_name:this.props.place.place_name,user_id:this.props.place.userId,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,youtube_term:this.props.place.youtube_term,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0,url:this.props.url}
 
     }
 
@@ -319,7 +408,7 @@ class PlaceTemplate extends React.Component{
     }
 
     render(){
-        const {place_name,description,image,contact,ig_acct,youtube_term,email,subaccount,isToEdit,place_hooks,hooks,place_id}=this.state
+        const {place_name,description,image,contact,ig_acct,youtube_term,email,subaccount,isToEdit,place_hooks,hooks,place_id,url}=this.state
 
         return(
                 <div>
@@ -346,15 +435,15 @@ class PlaceTemplate extends React.Component{
                     <div className="form-group">
                         <input type="text" name="subaccount" placeholder="enter subaccount number" value={subaccount} className="form-control" onChange={this.onChange} />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} />
-                    </div>
-                    <p className="bg-dark text-white">What hooks relate to this offer?</p>
-                    <div className="form-check-inline">
+                    </div> */}
+                    {/* <p className="bg-dark text-white">What hooks relate to this offer?</p> */}
+                    {/* <div className="form-check-inline">
 
                             {hooks.map((hook) =>
                                 <span className="mx-2"><label className="mx-1" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" value={hook.uid} checked={place_hooks.includes(hook.uid) ? true : false} onChange={this.updateHookID} /></span>)}
-                    </div>
+                    </div> */}
                     <div className="form-group mt-2">
                         <button className="form-control btn-dark text-white" onClick={this.updatePlace}>Save Changes</button>
                     </div>
@@ -369,18 +458,18 @@ class PlaceTemplate extends React.Component{
                             <img src={image} className=" card-img-top img-responsive img-fluid" />
                         <div className="card-body">
                             <h3 className="card-title text-white">{place_name}</h3>
-                            <p className="card-text text-white">{description}</p>
+                           <Linkify><p className="card-text text-white">{description}</p></Linkify>
                             <p className="card-text text-white">{contact}</p>
                             <p className="card-text text-white">{ig_acct}</p>
                             <p className="card-text text-white">{youtube_term}</p>
                             <p className="card-text text-white">{email}</p>
-                            {/* <p className="card-text text-white">{subaccount}</p> */}
+                            <p className="card-text text-white">{subaccount}</p>
                             <p className="card-text text-white">tracking code-{place_id}</p>
 
-                            <div className="form-check-inline">
+                            {/* <div className="form-check-inline">
                                 {hooks.map((hook) =>
                                     <span className="mx-2"><label className="mx-1 text-white" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" checked={place_hooks.includes(hook.uid) ? true : false} /></span>)}
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                  
