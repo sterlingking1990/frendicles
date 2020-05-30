@@ -2,6 +2,7 @@ import React from 'react';
 import {withFirebase} from '../firebase';
 import ProgressBar from './ProgressBar'
 import { setTimeout } from 'timers';
+import NumberFormat from "react-number-format";
 
 //steps
 //1- sum the total for funbee amount from funSlots for this particualr user
@@ -199,9 +200,17 @@ class CheckMilestone extends React.Component{
             <div className="container mt-3">
               <div className="row">
                 <div className="col-lg-12 sm-12">
-                  <h3 className="display-text text-white bg-dark text-center">
-                    Reward Total is {amount_by_current_user}
-                  </h3>
+                  <NumberFormat
+                    value={amount_by_current_user}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"oc"}
+                    renderText={value => (
+                      <h3 className="display-text text-white bg-dark text-center">
+                        Reward Total is {value}
+                      </h3>
+                    )}
+                  />
                 </div>
               </div>
               {fetch_successful &&
@@ -266,11 +275,19 @@ class UserGoalTemplate extends React.Component{
         return (
           <div>
             <div className="col sm-12">
-              <small className="text-display text-center">
-                <strong>
-                  {goal_type} ({unit_cost})
-                </strong>
-              </small>
+              <NumberFormat
+                value={unit_cost}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"oc"}
+                renderText={value => (
+                  <small className="text-display text-center">
+                    <strong>
+                      {goal_type} ({value})
+                    </strong>
+                  </small>
+                )}
+              />
             </div>
             <div className="col sm-12">
               <ProgressBar
