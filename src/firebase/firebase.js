@@ -81,9 +81,9 @@ class Firebase {
 
   doSignOut = () =>
     this.auth.signOut().then(() => {
-      console.log(history)
+      console.log(history);
       history.push("/");
-      history.go(0)
+      history.go(0);
     });
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
@@ -108,7 +108,7 @@ class Firebase {
     }).then(console.log);
   };
 
-  //send email of rewarding customer
+  //send email after redeeming reward
 
   sendEmailOnReward = (subject, email, offer_name, image, fun_cost) => {
     const callable = this.fbfnc.httpsCallable("emailOnReward");
@@ -118,6 +118,41 @@ class Firebase {
       offer_name: offer_name,
       image: image,
       fun_cost: fun_cost
+    }).then(console.log);
+  };
+
+  //send email after each reward
+  sendEmailEachReward = (subject, email, offer_name, image, reward_amount) => {
+    const callable = this.fbfnc.httpsCallable("emailEachReward");
+    return callable({
+      subject: subject,
+      email: email,
+      offer_name: offer_name,
+      image: image,
+      fun_cost: reward_amount
+    }).then(console.log);
+  };
+
+  //send email to admin on user join offer
+
+  sendEmailOnJoin = (subject, email,phone,offer_name) => {
+    const callable = this.fbfnc.httpsCallable("emailOnJoin");
+    return callable({
+      subject: subject,
+      email: email,
+      phone: phone,
+      offer_name: offer_name
+    }).then(console.log);
+  };
+
+  //send email to user on what next after joining an offer
+  sendEmailToUserOnJoin = (subject,email,username,offer_name) => {
+    const callable = this.fbfnc.httpsCallable("emailToUserOnJoin");
+    return callable({
+      subject: subject,
+      email: email,
+      username:username,
+      offer_name: offer_name,
     }).then(console.log);
   };
 
@@ -145,9 +180,10 @@ class Firebase {
   joinPlaces = () => this.db.ref("join-places");
 
   funSlot = uid => this.db.ref(`fun-slots/${uid}`);
-  funSlotUpdate = (uid, place_id) => this.db.ref(`fun-slots/${uid}/${place_id}`);
+  funSlotUpdate = (uid, place_id) =>
+    this.db.ref(`fun-slots/${uid}/${place_id}`);
   funSlots = () => this.db.ref("fun-slots");
-  funSlotUpdates=()=>this.db.ref("fun-slots")
+  funSlotUpdates = () => this.db.ref("fun-slots");
 
   funType = uid => this.db.ref(`fun-types/${uid}`);
   funTypes = () => this.db.ref("fun-types");
