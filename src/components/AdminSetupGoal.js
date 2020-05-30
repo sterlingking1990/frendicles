@@ -1,6 +1,7 @@
 import React from 'react'
 import {withFirebase} from '../firebase'
 import { AuthUserContext } from '../session';
+import NumberFormat from "react-number-format";
 
 
 const INITIALS={
@@ -180,22 +181,40 @@ class GoalTemplate extends React.Component{
 
     render(){
         const {goal_type,unit_cost,goal_image}=this.state
-        return(
-            <div className="col">
-                <div className="card bg-dark text-white">
-                    <span className="text-right text-sm text-display"><i className="fa fa-remove mx-2 text-red" id="delete_place" onClick={this.onDeleteGoal}></i></span>
-                    <h3 className="card-title">{goal_type}</h3>
-                    <div className="card-body">
-                        <img className="card-img img-responsive img-fluid" src={goal_image}/>
-                    </div>
-                    <div className="card-footer">
-                        <p className="text-display text-center text-white">{unit_cost}</p>
-                    </div>
-                </div>
-                <br/>
-
+        return (
+          <div className="col">
+            <div className="card bg-dark text-white">
+              <span className="text-right text-sm text-display">
+                <i
+                  className="fa fa-remove mx-2 text-red"
+                  id="delete_place"
+                  onClick={this.onDeleteGoal}
+                ></i>
+              </span>
+              <h3 className="card-title">{goal_type}</h3>
+              <div className="card-body">
+                <img
+                  className="card-img img-responsive img-fluid"
+                  src={goal_image}
+                />
+              </div>
+              <div className="card-footer">
+                <NumberFormat
+                  value={unit_cost}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"oc"}
+                  renderText={value => (
+                    <p className="text-display text-center text-white">
+                      {value}
+                    </p>
+                  )}
+                />
+              </div>
             </div>
-        )
+            <br />
+          </div>
+        );
     }
 }
 
