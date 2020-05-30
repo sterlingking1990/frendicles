@@ -7,7 +7,8 @@ import moment from "moment";
 import { withFirebase } from "../firebase";
 import { setTimeout } from "timers";
 
-
+const subject_each_reward = "Ofatri- Reward from Your Latest Transaction";
+const subject = "Ofatri- You have successfully redeemed your goal";
 class OfferAnalytics extends React.Component {
   constructor(props) {
     super(props);
@@ -141,6 +142,8 @@ class OfferAnalytics extends React.Component {
     //get the record for funslots
     let { reward_amount, users, places } = this.state;
 
+    const username=users.filter(each_user=>each_user.uid===user_id)
+
 
 
     var arrFunPick=[]
@@ -204,6 +207,13 @@ class OfferAnalytics extends React.Component {
     });
 
     this.setState({ transaction_completed: true });
+    this.props.firebase.sendEmailEachReward(
+      subject_each_reward,
+      username[0].email,
+      user_for_placename[0].username,
+      placename[0].image,
+      reward_amount
+    );
 
     setTimeout(
       function() {
@@ -221,7 +231,7 @@ class OfferAnalytics extends React.Component {
   };
 
 
-  redeemUserGoal=(token,cost,user_id,place_id)=>{
+  redeemUserGoal=(token,cost,user_id,user_email,place_id)=>{
 
     const {users,places}=this.state
     
@@ -267,6 +277,13 @@ class OfferAnalytics extends React.Component {
      });
 
      this.setState({ transaction_completed: true });
+     this.props.firebase.sendEmailOnReward(
+       subject,
+       user_email,
+       user_for_placename[0].username,
+       placename[0].image,
+       balance
+     );
 
      setTimeout(
        function() {
@@ -632,34 +649,46 @@ class UserTemplate extends React.Component {
         }
 
         var total_reward_user = 0;
+        if(keys_slot.length>0){
         for (let x = 0; x < keys_slot[0].length - 1; x++) {
           total_reward_user =
             parseInt(total_reward_user) +
             parseInt(total_reward_slot[0][keys_slot[0][x]].funbees_won);
         }
+      }
 
         
 
      //means the user hasnt been rewarded before by the offer;
 
-        var collection_fun=arrFunSlot.filter(each=>each!==undefined)
-        if(collection_fun.length===0){
-          var total_reward_amount=0
-        }
-        else{
-          let total_amount_rewarded = collection_fun.filter(
-          reward =>
-          reward.user_id === username[0].uid &&
-               token.includes(user_for_placename[0].username)
-          );
 
+        var collection_fun=arrFunSlot.filter(each=>each!==undefined)
+        var total_reward_amount=0
+        if(collection_fun.length===0){
+          total_reward_amount=0
+        }
+
+        console.log(username)
+
+        let keep_current_user_fun_slot=[]
+        for(let i=0;i<collection_fun.length;i++){
+          if(collection_fun[i].user_id===user_id && token.includes(user_for_placename[0].username)){
+            keep_current_user_fun_slot.push(collection_fun[i].funbees_won)
+          }
+        }
+        if(keep_current_user_fun_slot.length>0){
+          //means the user has some funbees here, use reduce to sum up
+          total_reward_amount=keep_current_user_fun_slot.reduce((a,b)=>a+b)
+        }
+
+          
           // let total_amount_rewarded_for_token = arrFunSlot.filter(
           //   reward =>
           //     reward.user_id === username[0].uid &&
           //     token.includes(user_for_placename[0].username)
           // );
           console.log(user_for_placename[0].username)
-          console.log(total_amount_rewarded)
+          console.log(total_reward_amount)
           console.log(token.includes(user_for_placename[0].username))
 
     //sum up all reward amount for this current user on the current business 
@@ -668,12 +697,11 @@ class UserTemplate extends React.Component {
           // return (acc += Number(curr.funbees_won));
           // }, 0);
 
-          var total_reward_amount=total_amount_rewarded.reduce(function(acc, curr) {
-          return (acc += Number(curr.funbees_won));
-          }, 0);
+          // var total_reward_amount=total_amount_rewarded.reduce(function(acc, curr) {
+          // return (acc += Number(curr.funbees_won));
+          // }, 0);
 
           console.log(total_reward_amount);
-        }
       // var total_reward_amount_for_token=this.props.total_fun_amount
 
     // const place_name=places.filter(place=>place.uid===place_id)
@@ -715,7 +743,9 @@ class UserTemplate extends React.Component {
               <div className="col-sm-6">
                 <button
                   className="btn btn-primary"
-                  onClick={() => this.props.rewardUser(username[0].uid,place_id, token)}
+                  onClick={() =>
+                    this.props.rewardUser(username[0].uid, place_id, token)
+                  }
                 >
                   Reward User
                 </button>
@@ -725,91 +755,117 @@ class UserTemplate extends React.Component {
             {/* /*list the goals and their ratings for redeeming*/}
             <div>
               {(() => {
-                let goal_list=[]
+                let goal_list = [];
                 if (this.props.all_user_goal_settings) {
-                  console.log("am here")
-                  console.log(this.props.all_user_goal_settings.length)
-                  console.log(this.props.all_user_goal_settings)
-                  console.log(this.props.all_user_goal_settings[0][0])
-                  console.log(this.props.all_user_goal_settings[0][0].length)
-                  console.log(this.props.all_user_goal_settings[0])
-                  for(let i=0;i<this.props.all_user_goal_settings.length;i++){
-                     let goal_obj=Object.values(this.props.all_user_goal_settings[i])
-                     for(let j=0;j<goal_obj.length;j++){
-                       if(goal_obj[j].goal_owner===user_for_placename[0].username && goal_obj[j].user_id===username[0].uid){
-                         goal_list.push({goal_type:goal_obj[j].type,cost:goal_obj[j].cost})
-                       }
-                     }
+                  console.log("am here");
+                  console.log(this.props.all_user_goal_settings.length);
+                  console.log(this.props.all_user_goal_settings);
+                  console.log(this.props.all_user_goal_settings[0][0]);
+                  console.log(this.props.all_user_goal_settings[0][0].length);
+                  console.log(this.props.all_user_goal_settings[0]);
+                  for (
+                    let i = 0;
+                    i < this.props.all_user_goal_settings.length;
+                    i++
+                  ) {
+                    let goal_obj = Object.values(
+                      this.props.all_user_goal_settings[i]
+                    );
+                    for (let j = 0; j < goal_obj.length; j++) {
+                      if (
+                        goal_obj[j].goal_owner ===
+                          user_for_placename[0].username &&
+                        goal_obj[j].user_id === username[0].uid
+                      ) {
+                        goal_list.push({
+                          goal_type: goal_obj[j].type,
+                          cost: goal_obj[j].cost
+                        });
+                      }
+                    }
                   }
                   return (
                     <span className="text-right text-sm text-display mx-2">
                       &nbsp;&nbsp;&nbsp;
                       <ul className="list-group list-group-horizontal">
-                      {goal_list.map(function(current_item){
-                        const disabledButton={}
-                        var reward_rate_to_goal=parseInt((total_reward_user/current_item.cost)*100);
-                        console.log(reward_rate_to_goal)
-                        console.log(current_item.cost)
-                        console.log(total_reward_user)
-                        var color;
-                        if(reward_rate_to_goal>=100){
-                          reward_rate_to_goal=100
-                          color = "mx-1 list-group-item list-group-item-success";
-                          disabledButton.disabled=false;
-                        }
-                        if(reward_rate_to_goal>=50 && reward_rate_to_goal<100){
-                          color="mx-1 list-group-item list-group-item-info"
-                          disabledButton.disabled=true
-                        }
-                        if(reward_rate_to_goal<50){
-                          color="mx-1 list-group-item list-group-item-danger"
-                          disabledButton.disabled=true
-                        }return (
-                           <li className={color}>
-                             <div>
-                               <div className="text-display text-center">
-                                 <small>{current_item.goal_type}</small>
-                               </div>
-                               <NumberFormat
-                                 value={current_item.cost}
-                                 displayType={"text"}
-                                 thousandSeparator={true}
-                                 prefix={"#"}
-                                 renderText={value => (
-                                   <div>
-                                     {value} - {reward_rate_to_goal}%
-                                   </div>
-                                 )}
-                               />
-                               {/* <div className="text-display text-center">
+                        {goal_list.map(
+                          function(current_item) {
+                            const disabledButton = {};
+                            var reward_rate_to_goal = parseInt(
+                              (total_reward_user / current_item.cost) * 100
+                            );
+                            console.log(reward_rate_to_goal);
+                            console.log(current_item.cost);
+                            console.log(total_reward_user);
+                            var color;
+                            if (reward_rate_to_goal >= 100) {
+                              reward_rate_to_goal = 100;
+                              color =
+                                "mx-1 list-group-item list-group-item-success";
+                              disabledButton.disabled = false;
+                            }
+                            if (
+                              reward_rate_to_goal >= 50 &&
+                              reward_rate_to_goal < 100
+                            ) {
+                              color =
+                                "mx-1 list-group-item list-group-item-info";
+                              disabledButton.disabled = true;
+                            }
+                            if (reward_rate_to_goal < 50) {
+                              color =
+                                "mx-1 list-group-item list-group-item-danger";
+                              disabledButton.disabled = true;
+                            }
+                            return (
+                              <li className={color}>
+                                <div>
+                                  <div className="text-display text-center">
+                                    <small>{current_item.goal_type}</small>
+                                  </div>
+                                  <NumberFormat
+                                    value={current_item.cost}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    prefix={"oc"}
+                                    renderText={value => (
+                                      <div>
+                                        {value} - {reward_rate_to_goal}%
+                                      </div>
+                                    )}
+                                  />
+                                  {/* <div className="text-display text-center">
                                  <small>{}</small>
                                </div> */}
-                               <div className="display-center">
-                                 <small>
-                                   <button
-                                     className="btn btn-primary"
-                                     {...disabledButton}
-                                     onClick={() =>
-                                       this.props.redeemUserGoal(
-                                         token,
-                                         current_item.cost,
-                                         username[0].uid,
-                                         place_id
-                                       )
-                                     }
-                                   >
-                                     Redeem
-                                   </button>
-                                 </small>
-                               </div>
-                             </div>
-                           </li>
-                         );
-                      }.bind(this))}
+                                  <div className="display-center">
+                                    <small>
+                                      <button
+                                        className="btn btn-primary"
+                                        {...disabledButton}
+                                        onClick={() =>
+                                          this.props.redeemUserGoal(
+                                            token,
+                                            current_item.cost,
+                                            username[0].uid,
+                                            username[0].email,
+                                            place_id
+                                          )
+                                        }
+                                      >
+                                        Redeem
+                                      </button>
+                                    </small>
+                                  </div>
+                                </div>
+                              </li>
+                            );
+                          }.bind(this)
+                        )}
                       </ul>
                     </span>
                   );
-              }})()}
+                }
+              })()}
             </div>
             <br />
           </div>
@@ -832,10 +888,20 @@ class UserTemplate extends React.Component {
               <small>{token}</small>
             </div>
             <div className="col">
-              <small>{total_reward_amount}</small>
+              <NumberFormat
+                value={total_reward_amount}
+                displayType={"text"}
+                thousandSeparator={true}
+                prefix={"oc"}
+                renderText={value => (
+                  <small>
+                    <span>{value}</span>
+                  </small>
+                )}
+              />
             </div>
             <div className="col">
-              <button onClick={()=>this.showRewardForm()}>
+              <button onClick={() => this.showRewardForm()}>
                 <i className="fa fa-trophy"></i>
               </button>
             </div>
