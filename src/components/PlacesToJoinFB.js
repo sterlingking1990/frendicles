@@ -124,7 +124,7 @@ class PlacesToJoinFB extends React.Component {
               authUser.phone,
               place_name
             );
-            this.props.firebase.sendEmailToUserOnJoin(subject_on_join, authUser.email,authUser.username, offer_name);
+            this.props.firebase.sendEmailToUserOnJoin(subject_on_join, authUser.email,authUser.username, place_name);
         }
         else{
             this.setState({join_token:null})
