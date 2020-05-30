@@ -18,7 +18,8 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 const THUMBNAIL_WIDTH=640;
 const PHOTO_COUNT=60;
 
-
+const subject="Customer has showed interest on your offer"
+const subject_on_join = "Congratulations You have Joined an Offer,See Next Steps!";
 const INITIALS = {
     pkey: "pk_test_c6ee2e7a44ffb088bff0cd3cfe7665336b40b6c0", //PAYSTACK PUBLIC KEY
     email: "",  // customer email
@@ -117,6 +118,13 @@ class PlacesToJoinFB extends React.Component {
                 ...snapShotObj[each],uid:each
             }))
             this.setState({join_token:snapShotArray[0].token})
+            this.props.firebase.sendEmailOnJoin(
+              subject,
+              authUser.email,
+              authUser.phone,
+              place_name
+            );
+            this.props.firebase.sendEmailToUserOnJoin(subject_on_join, authUser.email,authUser.username, offer_name);
         }
         else{
             this.setState({join_token:null})
