@@ -2,6 +2,7 @@ import React from 'react';
 import { withFirebase } from '../firebase';
 import { AuthUserContext } from '../session';
 import { setTimeout } from 'timers';
+import NumberFormat from "react-number-format";
 
 //use goal.uid to get all the goal settings for a particular user logged in o.e goal.uid===user_id(saved on mount)
 
@@ -258,12 +259,34 @@ class GoalTemplate extends React.Component{
             borderColor: color,
         }
         
-        return(
-            <div className="goal-type" style={style} onClick={()=>this.props.handleSelectGoal(goal_id,this.props.goal.goal_type,this.props.goal.unit_cost,this.props.goal.goal_owner,this.props.goal.goal_owner_id)}>
-                <h3 id="goal">{this.props.goal.goal_type}</h3>
-                <div id="cost" className="text-display text-white">{this.props.goal.unit_cost}</div>
-            </div>
-        )
+        return (
+          <div
+            className="goal-type"
+            style={style}
+            onClick={() =>
+              this.props.handleSelectGoal(
+                goal_id,
+                this.props.goal.goal_type,
+                this.props.goal.unit_cost,
+                this.props.goal.goal_owner,
+                this.props.goal.goal_owner_id
+              )
+            }
+          >
+            <h3 id="goal">{this.props.goal.goal_type}</h3>
+            <NumberFormat
+              value={this.props.goal.unit_cost}
+              displayType={"text"}
+              thousandSeparator={true}
+              prefix={"oc"}
+              renderText={value => (
+                <div id="cost" className="text-display text-white">
+                  {value}
+                </div>
+              )}
+            />
+          </div>
+        );
     }
 }
 
