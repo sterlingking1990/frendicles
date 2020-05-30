@@ -29,9 +29,9 @@ const HOCHeader = (Component1, Component2, Component3, Component4) => {
                     else if (
                            authUser.email === "uche@gmail.com" ||
                            authUser.email === "izunduchiomaij@gmail.com" ||
-                           authUser.email === "cakelegend@gmail.com" ||
+                           authUser.email === "ofatri4business@gmail.com" ||
                            authUser.email === "kingstan4christ@yahoo.com" ||
-                           authUser.email === "asabe@gmail.com"
+                           authUser.email === "jumokemagaret@gmail.com"
                          ) {
                            //partner emails
                            return <Component4 />;
@@ -60,9 +60,9 @@ const HOCRouter = (Component1, Component2, Component3, Component4) => {
                         else if (
                                authUser.email === "uche@gmail.com" ||
                                authUser.email === "izunduchiomaij@gmail.com" ||
-                               authUser.email === "cakelegend@gmail.com" ||
+                               authUser.email === "ofatri4business@gmail.com" ||
                                authUser.email === "kingstan4christ@yahoo.com" ||
-                               authUser.email === "asabe@gmail.com"
+                               authUser.email === "jumokemagaret@gmail.com"
                              ) {
                                //partner emails
                                return <Component4 />;
