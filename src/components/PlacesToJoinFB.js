@@ -41,6 +41,7 @@ const INITIALS = {
     search_text:'',
     user_id:'',
     username:'',
+    users:[]
 }
 
 class PlacesToJoinFB extends React.Component {
@@ -85,6 +86,14 @@ class PlacesToJoinFB extends React.Component {
                 const places_to_join = placeList.filter(place => place.userId !==authUser.uid && place.status==="open")
                 this.setState({ places: places_to_join })
             })
+
+            this.props.firebase.users().on("value",snapShot=>{
+              const userObj=snapShot.val()
+              const userArr=Object.keys(userObj).map(key=>({
+                ...userObj[key],uid:key
+              }))
+              this.setState({users:userArr})
+            })
                 
         });
         
@@ -101,6 +110,7 @@ class PlacesToJoinFB extends React.Component {
     }
 
     onJoinPlace=(place_id,place_name,authUser)=>{
+      const {users,places}=this.state
         var place_name_join=place_name.replace(/\s/g,'');
 
         var joinRef=this.props.firebase.joinPlaces().push({
@@ -109,6 +119,19 @@ class PlacesToJoinFB extends React.Component {
             userId:authUser.uid,
             date_joined:this.props.firebase.getCurrentTime(),
         })
+
+        const place_identity=places.filter(place=>place.uid===place_id)
+        const user_who_owns_place=users.filter(user=>user.uid===place_identity[0].userId)
+        const user_who_owns_place_email=user_who_owns_place[0].email
+        const user_who_owns_place_phone=user_who_owns_place[0].phone
+        const user_who_owns_place_username=user_who_owns_place[0].username
+
+        const auth_user_identity=users.filter(user=>user.uid===authUser.uid)
+        const auth_user_phone=auth_user_identity[0].phone
+        const auth_user_username=auth_user_identity[0].username
+        console.log(auth_user_phone)
+        console.log(user_who_owns_place_email)
+
 
         this.setState({join_ref:joinRef.key,isToJoin:false})
         this.props.firebase.joinPlaces().orderByChild('key').equalTo(this.state.join_ref).on('value',snapShot=>{
@@ -121,10 +144,11 @@ class PlacesToJoinFB extends React.Component {
             this.props.firebase.sendEmailOnJoin(
               subject,
               authUser.email,
-              authUser.phone,
+              user_who_owns_place_email,
+              auth_user_phone,
               place_name
             );
-            this.props.firebase.sendEmailToUserOnJoin(subject_on_join, authUser.email,authUser.username, place_name);
+            this.props.firebase.sendEmailToUserOnJoin(subject_on_join, authUser.email,auth_user_username, place_name,user_who_owns_place_username,user_who_owns_place_phone);
         }
         else{
             this.setState({join_token:null})
