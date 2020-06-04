@@ -24,7 +24,7 @@ const UserHeader = () => (
               </NavLink>
             </li>
             <li data-toggle="collapse" data-target="#NavbarMenu">
-              <NavLink to="/create-offer" className="nav-link">
+              <NavLink to="/create-offer" className="nav-link" activeClassName="is-active">
                 Create Offer
               </NavLink>
             </li>
