@@ -135,24 +135,27 @@ class Firebase {
 
   //send email to admin on user join offer
 
-  sendEmailOnJoin = (subject, email,phone,offer_name) => {
+  sendEmailOnJoin = (subject, email,email_of_place_owner,phone,offer_name) => {
     const callable = this.fbfnc.httpsCallable("emailOnJoin");
     return callable({
       subject: subject,
       email: email,
+      email_of_place_owner:email_of_place_owner,
       phone: phone,
       offer_name: offer_name
     }).then(console.log);
   };
 
   //send email to user on what next after joining an offer
-  sendEmailToUserOnJoin = (subject,email,username,offer_name) => {
+  sendEmailToUserOnJoin = (subject,email,username,offer_name,user_who_owns_place_username,user_who_owns_place_phone) => {
     const callable = this.fbfnc.httpsCallable("emailToUserOnJoin");
     return callable({
       subject: subject,
       email: email,
       username:username,
       offer_name: offer_name,
+      user_who_owns_place_username:user_who_owns_place_username,
+      user_who_owns_place_phone:user_who_owns_place_phone
     }).then(console.log);
   };
 
