@@ -120,8 +120,8 @@ class Dashboard extends React.Component{
                                             </div>
                                             <div id="faq1" data-parent="#accordion" className="collapse show">
                                                 <div className="card-body">
-                                                Offers are goods or services which comes with a reward when you buy them, they can be a company or business name that offers reward when ever you buy their product or service. 
-                                                For example, CakeLegend is a business name that sells cake but it is an Offer too for the business name; which means when you join this Offer and buy cakes, you get rewarded.
+                                                Offers are promo or brands which offers reward when you buy them. 
+                                                For example, Ofatri Kingz Watch is a promo name that sells cake but it is an Offer too for the business name; which means when you join this Offer and buy cakes, you get rewarded.
                                                 </div>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@ class Dashboard extends React.Component{
                                             </div>
                                             <div id="faq2" className="collapse" data-parent="#accordion"> 
                                                 <div className="card-body">
-                                                    When you search for a business name and didnt find it on Ofatri, you can reach us on instagram or whatsApp and tell us what product or service you need,
+                                                    When you search for a business name and didnt find it on Ofatri, you can reach us on <a href="https://www.instagram.com/ofatribiz"><mark>instagram</mark></a> or <a href="https://wa.me/2348060456301?text=help%20me%20find%20an%20offer%20to%20join"><mark>whatsApp</mark></a> and tell us what product or service you need,
                                                     Ofatri Business Agent will respond with the Offer name for such service and you can continue with Joining the Offer and get rewarded after making Transaction. 
                                                     If the business needs to get listed on Ofatri, then we will be glad to list them here for free so you can buy from them as well.
                                                 </div>
@@ -151,14 +151,14 @@ class Dashboard extends React.Component{
                                             </div>
                                             <div id="faq3" className="collapse" data-parent="#accordion">
                                                 <div className="card-body">
-                                                    As soon as you JOIN an Offer, a Reward Token is shown to you. After making Transaction and It is sent to Us by the Business for Verification, 
-                                                    You will instantly get your reward notification and can verify this by checking on 'My Rewards' Menu
+                                                    As soon as you JOIN an Offer, a Reward Token is shown to you. After making Transaction and we have completed verification of your payment for the offer, 
+                                                    You will be rewarded with ofatri coin and get your reward notification. You can verify this by checking on 'My Rewards' Menu
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* question 4 */}
-                                        <div className="card">
+                                        {/* <div className="card">
                                             <div className="card-header">
                                                 <a href="#faq4" className="collapsed card-link" data-toggle="collapse">
                                                     What if The Business didnt forward my Reward Token to Ofatri
@@ -171,7 +171,7 @@ class Dashboard extends React.Component{
                                                     That is why we are ensure to List only Businesses that we verify to be genuine and that consumers trust to be reliable.
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         {/* question 5 */}
                                         <div className="card">
@@ -219,14 +219,13 @@ class Dashboard extends React.Component{
                                         <div className="card">
                                             <div className="card-header">
                                                 <a href="#faq8" className="collapsed card-link" data-toggle="collapse">
-                                                    I like an Offer and I have bargained with the Business Owner, How Do I Pay for the Product
+                                                    How Do I Pay for the Product
                                                         </a>
                                             </div>
                                             <div id="faq8" className="collapse" data-parent="#accordion">
-                                                Immediately you click on Join Offer, a <strong>Make Payment</strong> check button is displayed, after bargaining with the business owner,<br />Click on the <strong>Make Payment</strong> check button then enter your payments information to make payment to the Business Owner.<br />
-                                                Payments should only be made this way if the Business is comfortable accepting online payments.
+                                                you should see a payment link on the description of the offer<strong>click it</strong> and you will be directed to a secure portal where you make payment<br />
                                                 <br />
-                                                However you can contact Ofatri for more details on making payment for the product after bargaining with the Business Owner
+                                                However you can <a href="https://wa.me/2348060456301?text=I%20%20will%20like%20to%20make%20payments%20with%20other%20options">contact</a>Ofatri for more details on making payment for the product if you are not comfortable with online payments
                                                     </div>
                                         </div>
 
@@ -238,7 +237,7 @@ class Dashboard extends React.Component{
                                                 </a>
                                             </div>
                                             <div id="faq9" className="collapse" data-parent="#accordion">
-                                                It has been proved that Rewarding Customers help you gain new customers in a more cheaper way and Increase your sales.<br/>Contact Ofatri on <i>izundukingsleyemeka@gmail.com</i> to get Your Business Listed as well as an assigned Reward Manager<br/> Your Manager helps plan everything, while you focus on your business<br/>
+                                                It has been proved that Rewarding Customers help you gain new customers in a more cheaper way and Increase your sales.<br/><a href="https://wa.me/2348060456301?text=I'm%20interested%20in%20ofatri%20and%20want%20my%20business%20listed">contact</a>Ofatri or send a mail to <i>izundukingsleyemeka@gmail.com</i> to get Your Business Listed as well as an assigned Reward Manager<br/> Your Manager helps plan everything, while you focus on your business<br/>
                                             </div>
                                         </div>
                                     </div>
@@ -294,6 +293,10 @@ class Dashboard extends React.Component{
                                             <p className="text-justify text-center mx-3 my-4"><strong>Click on subscribe now and a business manager will contact you...</strong></p>
                                             <div className="form-group">
                                         <button className="form-control btn-success btn-lg text-center"><a href="https://forms.gle/BP4iTq6nFZfqdjxc6">SUBSCRIBE NOW</a></button>
+                                            </div>
+                                            <br/>
+                                            <div className="form-group">
+                                            <button className="form-control btn-success btn-lg text-center"><a className="text-white" href="https://wa.me/2348060456301?text=I%20am%20interested%20in%20upgrading%20to%20add%20my%20instagram%20and%20YouTube%20on%20my%20offer">WhatsApp Instead</a></button>
                                             </div>
                                         </div>
                                     </div>
