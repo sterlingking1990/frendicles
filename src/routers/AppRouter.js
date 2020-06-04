@@ -31,7 +31,9 @@ const HOCHeader = (Component1, Component2, Component3, Component4) => {
                            authUser.email === "izunduchiomaij@gmail.com" ||
                            authUser.email === "ofatri4business@gmail.com" ||
                            authUser.email === "kingstan4christ@yahoo.com" ||
-                           authUser.email === "jumokemagaret@gmail.com"
+                           authUser.email === "jumokemagaret@gmail.com" ||
+                           authUser.email ==="ekwulugwogloriaoluchukwu@gmail.com" ||
+                           authUser.email ==="onyinyeizundu3@gmail.com"
                          ) {
                            //partner emails
                            return <Component4 />;
@@ -62,7 +64,9 @@ const HOCRouter = (Component1, Component2, Component3, Component4) => {
                                authUser.email === "izunduchiomaij@gmail.com" ||
                                authUser.email === "ofatri4business@gmail.com" ||
                                authUser.email === "kingstan4christ@yahoo.com" ||
-                               authUser.email === "jumokemagaret@gmail.com"
+                               authUser.email === "jumokemagaret@gmail.com" ||
+                               authUser.email ==="ekwulugwogloriaoluchukwu@gmail.com" ||
+                               authUser.email === "onyinyeizundu3@gmail.com"
                              ) {
                                //partner emails
                                return <Component4 />;
