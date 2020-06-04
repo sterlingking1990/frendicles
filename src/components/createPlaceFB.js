@@ -116,6 +116,7 @@ class CreatePlaceFB extends React.Component{
                 status:"open"
             
             })
+            
             this.setState({url})
             this.props.firebase.sendEmail(update_subject, place_name, url , description);
         })
@@ -464,7 +465,7 @@ class PlaceTemplate extends React.Component{
                             <p className="card-text text-white">{youtube_term}</p>
                             <p className="card-text text-white">{email}</p>
                             <p className="card-text text-white">{subaccount}</p>
-                            <p className="card-text text-white">tracking code-{place_id}</p>
+                            <p className="card-text text-white">tracking code- &nbsp; {place_id}</p>
 
                             {/* <div className="form-check-inline">
                                 {hooks.map((hook) =>
