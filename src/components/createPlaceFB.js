@@ -45,6 +45,17 @@ class CreatePlaceFB extends React.Component{
                 console.log(places_you_created)
             })
 
+            // this.props.firebase.users().on("value",snapShot=>{
+            //   const userObj=snapShot.val()
+            //   const userArr=Object.keys(userObj).map(key=>({
+            //     ...userObj[key],uid:key
+            //   }))
+
+            //   const user_who_create_offer=userArr.filter(user=>user.uid===authUser.uid)
+            //   const user_who_create_offer_phone=user_who_create_offer[0].phone
+            //   console.log(user_who_create_offer_phone)
+            //   this.setState({phone:user_who_create_offer_phone})
+            // })
         })
 
         this.setState({ loading_hooks: true, loading_places: true, isCreated: false })
@@ -324,10 +335,14 @@ class CreatePlaceFB extends React.Component{
                       />
                     </div>
                   ) : (
-                    <h3 className="display-4 text-center text-dark mt-2">
-                      You Have not created any Offer Yet, Create Promotional
-                      Offer And Start Getting Closed Deals From Customers
-                    </h3>
+                    <div className="card bg-white">
+                      <div className="card-body">
+                        <p className="display-4 text-justify text-dark mt-2">
+                        You Have not created any Offer Yet, Create Promotional
+                        Offer And Start Getting Closed Deals From Customers
+                        </p>
+                        </div>
+                    </div>
                   )}
                 </div>
               </div>
@@ -353,7 +368,7 @@ const Places=({places,hooks,onDeletePlace,onPlaceUpdate,user_id,url})=>(
 class PlaceTemplate extends React.Component{
     constructor(props){
         super(props);
-        this.state={userId:this.props.user_id,isToEdit:false,place_name:this.props.place.place_name,user_id:this.props.place.userId,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,youtube_term:this.props.place.youtube_term,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0,url:this.props.url}
+        this.state={userId:this.props.user_id,isToEdit:false,place_name:this.props.place.place_name,user_id:this.props.place.userId,description:this.props.place.description,image:this.props.place.image,contact:this.props.place.contact,ig_acct:this.props.place.ig_acct,youtube_term:this.props.place.youtube_term,email:this.props.place.email,subaccount:this.props.place.subaccount,hooks:this.props.hooks?this.props.hooks:[],place_hooks:this.props.place.place_hooks?this.props.place.place_hooks:[],place_id:this.props.place_id,hook_count:this.props.place.place_hooks?this.props.place.place_hooks.length:0,url:this.props.url,phone:this.props.phone}
 
     }
 
@@ -411,75 +426,158 @@ class PlaceTemplate extends React.Component{
     render(){
         const {place_name,description,image,contact,ig_acct,youtube_term,email,subaccount,isToEdit,place_hooks,hooks,place_id,url}=this.state
 
-        return(
-                <div>
-                {isToEdit ?
-                    <div>
-                    <div className="form-group">
-                        <input type="text" name="place_name" placeholder="enter the offer name" value={place_name} className="form-control" onChange={this.onChange} />
-                    </div>
-                    <div className="form-group">
-                        <textarea cols="6" rows="5" name="description" placeholder="describe the offer" value={description} className="form-control" onChange={this.onChange} />
-                    </div>
-                    <div className="form-group">
-                        <input type="text" name="contact" placeholder="enter phone number (whatsApp)" value={contact} className="form-control" onChange={this.onChange} />
-                    </div>
-                    <div className="form-group">
-                        <input type="text" name="ig_acct" placeholder="enter IG id" value={ig_acct} className="form-control" onChange={this.onChange} />
-                    </div>
-                        <div className="form-group">
-                            <input type="text" name="youtube_term" placeholder="enter youtube term" value={youtube_term} className="form-control" onChange={this.onChange} />
-                        </div>
-                    <div className="form-group">
-                            <input type="file" id="myFile" className="form-control" name="image" onChange={this.handleImageChange} />
-                    </div>
-                    <div className="form-group">
-                        <input type="text" name="subaccount" placeholder="enter subaccount number" value={subaccount} className="form-control" onChange={this.onChange} />
-                    </div>
-                    {/* <div className="form-group">
+        return (
+          <div>
+            {isToEdit ? (
+              <div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="place_name"
+                    placeholder="enter the offer name"
+                    value={place_name}
+                    className="form-control"
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <textarea
+                    cols="6"
+                    rows="5"
+                    name="description"
+                    placeholder="describe the offer"
+                    value={description}
+                    className="form-control"
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="contact"
+                    placeholder="enter phone number (whatsApp)"
+                    value={contact}
+                    className="form-control"
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="ig_acct"
+                    placeholder="enter IG id"
+                    value={ig_acct}
+                    className="form-control"
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="youtube_term"
+                    placeholder="enter youtube term"
+                    value={youtube_term}
+                    className="form-control"
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="file"
+                    id="myFile"
+                    className="form-control"
+                    name="image"
+                    onChange={this.handleImageChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="subaccount"
+                    placeholder="enter subaccount number"
+                    value={subaccount}
+                    className="form-control"
+                    onChange={this.onChange}
+                  />
+                </div>
+                {/* <div className="form-group">
                         <input type="text" name="image" placeholder="enter image url" className="form-control" value={image} onChange={this.onChange} />
                     </div> */}
-                    {/* <p className="bg-dark text-white">What hooks relate to this offer?</p> */}
-                    {/* <div className="form-check-inline">
+                {/* <p className="bg-dark text-white">What hooks relate to this offer?</p> */}
+                {/* <div className="form-check-inline">
 
                             {hooks.map((hook) =>
                                 <span className="mx-2"><label className="mx-1" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" value={hook.uid} checked={place_hooks.includes(hook.uid) ? true : false} onChange={this.updateHookID} /></span>)}
                     </div> */}
-                    <div className="form-group mt-2">
-                        <button className="form-control btn-dark text-white" onClick={this.updatePlace}>Save Changes</button>
-                    </div>
-                    <div className="form-group mt-2">
-                        <button className="form-control btn-dark text-white" onClick={this.handleReset}>Reset</button>
-                    </div> 
-                    </div>:
-
-                   
-                    <div className="card bg-dark" id="space-card">
-                        <span className="text-right text-sm text-display"><i className="fa fa-remove mx-2 text-red" id="delete_place" onClick={this.onDeletePlace}></i><i className="fa fa-edit mx-2 text-white" onClick={this.togglePlaceEdit}></i></span>
-                            <img src={image} className=" card-img-top img-responsive img-fluid" />
-                        <div className="card-body">
-                            <h3 className="card-title text-white">{place_name}</h3>
-                           <Linkify><p className="card-text text-white">{description}</p></Linkify>
-                            <p className="card-text text-white">{contact}</p>
-                            <p className="card-text text-white">{ig_acct}</p>
-                            <p className="card-text text-white">{youtube_term}</p>
-                            <p className="card-text text-white">{email}</p>
-                            <p className="card-text text-white">{subaccount}</p>
-                            <p className="card-text text-white">tracking code- &nbsp; {place_id}</p>
-
-                            {/* <div className="form-check-inline">
+                <div className="form-group mt-2">
+                  <button
+                    className="form-control btn-dark text-white"
+                    onClick={this.updatePlace}
+                  >
+                    Save Changes
+                  </button>
+                </div>
+                <div className="form-group mt-2">
+                  <button
+                    className="form-control btn-dark text-white"
+                    onClick={this.handleReset}
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="card bg-dark" id="space-card">
+                <span className="text-right text-sm text-display">
+                  <i
+                    className="fa fa-remove mx-2 text-red"
+                    id="delete_place"
+                    onClick={this.onDeletePlace}
+                  ></i>
+                  <i
+                    className="fa fa-edit mx-2 text-white"
+                    onClick={this.togglePlaceEdit}
+                  ></i>
+                </span>
+                <img
+                  itemprop="image"
+                  src={image}
+                  className=" card-img-top img-responsive img-fluid"
+                />
+                <div
+                  itemscope
+                  itemtype="http://schema.org/Product"
+                  className="card-body"
+                >
+                  <h3 itemprop="brand" className="card-title text-white">
+                    {place_name}
+                  </h3>
+                  <Linkify>
+                    <p itemprop="description" className="card-text text-white">
+                      {description}
+                    </p>
+                  </Linkify>
+                  <p className="card-text text-white" itemprop="telephone" content={contact}>{contact}</p>
+                  <p className="card-text text-white">{ig_acct}</p>
+                  <p className="card-text text-white">{youtube_term}</p>
+                  <p className="card-text text-white">{email}</p>
+                  <p className="card-text text-white">{subaccount}</p>
+                  <p className="card-text text-white">
+                    tracking code: &nbsp; {place_id}
+                  </p>
+                  <meta
+                    itemprop="availability"
+                    content="http://schema.org/InStock"
+                  />
+                  {/* <div className="form-check-inline">
                                 {hooks.map((hook) =>
                                     <span className="mx-2"><label className="mx-1 text-white" for={hook.hook_name}>{hook.hook_name}</label><input className="form-check-input" name={hook.hook_name} type="checkbox" checked={place_hooks.includes(hook.uid) ? true : false} /></span>)}
                             </div> */}
-                        </div>
-                    </div>
-                 
-                
-                }
-             
-            </div>
-
-        )
+                </div>
+              </div>
+            )}
+          </div>
+        );
     }
 }
 
