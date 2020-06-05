@@ -193,7 +193,7 @@ code {
   display:grid;
   grid-template-columns: repeat(auto-fill,minmax(1fr));
   grid-template-rows:auto;
-  background:url('happy-cust.jpg') no-repeat center center;
+  background:url('redeem2.jpg') no-repeat center center;
    -webkit-background-size:cover;
   -moz-background-size:cover;
   -o-background-size:cover;
@@ -220,11 +220,12 @@ code {
   grid-column: 2/10;
   text-align:center;
   margin: auto;
+  background: rgba(0,0,0,0.5);
 }
 
 
 #first_heading{
-  color:green;
+  color:white;
     font-size: 2em;
   font: tahoma;
   letter-spacing: 2px;
@@ -232,7 +233,7 @@ code {
 }
 
 #second_heading{
-  color:white;
+  color:rgb(120, 211, 0);
     font-size: 2em;
   font: tahoma ;
   letter-spacing: 1px;
@@ -1177,7 +1178,7 @@ margin:5px;
   display:grid;
   grid-template-columns: repeat(12,minmax(1fr));
   grid-template-rows:auto;
-  background:url('happy-cust.jpg') no-repeat center center;
+  background:url('redeem2.jpg') no-repeat center center;
    -webkit-background-size:cover;
   -moz-background-size:cover;
   -o-background-size:cover;
@@ -1199,10 +1200,11 @@ background-color: hsl(249, 48%, 89%);
   grid-column: 5/8;
   text-align:center;
   margin:10%;
+  background:rgba(0,0,0,0.5);
 }
 
 #first_heading{
-  color:green;
+  color:white;
     font-size: 1em;
   font: tahoma;
   letter-spacing: 2px;
@@ -1210,7 +1212,7 @@ background-color: hsl(249, 48%, 89%);
 }
 
 #second_heading{
-  color:white;
+  color:rgb(120, 211, 0);
     font-size: 1em;
   font: tahoma ;
   letter-spacing: 1px;
@@ -1279,7 +1281,7 @@ background-color: hsl(249, 48%, 89%);
 
 #action_button{
   width:200px;
-  height:70px;
+  height:50px;
 }
 
 #analysis-row{ 
