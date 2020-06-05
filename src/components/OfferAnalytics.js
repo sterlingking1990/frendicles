@@ -416,7 +416,8 @@ class OfferAnalytics extends React.Component {
           <div className="row">
             <div className="col-lg-12">
               <div className="well well-bg bg-white text-center">
-                Enter Offer ID, Then Select Date Range to View Customers who Participated in your Offer
+                Enter Offer ID, Then Select Date Range to View Customers who
+                Participated in your Offer
               </div>
             </div>
             <div className="col-lg-12">
@@ -425,12 +426,16 @@ class OfferAnalytics extends React.Component {
                 <input
                   type={toggleResult}
                   className="form-control"
-
                   value={offer_id}
                   placeholder="enter offer id"
                   onChange={this.setOfferID}
                 />
-                <span className="mt-1 my-1 text-right" onClick={this.togglePassword}><i className={eye_toggle}></i></span>
+                <span
+                  className="mt-1 my-1 text-right"
+                  onClick={this.togglePassword}
+                >
+                  <i className={eye_toggle}></i>
+                </span>
               </div>
             </div>
             <div className="col-lg-12">
@@ -473,7 +478,7 @@ class OfferAnalytics extends React.Component {
               ) : (
                 <div>
                   <p className="text-display text-center bg-dark text-white">
-                    Number of Customers who Joined your Offer- 
+                    Number of Customers who Joined your Offer-
                     {loadingRewards ? (
                       <small>
                         <div className="spinner-border text-primary text-small"></div>
@@ -482,47 +487,41 @@ class OfferAnalytics extends React.Component {
                       userJoin.length
                     )}
                   </p>
-                  {userJoin.length>0 &&
-                  (<div className="row">
-                    <div className="col">
-                      <div className="form-group">
-                        <input
-                          className="form-control"
-                          type="text"
-                          onChange={this.saveAutoRewardAmount}
-                          placeholder="auto reward amt"
-                        />
+                  {userJoin.length > 0 && (
+                    <div className="row">
+                      <div className="col">
+                        <div className="form-group">
+                          <input
+                            className="form-control"
+                            type="text"
+                            onChange={this.saveAutoRewardAmount}
+                            placeholder="auto reward amt"
+                          />
+                        </div>
                       </div>
+                      <span className="mx-2">
+                        <i
+                          className="fa fa-arrow-circle-o-down"
+                          onClick={this.automateReward}
+                        ></i>
+                      </span>
+                      <span className="mx-4">
+                        <button
+                          className="btn btn-primary"
+                          onClick={this.closeOffer}
+                        >
+                          {closedOffer ? (
+                            <i className="fa fa-lock"></i>
+                          ) : (
+                            <i className="fa fa-unlock"></i>
+                          )}
+                        </button>
+                      </span>
                     </div>
-                    <div className="col">
-                      <button
-                        className="btn btn-primary"
-                        onClick={this.automateReward}
-                      >
-                        Auto Reward
-                      </button>
-                    </div>
-                    <div className="col">
-                      <button
-                        className="btn btn-primary"
-                        onClick={this.closeOffer}
-                      >
-                        {closedOffer ? (
-                          <span>Open Offer</span>
-                        ) : (
-                          <span>Close Offer</span>
-                        )}
-                      </button>
-                    </div>
-                  </div>)}
+                  )}
                 </div>
               )}
             </div>
-          </div>
-          <div className="row" id="ofatri-analysis-header">
-            <div className="col">Name</div>
-            <div className="col">Phone</div>
-            <div className="col">Token</div>
           </div>
           <br />
           <UserDetails
@@ -870,42 +869,47 @@ class UserTemplate extends React.Component {
             <br />
           </div>
         ) : (
-          <div className="row">
-            <div className="col">
-              <small>{username[0] ? username[0].username : "anonymous"}</small>
-            </div>
-            <div className="col">
-              <small>
-                {username[0]
-                  ? username[0].phone
+          <div id="scroll">
+            <div className="row">
+              <div className="col">
+                <small>
+                  {username[0] ? username[0].username : "anonymous"}
+                </small>
+              </div>
+              <div className="col">
+                <small>
+                  {username[0]
                     ? username[0].phone
-                    : "no-number"
-                  : "anonymous"}
-                {/* {place_name[0].place_name} */}
-              </small>
+                      ? username[0].phone
+                      : "no-number"
+                    : "anonymous"}
+                  {/* {place_name[0].place_name} */}
+                </small>
+              </div>
+              <div className="col">
+                <small>{token}</small>
+              </div>
+              <div className="col">
+                <NumberFormat
+                  value={total_reward_amount}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={"oc"}
+                  renderText={value => (
+                    <small>
+                      <span>{value}</span>
+                    </small>
+                  )}
+                />
+              </div>
+              <div className="col">
+                  <i
+                    className="fa fa-trophy"
+                    onClick={() => this.showRewardForm()}
+                  ></i>
+              </div>
             </div>
-            <div className="col">
-              <small>{token}</small>
-            </div>
-            <div className="col">
-              <NumberFormat
-                value={total_reward_amount}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"oc"}
-                renderText={value => (
-                  <small>
-                    <span>{value}</span>
-                  </small>
-                )}
-              />
-            </div>
-            <div className="col">
-              <button onClick={() => this.showRewardForm()}>
-                <i className="fa fa-trophy"></i>
-              </button>
-            </div>
-            <br />
+            <div  id="scroll-format"></div>
           </div>
         )}
       </div>
