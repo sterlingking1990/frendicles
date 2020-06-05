@@ -199,7 +199,7 @@ class SetRewardGoal extends React.Component{
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="form-group">
-                                <label for="business_name">Select Business you Buy from</label>
+                                <label for="business_name">Select Marketer or Seller you Buy from</label>
                                 <select className="form-control" id="business_name" value={selected_business} onChange={this.handleChange}>
                                 <option value=""></option>
                                 {unique.map(each_goal=>(<option value={each_goal}>{each_goal}</option>))}
