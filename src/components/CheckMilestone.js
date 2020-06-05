@@ -180,7 +180,7 @@ class CheckMilestone extends React.Component{
               <div className="row">
                 <div className="col-lg-12">
                   <div className="form-group">
-                    <label for="business">Select Business you Buy from</label>
+                    <label for="business">Select Marketer or Seller you Buy from</label>
                     <select
                       className="form-control"
                       id="business"
@@ -224,11 +224,13 @@ class CheckMilestone extends React.Component{
               ) : (
                 <div className="row">
                   <div className="col">
-                    <small>
-                      <h3 className="display-text text-white text-center bg-dark">
-                        Set goals and make transactions to view milestone
-                      </h3>
-                    </small>
+                    <div className="card bg-white">
+                      <div className="card-body">
+                        <p className="display-text text-dark text-center">
+                          Set goals and make transactions to view milestone
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
