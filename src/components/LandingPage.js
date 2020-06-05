@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 // import store3 from '../../src/store3.jpg'
 import pic1 from '../imageUpload/pic1.png';
 import pic2 from '../imageUpload/pic2.png';
-import pic3 from '../imageUpload/pic3.png';
+// import pic3 from '../imageUpload/pic3.png';
 import pic4 from '../imageUpload/pic4.png';
 import pic5 from '../imageUpload/pic5.png';
 
@@ -23,9 +23,9 @@ const LandingPage = () => (
           <strong id="third_heading"> Achieve Goals</strong>
         </div>
         <p className="banner-button">
-          <NavLink to="/signin" exact={true}>
-            <button className="btn btn-success btn-large" id="action_button">
-              Begin Here{" "}
+          <NavLink to="/signup" exact={true}>
+            <button type="button" className="btn btn-success btn-sm" id="action_button">
+              Begin Here
             </button>
           </NavLink>
         </p>
@@ -118,6 +118,7 @@ const LandingPage = () => (
                   <img
                     src={pic1}
                     className="card-img img-fluid img-responsive"
+                    alt="dashboard"
                   />
                 </div>
                 <div className="card-footer">
@@ -137,6 +138,7 @@ const LandingPage = () => (
                   <img
                     src={pic2}
                     className="card-img img-fluid img-responsive"
+                    alt="search-offer"
                   />
                 </div>
                 <div className="card-footer">
@@ -167,6 +169,7 @@ const LandingPage = () => (
                   <img
                     src={pic4}
                     className="card-img img-fluid img-responsive"
+                    alt="goal"
                   />
                 </div>
                 <div className="card-footer">
@@ -187,6 +190,7 @@ const LandingPage = () => (
                   <img
                     src={pic5}
                     className="card-img img-fluid img-responsive"
+                    alt="milestone"
                   />
                 </div>
                 <div className="card-footer">
