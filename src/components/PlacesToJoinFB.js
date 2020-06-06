@@ -401,16 +401,37 @@ class PlaceTemplate extends React.Component {
                         </div>
                       </div>
                     ) : (
-                      <div>
-                        <h3 className="card-title text-white">{place_name}</h3>
+                      <div itemscope itemtype="http://schema.org/Product">
+                        <h3 className="card-title text-white" itemprop="brand">
+                          {place_name}
+                        </h3>
                         <img
                           src={image}
                           className="card-img img-responsive img-fluid"
                           loading="lazy"
-                          style={{ width: "100%",height: "auto"}}
+                          style={{ width: "100%", height: "auto" }}
+                          itemprop="image"
+                          alt="product"
                         />
-                        <Linkify><p className="card-text text-white">{description}</p></Linkify>
-                        <p className="card-text text-white">{contact}</p>
+                        <Linkify>
+                          <p
+                            itemprop="description"
+                            className="card-text text-white"
+                          >
+                            {description}
+                          </p>
+                        </Linkify>
+                        <p
+                          itemprop="telephone"
+                          content={contact}
+                          className="card-text text-white"
+                        >
+                          {contact}
+                        </p>
+                        <meta
+                          itemprop="availability"
+                          content="http://schema.org/InStock"
+                        />
                       </div>
                     )}
 
@@ -483,7 +504,6 @@ class PlaceTemplate extends React.Component {
                               </span>
                             </div> */}
 
-                          
                             {make_payment && (
                               <div className="paystack_window">
                                 <div className="form-group mt-1">
