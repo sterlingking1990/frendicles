@@ -27,25 +27,15 @@ const UserHeader = () => (
                 Home
               </NavLink>
             </li>
-            <li className="dropdown" id="menu-anchor">
-              <a className="dropdown-toggle" data-toggle="dropdown" href="#">
-                Offer
-                <span className="caret"></span>
-              </a>
-              <ul className="dropdown-menu">
-                <li data-toggle="collapse" data-target="#NavbarMenu">
-                  <NavLink
+            <li data-toggle="collapse" data-target="#NavbarMenu">
+                <NavLink
                     className="nav-link"
                     to="/offer"
                     activeClassName="is-active"
                   >
                     Join Offer
-                  </NavLink>
-                </li>
-                
-              </ul>
+                </NavLink>
             </li>
-
             <li className="dropdown" id="menu-anchor">
               <a className="dropdown-toggle" data-toggle="dropdown" href="#">
                 RewardnGoal
