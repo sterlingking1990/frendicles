@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, HashRouter,Router} from 'react-router-dom'
+import {HashRouter,Router} from 'react-router-dom'
 import createHistory from 'history/createBrowserHistory';
 
 import GuestHeader from '../components/GuestHeader';
