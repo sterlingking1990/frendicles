@@ -9,7 +9,7 @@ import ErrorPage from '../components/ErrorPage';
 import ConfirmFunCodeFB from './ConfirmFunCodeFB';
 // import PlacesPage from '../components/PlacesPage';
 import UpdateAccountFB from './UpdateAccountFB';
-import CreateHookFB from './CreateHookFB';
+// import CreateHookFB from './CreateHookFB';
 import AdminSetupGoal from './AdminSetupGoal';
 import RedeemCoin from './RedeemCoin';
 const AdminRouter = () => (
