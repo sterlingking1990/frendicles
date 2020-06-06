@@ -182,7 +182,7 @@ class CreatePlaceFB extends React.Component{
     }
 
     render(){
-        const {url,image,user_id,place_name,description,contact,ig_acct,youtube_term,email,subaccount,place_hooks,hooks,loading_hooks,loading_places,isCreated,places}=this.state
+        const {url,user_id,place_name,description,contact,ig_acct,youtube_term,email,subaccount,hooks,loading_places,isCreated,places}=this.state
         return (
           <div id="create-place">
             <div className="banner-body-background">
@@ -424,7 +424,7 @@ class PlaceTemplate extends React.Component{
     }
 
     render(){
-        const {place_name,description,image,contact,ig_acct,youtube_term,email,subaccount,isToEdit,place_hooks,hooks,place_id,url}=this.state
+        const {place_name,description,image,contact,ig_acct,youtube_term,email,subaccount,isToEdit,place_id}=this.state
 
         return (
           <div>
@@ -543,6 +543,7 @@ class PlaceTemplate extends React.Component{
                   itemprop="image"
                   src={image}
                   className=" card-img-top img-responsive img-fluid"
+                  alt="offer"
                 />
                 <div
                   itemscope
