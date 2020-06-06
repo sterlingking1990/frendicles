@@ -115,7 +115,7 @@ class AdminSetupGoal extends React.Component{
     }
 
     render(){
-        const {goal_type,unit_cost,saved,cant_save,url,admin_goal}=this.state
+        const {goal_type,unit_cost,saved,cant_save,admin_goal}=this.state
 
         return(
             <div className="set-goal">
@@ -196,6 +196,7 @@ class GoalTemplate extends React.Component{
                 <img
                   className="card-img img-responsive img-fluid"
                   src={goal_image}
+                  alt="goal-image"
                 />
               </div>
               <div className="card-footer">
