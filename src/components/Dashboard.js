@@ -33,132 +33,239 @@ class Dashboard extends React.Component{
 
     render(){
         const {username}=this.state;
-        return(
-                    <div>
-                <div className="banner-body-background">
-                    <div className="banner-body-text1">
-                        <span className="logo-name" id="app-name">ofatri</span>
-                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
-                        <br/>
-                        <p className="text-center text-display text-center" id="welcome-text">welcome {username}</p>
+        return (
+          <div>
+            <div className="banner-body-background">
+              <div className="banner-body-text1">
+                <span className="logo-name" id="app-name">
+                  ofatri
+                </span>
+                <div className="text-display text-center">
+                  <strong id="first_heading">Make Transactions </strong> &nbsp;
+                  <strong id="second_heading"> Get Rewarded</strong>&nbsp;
+                  <strong id="third_heading"> Achieve Goals</strong>
+                </div>
+                <br />
+                <p
+                  className="text-center text-display text-center"
+                  id="welcome-text"
+                >
+                  welcome {username}
+                </p>
+              </div>
+            </div>
+
+            <div className="container" id="intro">
+              <div className="row mt-4">
+                <div className="col-lg-12 sm-12">
+                  <p className="text-display text-center" id="about-us">
+                    About Us
+                  </p>
+                </div>
+                <div className="col">
+                  <div id="about-us-body">
+                    <div className="card bg-white">
+                      <div className="card-title">
+                        <div className="media">
+                          <span id="app-name">ofatri</span>
+                        </div>
+                        <div className="media-body">
+                          <p className="text-muted my-1">
+                            We are customer rewarding company, partnering with
+                            over millions of enterprise who value her customers
+                            and always says yes to every of their needs
+                          </p>
+                          <p className="text-muted mx-3">
+                            We are on a mission of continuously increasing
+                            customer base of industries through appreciating the
+                            customers each time they complete a transaction
+                          </p>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row my-3">
+                <div className="col-lg-12 sm-12">
+                  <p className="text-display text-center" id="how-it-works">
+                    How it works
+                  </p>
+                </div>
+                <div className="col-lg-4">
+                  <div className="card bg-white mt-2">
+                    <div className="card-image text-center">
+                      <img
+                        src={store1}
+                        width="200px"
+                        height="200px"
+                        alt="item1"
+                        className="img-fluid img-responsive img-center"
+                      />
+                    </div>
+                    <div className="card-content">
+                      <p className="text-justify text-center mx-3 my-2">
+                        Join offers from collection of available offers i.e
+                        Cake4VAL,Hair4Val,Look9ce,Selfie2Kill, Drive2Rock.
+                        Offers are promotional transactions businesses are
+                        selling to you that comes with reward{" "}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-4">
+                  <div className="card bg-white mt-2">
+                    <div className="card-image text-center">
+                      <img
+                        src={store2}
+                        width="200px"
+                        height="200px"
+                        alt="item1"
+                        className="img-fluid img-responsive img-center"
+                      />
+                    </div>
+                    <div className="card-content">
+                      <p className="text-justify text-center mx-3 my-4">
+                        Proceed to make transaction with the offer provider
+                        using your usual means. Issue the token generated when
+                        you joined the offer to the offer provider to verify and
+                        reveal your reward
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-4">
+                  <div className="card bg-white mt-2">
+                    <div className="card-image text-center">
+                      <img
+                        src={store3}
+                        width="200px"
+                        height="200px"
+                        alt="item1"
+                        className="img-fluid img-responsive img-center"
+                      />
+                    </div>
+                    <div className="card-content">
+                      <p className="text-justify text-center mx-3 my-4">
+                        Enjoy several rewards offered by the offer provider
+                        which can range from free photoshoot, cupcakes,
+                        smallchops, free gym access, val card, data topup, paid
+                        travel and other brand product rewards
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row my-3">
+                <div className="col-lg-12 sm-12">
+                  <p className="text-display text-center" id="faq">
+                    Frequently Aksed Questions
+                  </p>
                 </div>
 
-                        <div className="container" id="intro">
-                            <div className="row mt-4">
-                                <div className="col-lg-12 sm-12">
-                                <p className="text-display text-center" id="about-us">About Us</p>
-                                </div>
-                                <div className="col">
-                                    <div id="about-us-body">
-                                        <div className="card bg-white">
-                                            <div className="card-title">
-                                                <div className="media">
-                                                    <span id="app-name">ofatri</span>
-                                                </div>
-                                                <div className="media-body">
-                                                    <p className="text-muted my-1">We are customer rewarding company, partnering with over millions of enterprise who value her customers and always says yes to every of their needs</p>
-                                                    <p className="text-muted mx-3">We are on a mission of continuously increasing customer base of industries through appreciating the customers each time they complete a transaction</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                <div className="col-lg-12">
+                  <div id="accordion">
+                    {/* question 1 */}
+                    <div className="card">
+                      <div className="card-header">
+                        <a
+                          className="card-link"
+                          data-toggle="collapse"
+                          href="#faq1"
+                        >
+                          What Service is Ofatri known for?
+                        </a>
+                      </div>
+                      <div
+                        id="faq1"
+                        data-parent="#accordion"
+                        className="collapse show"
+                      >
+                        <div className="card-body">
+                          When marketers or sellers wish to promote or sell
+                          their quality products in addition reward customers
+                          who buy those products, they use the Ofatri platform
+                          to do so. <a href="http://ofatri.com/#/">Ofatri</a>{" "}
+                          gives marketers and sellers Innovative means of
+                          promoting and selling with the intention of rewarding
+                          customers
+                        </div>
+                      </div>
+                    </div>
 
-                            <div className="row my-3">
-                                <div className="col-lg-12 sm-12">
-                                <p className="text-display text-center" id="how-it-works">How it works</p>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="card bg-white mt-2">
-                                        <div className="card-image text-center">
-                                            <img src={store1} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                                        </div>
-                                        <div className="card-content">
-                                            <p className="text-justify text-center mx-3 my-2">Join offers from collection of available offers i.e Cake4VAL,Hair4Val,Look9ce,Selfie2Kill, Drive2Rock. Offers are promotional transactions businesses are selling to you that comes with reward </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="card bg-white mt-2">
-                                        <div className="card-image text-center">
-                                            <img src={store2} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                                        </div>
-                                        <div className="card-content">
-                                            <p className="text-justify text-center mx-3 my-4">Proceed to make transaction with the offer provider using your usual means. Issue the token generated when you joined the offer to the offer provider to verify and reveal your reward</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-4">
-                                    <div className="card bg-white mt-2">
-                                        <div className="card-image text-center">
-                                            <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                                        </div>
-                                        <div className="card-content">
-                                            <p className="text-justify text-center mx-3 my-4">Enjoy several rewards offered by the offer provider which can range from free photoshoot, cupcakes, smallchops, free gym access, val card, data topup, paid travel and other brand product rewards</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    {/* quesiton 2 */}
+                    <div className="card">
+                      <div className="card-header">
+                        <a
+                          className="collapsed card-link"
+                          data-toggle="collapse"
+                          href="#faq2"
+                        >
+                          What is the mantra of Ofatri?
+                        </a>
+                      </div>
+                      <div
+                        id="faq2"
+                        className="collapse"
+                        data-parent="#accordion"
+                      >
+                        <div className="card-body">
+                          Ofatri's mantra is simple- Make Transactions, Get
+                          Rewarded, Achieve Goals.
+                        </div>
+                      </div>
+                    </div>
 
-                            <div className="row my-3">
-                                <div className="col-lg-12 sm-12">
-                                    <p className="text-display text-center" id="faq">
-                                        Frequently Aksed Questions
-                                    </p>
-                                </div>
+                    {/* question 3 */}
+                    <div className="card">
+                      <div className="card-header">
+                        <a
+                          className="collapsed card-link"
+                          data-toggle="collapse"
+                          href="#faq3"
+                        >
+                          How does Ofatri Reward Customers?
+                        </a>
+                      </div>
+                      <div
+                        id="faq3"
+                        className="collapse"
+                        data-parent="#accordion"
+                      >
+                        <div className="card-body">
+                          <ul>
+                            <li>
+                              The first thing you want to do is{" "}
+                              <a href="http://ofatri.com/#/signup">Sign up</a>
+                            </li>
+                            <li>
+                              Then Click on the <strong>Join Offer</strong> Menu
+                            </li>{" "}
+                            <li>
+                              Search for an Offer by the{" "}
+                              <strong>Marketers Name</strong> or Just{" "}
+                              <strong>Scroll</strong> to see products you like
+                              to buy
+                            </li>
+                            <li>Join that Offer to reveal your reward Token</li>
+                            <li>
+                              Make payment by clicking on the Payment Link in
+                              the Offer's description or Call the number on the
+                              Offer for guidance
+                            </li>
+                            <li>
+                              After payment and your product delivered, You get
+                              rewarded
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
 
-                                <div className="col-lg-12">
-                                    <div id="accordion">
-                                        {/* question 1 */}
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <a className="card-link" data-toggle="collapse" href="#faq1">
-                                                What are Offers
-                                                </a>
-                                            </div>
-                                            <div id="faq1" data-parent="#accordion" className="collapse show">
-                                                <div className="card-body">
-                                                Offers are promo or brands which offers reward when you buy them. 
-                                                For example, Ofatri Kingz Watch is a promo name that sells cake but it is an Offer too for the business name; which means when you join this Offer and buy cakes, you get rewarded.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* quesiton 2 */}
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <a className="collapsed card-link" data-toggle="collapse" href="#faq2">
-                                                    I know a Business Name, but I Can not find its Offer. How can I find It
-                                                </a>
-                                            </div>
-                                            <div id="faq2" className="collapse" data-parent="#accordion"> 
-                                                <div className="card-body">
-                                                    When you search for a business name and didnt find it on Ofatri, you can reach us on <a href="https://www.instagram.com/ofatribiz"><mark>instagram</mark></a> or <a href="https://wa.me/2348060456301?text=help%20me%20find%20an%20offer%20to%20join"><mark>whatsApp</mark></a> and tell us what product or service you need,
-                                                    Ofatri Business Agent will respond with the Offer name for such service and you can continue with Joining the Offer and get rewarded after making Transaction. 
-                                                    If the business needs to get listed on Ofatri, then we will be glad to list them here for free so you can buy from them as well.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* question 3 */}
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <a className="collapsed card-link" data-toggle="collapse" href="#faq3">
-                                                    How Long Before I get Rewarded
-                                                </a>
-                                            </div>
-                                            <div id="faq3" className="collapse" data-parent="#accordion">
-                                                <div className="card-body">
-                                                    As soon as you JOIN an Offer, a Reward Token is shown to you. After making Transaction and we have completed verification of your payment for the offer, 
-                                                    You will be rewarded with ofatri coin and get your reward notification. You can verify this by checking on 'My Rewards' Menu
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        {/* question 4 */}
-                                        {/* <div className="card">
+                    {/* question 4 */}
+                    {/* <div className="card">
                                             <div className="card-header">
                                                 <a href="#faq4" className="collapsed card-link" data-toggle="collapse">
                                                     What if The Business didnt forward my Reward Token to Ofatri
@@ -173,83 +280,154 @@ class Dashboard extends React.Component{
                                             </div>
                                         </div> */}
 
-                                        {/* question 5 */}
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <a href="#faq5" className="collapsed card-link" data-toggle="collapse">
-                                                    Do I have to Pay to Redeem my Reward
-                                                </a>
-                                            </div>
-                                            <div className="collapse" id="faq5" data-parent="#accordion">
-                                                <div className="card-body">
-                                                    It is expected that you Redeem your Rewards from the business that Rewarded you. Hence Rewards are not supposed to be paid for since you already merit it by fulfilling the transaction Offer
-                                                </div>
-                                            </div>
-                                        </div>
+                    {/* question 5 */}
+                    <div className="card">
+                      <div className="card-header">
+                        <a
+                          href="#faq5"
+                          className="collapsed card-link"
+                          data-toggle="collapse"
+                        >
+                          What kinds of Rewards does Ofatri gives customers who
+                          make transactions from the platform?
+                        </a>
+                      </div>
+                      <div
+                        className="collapse"
+                        id="faq5"
+                        data-parent="#accordion"
+                      >
+                        <div className="card-body">
+                          The Ofatri coins rewarded to customers help them get
+                          other exciting products for free; we call these
+                          products goals in Ofatri i.e food, electronics, luxury
+                          and so much more.
+                        </div>
+                      </div>
+                    </div>
 
-                                        {/* question 6 */}
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <a href="#faq6" className="collapsed card-link" data-toggle="collapse">
-                                                    What are The Rewards Like
-                                                </a>
-                                            </div>
-                                            <div id="faq6" className="collapse" data-parent="#accordion">
-                                                <div className="card-body">
-                                                    Ofatri believes that buying should be fun and rewarding. <br/>Our core is The Business and the Consumer, The Reward Coin can get you things that conform with the business brand or culture.<br/>
-                                                    However, The coins can help you achieve goals which are generic and ubiquituous so as to let you experience and enjoy what you long for with your Reward Coin.
-                                                </div>
-                                            </div>
-                                        </div>
+                    {/* question 6 */}
+                    <div className="card">
+                      <div className="card-header">
+                        <a
+                          href="#faq6"
+                          className="collapsed card-link"
+                          data-toggle="collapse"
+                        >
+                          Can I choose the goals I will like to Track as I make
+                          transactions and get rewarded?
+                        </a>
+                      </div>
+                      <div
+                        id="faq6"
+                        className="collapse"
+                        data-parent="#accordion"
+                      >
+                        <div className="card-body">
+                          The platform enables you to decide among the numerous
+                          exciting goals from any marketer or seller in the
+                          platform, which ones you will like to track- you can
+                          even track all at any time
+                        </div>
+                      </div>
+                    </div>
 
-                                        {/* question 7 */}
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <a href="#faq7" className="collapsed card-link" data-toggle="collapse">
-                                                    Can I use My Reward Coin to Achieve My Goals
-                                                </a>
+                    {/* question 7 */}
+                    <div className="card">
+                      <div className="card-header">
+                        <a
+                          href="#faq7"
+                          className="collapsed card-link"
+                          data-toggle="collapse"
+                        >
+                          How do I redeem my goals when they are due?
+                        </a>
+                      </div>
+                      <div
+                        id="faq7"
+                        className="collapse"
+                        data-parent="#accordion"
+                      >
+                        When your goals are due for redeeming, you get a
+                        notification mail or you check your Milestone menu to
+                        see whether the goals have a congratulation status.{" "}
+                        <p>
+                          {" "}
+                          If so, you can call the marketers number or the seller
+                          from where you have bought from in order to direct you
+                          how to go about picking up the item from the stores
+                          available
+                        </p>
+                      </div>
+                    </div>
 
-                                            </div>
-                                            <div id="faq7" className="collapse" data-parent="#accordion">
-                                                Yes!, the more you make transactions, the more Reward Coins you earn. <br/> If you do not want to Redeem the Rewards, you can let it accumulate until you reach the Goal you aspire for
-                                            </div>
-                                        </div>
+                    {/* question 8 */}
+                    <div className="card">
+                      <div className="card-header">
+                        <a
+                          href="#faq8"
+                          className="collapsed card-link"
+                          data-toggle="collapse"
+                        >
+                          How about refund, supposing my products is not
+                          delivered to me?
+                        </a>
+                      </div>
+                      <div
+                        id="faq8"
+                        className="collapse"
+                        data-parent="#accordion"
+                      >
+                        We often make sure that every customer is treated very
+                        urgent and important. However, if by any uncontrollable
+                        situation you were not able to get your ordered product,
+                        we ensure a deliver within 3 days.
+                      </div>
+                    </div>
 
-                                        {/* question 8 */}
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <a href="#faq8" className="collapsed card-link" data-toggle="collapse">
-                                                    How Do I Pay for the Product
-                                                        </a>
-                                            </div>
-                                            <div id="faq8" className="collapse" data-parent="#accordion">
-                                                you should see a payment link on the description of the offer<strong>click it</strong> and you will be directed to a secure portal where you make payment<br />
-                                                <br />
-                                                However you can <a href="https://wa.me/2348060456301?text=I%20%20will%20like%20to%20make%20payments%20with%20other%20options">contact</a>Ofatri for more details on making payment for the product if you are not comfortable with online payments
-                                                    </div>
-                                        </div>
+                    {/* question 9 */}
+                    <div className="card">
+                      <div className="card-header">
+                        <a
+                          href="#faq9"
+                          className="collapsed card-link"
+                          data-toggle="collapse"
+                        >
+                          I own a Business, I would love Ofatri to List My
+                          Business so I can Reward my Customers
+                        </a>
+                      </div>
+                      <div
+                        id="faq9"
+                        className="collapse"
+                        data-parent="#accordion"
+                      >
+                        It has been proved that Rewarding Customers help you
+                        gain new customers in a more cheaper way and Increase
+                        your sales.
+                        <br />
+                        <a href="https://wa.me/2348060456301?text=I'm%20interested%20in%20ofatri%20and%20want%20my%20business%20listed">
+                          contact
+                        </a>
+                        Ofatri or send a mail to
+                        <i>izundukingsleyemeka@gmail.com</i> to get Your
+                        Business Listed as well as an assigned Reward Manager
+                        <br /> Your Manager helps plan everything, while you
+                        focus on your business
+                        <br />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-                                        {/* question 9 */}
-                                        <div className="card">
-                                            <div className="card-header">
-                                                <a href="#faq9" className="collapsed card-link" data-toggle="collapse">
-                                                    I own a Business, I would love Ofatri to List My Business so I can Reward my Customers
-                                                </a>
-                                            </div>
-                                            <div id="faq9" className="collapse" data-parent="#accordion">
-                                                It has been proved that Rewarding Customers help you gain new customers in a more cheaper way and Increase your sales.<br/><a href="https://wa.me/2348060456301?text=I'm%20interested%20in%20ofatri%20and%20want%20my%20business%20listed">contact</a>Ofatri or send a mail to <i>izundukingsleyemeka@gmail.com</i> to get Your Business Listed as well as an assigned Reward Manager<br/> Your Manager helps plan everything, while you focus on your business<br/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div className="row my-3">
-                                <div className="col-lg-12 sm-12">
-                                <p className="text-display text-center" id="ofatri-business">Ofatri Business</p>
-                                </div>
-                                {/* <div className="col-lg-6">
+              <div className="row my-3">
+                <div className="col-lg-12 sm-12">
+                  <p className="text-display text-center" id="ofatri-business">
+                    Ofatri Business
+                  </p>
+                </div>
+                {/* <div className="col-lg-6">
 
                                     <div className="card bg-white mt-2">
                                         <h3 className="card-title text-red text-center"><strong>Ofatri Basic</strong></h3>
@@ -269,45 +447,96 @@ class Dashboard extends React.Component{
                                         </div>
                                     </div>
                                 </div> */}
-                          
-                                <div className="col">
-                                    <div className="card bg-white mt-2">
-                                        <h3 className="card-title text-red text-center"><strong>Getting Listed on Ofatri</strong></h3>
-                                        <div className="card-image text-center">
-                                            <img src={store3} width="200px" height="200px" alt="item1" className="img-fluid img-responsive img-center" />
-                                        </div>
-                                        <div className="card-content">
-                                            <p className="text-justify text-center mx-3 my-4"><strong>Ofatri Business</strong> will offer you the following features when you get listed</p>
-                                            <ul>
-                                                <li>Dedicated Rewaard Manager- A customer friendly and passionate Ofatri Reward Manager</li>
-                                                <li>Customer Notifications- When Your Promotional Offer is Created and Rewards given to Your Customers</li>
-                                                <li>Consultation- Relate with Our Expert on Rewarding for Business Growth</li>
-                                                <li>Wider Coverage- Promoting your Offer across our social platforms</li>
-                                            </ul>
-                                            <p className="text-justify text-center mx-3 my-4"><strong>either of the following features are integrated on Upgrade</strong></p>
-                                            <ul>
-                                                <li>Your Instagram Pictures- To let users see latest pics of your products</li>
-                                                <li>Your Youtube Videos- Are you also making youtube videos of your products, Upgrade to get this feature on your Promotional Offer</li>
-                                                <li>Ofatri Designer- Use our Designers to get Stunning Promotional Offer Cover</li>
-                                            </ul>
-                                            <p className="text-justify text-center mx-3 my-4"><strong>Click on subscribe now and a business manager will contact you...</strong></p>
-                                            <div className="form-group">
-                                        <button className="form-control btn-success btn-lg text-center"><a href="https://forms.gle/BP4iTq6nFZfqdjxc6">SUBSCRIBE NOW</a></button>
-                                            </div>
-                                            <br/>
-                                            <div className="form-group">
-                                            <button className="form-control btn-success btn-lg text-center"><a className="text-white" href="https://wa.me/2348060456301?text=I%20am%20interested%20in%20upgrading%20to%20add%20my%20instagram%20and%20YouTube%20on%20my%20offer">WhatsApp Instead</a></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-
+                <div className="col">
+                  <div className="card bg-white mt-2">
+                    <h3 className="card-title text-red text-center">
+                      <strong>Getting Listed on Ofatri</strong>
+                    </h3>
+                    <div className="card-image text-center">
+                      <img
+                        src={store3}
+                        width="200px"
+                        height="200px"
+                        alt="item1"
+                        className="img-fluid img-responsive img-center"
+                      />
                     </div>
-           
-        )
+                    <div className="card-content">
+                      <p className="text-justify text-center mx-3 my-4">
+                        <strong>Ofatri Business</strong> will offer you the
+                        following features when you get listed
+                      </p>
+                      <ul>
+                        <li>
+                          Dedicated Rewaard Manager- A customer friendly and
+                          passionate Ofatri Reward Manager
+                        </li>
+                        <li>
+                          Customer Notifications- When Your Promotional Offer is
+                          Created and Rewards given to Your Customers
+                        </li>
+                        <li>
+                          Consultation- Relate with Our Expert on Rewarding for
+                          Business Growth
+                        </li>
+                        <li>
+                          Wider Coverage- Promoting your Offer across our social
+                          platforms
+                        </li>
+                      </ul>
+                      <p className="text-justify text-center mx-3 my-4">
+                        <strong>
+                          either of the following features are integrated on
+                          Upgrade
+                        </strong>
+                      </p>
+                      <ul>
+                        <li>
+                          Your Instagram Pictures- To let users see latest pics
+                          of your products
+                        </li>
+                        <li>
+                          Your Youtube Videos- Are you also making youtube
+                          videos of your products, Upgrade to get this feature
+                          on your Promotional Offer
+                        </li>
+                        <li>
+                          Ofatri Designer- Use our Designers to get Stunning
+                          Promotional Offer Cover
+                        </li>
+                      </ul>
+                      <p className="text-justify text-center mx-3 my-4">
+                        <strong>
+                          Click on subscribe now and a business manager will
+                          contact you...
+                        </strong>
+                      </p>
+                      <div className="form-group">
+                        <button className="form-control btn-success btn-lg text-center">
+                          <a href="https://forms.gle/BP4iTq6nFZfqdjxc6">
+                            SUBSCRIBE NOW
+                          </a>
+                        </button>
+                      </div>
+                      <br />
+                      <div className="form-group">
+                        <button className="form-control btn-success btn-lg text-center">
+                          <a
+                            className="text-white"
+                            href="https://wa.me/2348060456301?text=I%20am%20interested%20in%20upgrading%20to%20add%20my%20instagram%20and%20YouTube%20on%20my%20offer"
+                          >
+                            WhatsApp Instead
+                          </a>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
     }
 }
 
