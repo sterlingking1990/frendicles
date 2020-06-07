@@ -627,12 +627,7 @@ class PlaceTemplate extends React.Component {
                 onClick={this.togglePlaceEdit}
               ></i>
             </span>
-            <img
-              itemprop="image"
-              src={image}
-              className=" card-img-top img-responsive img-fluid"
-              alt="offer"
-            />
+
             <div
               itemscope
               itemtype="http://schema.org/Product"
@@ -641,6 +636,12 @@ class PlaceTemplate extends React.Component {
               <p itemprop="brand" className="card-title text-white">
                 {place_name}
               </p>
+              <img
+                itemprop="image"
+                src={image}
+                className=" card-img-top img-responsive img-fluid"
+                alt="offer"
+              />
               <p itemprop="name">{place_name}</p>
               <Linkify>
                 <p itemprop="description" className="card-text text-white">
@@ -670,7 +671,7 @@ class PlaceTemplate extends React.Component {
                 itemtype="http://schema.org/Offer"
               >
                 Price: <span itemprop="price">{offer_price}</span>
-                Condition:{" "}
+                Condition:
                 <span itemprop="itemCondition" content="new">
                   new
                 </span>
