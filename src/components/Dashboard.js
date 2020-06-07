@@ -187,7 +187,7 @@ class Dashboard extends React.Component{
                           When marketers or sellers wish to promote or sell
                           their quality products in addition reward customers
                           who buy those products, they use the Ofatri platform
-                          to do so. <a href="http://ofatri.com/#/">Ofatri</a>{" "}
+                          to do so. <a href="http://ofatri.com/#/">Ofatri</a>
                           gives marketers and sellers Innovative means of
                           promoting and selling with the intention of rewarding
                           customers
@@ -237,15 +237,15 @@ class Dashboard extends React.Component{
                         <div className="card-body">
                           <ul>
                             <li>
-                              The first thing you want to do is{" "}
+                              The first thing you want to do is
                               <a href="http://ofatri.com/#/signup">Sign up</a>
                             </li>
                             <li>
                               Then Click on the <strong>Join Offer</strong> Menu
-                            </li>{" "}
+                            </li>
                             <li>
-                              Search for an Offer by the{" "}
-                              <strong>Marketers Name</strong> or Just{" "}
+                              Search for an Offer by the
+                              <strong>Marketers Name</strong> or Just
                               <strong>Scroll</strong> to see products you like
                               to buy
                             </li>
