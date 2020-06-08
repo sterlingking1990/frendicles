@@ -168,8 +168,13 @@ class Dashboard extends React.Component{
                 <div className="col-lg-12">
                   <div id="accordion">
                     {/* question 1 */}
-                    <div className="card">
-                      <div className="card-header">
+                    <div
+                      itemscope
+                      itemprop="mainEntity"
+                      itemtype="https://schema.org/Question"
+                      className="card"
+                    >
+                      <div itemprop="name" className="card-header">
                         <a
                           className="card-link"
                           data-toggle="collapse"
@@ -179,11 +184,14 @@ class Dashboard extends React.Component{
                         </a>
                       </div>
                       <div
+                        itemscope
+                        itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer"
                         id="faq1"
                         data-parent="#accordion"
                         className="collapse show"
                       >
-                        <div className="card-body">
+                        <div itemprop="text" className="card-body">
                           When marketers or sellers wish to promote or sell
                           their quality products in addition reward customers
                           who buy those products, they use the Ofatri platform
@@ -196,8 +204,13 @@ class Dashboard extends React.Component{
                     </div>
 
                     {/* quesiton 2 */}
-                    <div className="card">
-                      <div className="card-header">
+                    <div
+                      itemscope
+                      itemprop="mainEntity"
+                      itemtype="https://schema.org/Question"
+                      className="card"
+                    >
+                      <div itemprop="name" className="card-header">
                         <a
                           className="collapsed card-link"
                           data-toggle="collapse"
@@ -206,12 +219,14 @@ class Dashboard extends React.Component{
                           What is the mantra of Ofatri?
                         </a>
                       </div>
-                      <div
+                      <div itemscope
+                        itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer"
                         id="faq2"
                         className="collapse"
                         data-parent="#accordion"
                       >
-                        <div className="card-body">
+                        <div itemprop="text" className="card-body">
                           Ofatri's mantra is simple- Make Transactions, Get
                           Rewarded, Achieve Goals.
                         </div>
@@ -219,8 +234,13 @@ class Dashboard extends React.Component{
                     </div>
 
                     {/* question 3 */}
-                    <div className="card">
-                      <div className="card-header">
+                    <div
+                      itemscope
+                      itemprop="mainEntity"
+                      itemtype="https://schema.org/Question"
+                      className="card"
+                    >
+                      <div itemprop="name" className="card-header">
                         <a
                           className="collapsed card-link"
                           data-toggle="collapse"
@@ -230,11 +250,14 @@ class Dashboard extends React.Component{
                         </a>
                       </div>
                       <div
+                        itemscope
+                        itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer"
                         id="faq3"
                         className="collapse"
                         data-parent="#accordion"
                       >
-                        <div className="card-body">
+                        <div itemprop="text" className="card-body">
                           <ul>
                             <li>
                               The first thing you want to do is
@@ -281,8 +304,13 @@ class Dashboard extends React.Component{
                                         </div> */}
 
                     {/* question 5 */}
-                    <div className="card">
-                      <div className="card-header">
+                    <div
+                      itemscope
+                      itemprop="mainEntity"
+                      itemtype="https://schema.org/Question"
+                      className="card"
+                    >
+                      <div itemprop="name" className="card-header">
                         <a
                           href="#faq5"
                           className="collapsed card-link"
@@ -293,11 +321,14 @@ class Dashboard extends React.Component{
                         </a>
                       </div>
                       <div
+                        itemscope
+                        itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer"
                         className="collapse"
                         id="faq5"
                         data-parent="#accordion"
                       >
-                        <div className="card-body">
+                        <div itemprop="text" className="card-body">
                           The Ofatri coins rewarded to customers help them get
                           other exciting products for free; we call these
                           products goals in Ofatri i.e food, electronics, luxury
@@ -307,8 +338,13 @@ class Dashboard extends React.Component{
                     </div>
 
                     {/* question 6 */}
-                    <div className="card">
-                      <div className="card-header">
+                    <div
+                      itemscope
+                      itemprop="mainEntity"
+                      itemtype="https://schema.org/Question"
+                      className="card"
+                    >
+                      <div itemprop="name" className="card-header">
                         <a
                           href="#faq6"
                           className="collapsed card-link"
@@ -319,11 +355,14 @@ class Dashboard extends React.Component{
                         </a>
                       </div>
                       <div
+                        itemscope
+                        itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer"
                         id="faq6"
                         className="collapse"
                         data-parent="#accordion"
                       >
-                        <div className="card-body">
+                        <div itemprop="text" className="card-body">
                           The platform enables you to decide among the numerous
                           exciting goals from any marketer or seller in the
                           platform, which ones you will like to track- you can
@@ -333,8 +372,13 @@ class Dashboard extends React.Component{
                     </div>
 
                     {/* question 7 */}
-                    <div className="card">
-                      <div className="card-header">
+                    <div
+                      itemscope
+                      itemprop="mainEntity"
+                      itemtype="https://schema.org/Question"
+                      className="card"
+                    >
+                      <div itemprop="name" className="card-header">
                         <a
                           href="#faq7"
                           className="collapsed card-link"
@@ -344,26 +388,36 @@ class Dashboard extends React.Component{
                         </a>
                       </div>
                       <div
+                        itemscope
+                        itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer"
                         id="faq7"
                         className="collapse"
                         data-parent="#accordion"
                       >
-                        When your goals are due for redeeming, you get a
-                        notification mail or you check your Milestone menu to
-                        see whether the goals have a congratulation status.{" "}
-                        <p>
-                          {" "}
-                          If so, you can call the marketers number or the seller
-                          from where you have bought from in order to direct you
-                          how to go about picking up the item from the stores
-                          available
-                        </p>
+                        <div itemprop="text" className="card-body">
+                          When your goals are due for redeeming, you get a
+                          notification mail or you check your Milestone menu to
+                          see whether the goals have a congratulation status.{" "}
+                          <p>
+                            {" "}
+                            If so, you can call the marketers number or the
+                            seller from where you have bought from in order to
+                            direct you how to go about picking up the item from
+                            the stores available
+                          </p>
+                        </div>
                       </div>
                     </div>
 
                     {/* question 8 */}
-                    <div className="card">
-                      <div className="card-header">
+                    <div
+                      itemscope
+                      itemprop="mainEntity"
+                      itemtype="https://schema.org/Question"
+                      className="card"
+                    >
+                      <div itemprop="name" className="card-header">
                         <a
                           href="#faq8"
                           className="collapsed card-link"
@@ -374,20 +428,30 @@ class Dashboard extends React.Component{
                         </a>
                       </div>
                       <div
+                        itemscope
+                        itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer"
                         id="faq8"
                         className="collapse"
                         data-parent="#accordion"
                       >
-                        We often make sure that every customer is treated very
-                        urgent and important. However, if by any uncontrollable
-                        situation you were not able to get your ordered product,
-                        we ensure a deliver within 3 days.
+                        <div itemprop="text" className="card-body">
+                          We often make sure that every customer is treated very
+                          urgent and important. However, if by any
+                          uncontrollable situation you were not able to get your
+                          ordered product, we ensure a deliver within 3 days.
+                        </div>
                       </div>
                     </div>
 
                     {/* question 9 */}
-                    <div className="card">
-                      <div className="card-header">
+                    <div
+                      itemscope
+                      itemprop="mainEntity"
+                      itemtype="https://schema.org/Question"
+                      className="card"
+                    >
+                      <div itemprop="name" className="card-header">
                         <a
                           href="#faq9"
                           className="collapsed card-link"
@@ -398,23 +462,28 @@ class Dashboard extends React.Component{
                         </a>
                       </div>
                       <div
+                        itemscope
+                        itemprop="acceptedAnswer"
+                        itemtype="https://schema.org/Answer"
                         id="faq9"
                         className="collapse"
                         data-parent="#accordion"
                       >
-                        It has been proved that Rewarding Customers help you
-                        gain new customers in a more cheaper way and Increase
-                        your sales.
-                        <br />
-                        <a href="https://wa.me/2348060456301?text=I'm%20interested%20in%20ofatri%20and%20want%20my%20business%20listed">
-                          contact
-                        </a>
-                        Ofatri or send a mail to
-                        <i>izundukingsleyemeka@gmail.com</i> to get Your
-                        Business Listed as well as an assigned Reward Manager
-                        <br /> Your Manager helps plan everything, while you
-                        focus on your business
-                        <br />
+                        <div itemprop="text" className="card-body">
+                          It has been proved that Rewarding Customers help you
+                          gain new customers in a more cheaper way and Increase
+                          your sales.
+                          <br />
+                          <a href="https://wa.me/2348060456301?text=I'm%20interested%20in%20ofatri%20and%20want%20my%20business%20listed">
+                            contact
+                          </a>
+                          Ofatri or send a mail to
+                          <i>izundukingsleyemeka@gmail.com</i> to get Your
+                          Business Listed as well as an assigned Reward Manager
+                          <br /> Your Manager helps plan everything, while you
+                          focus on your business
+                          <br />
+                        </div>
                       </div>
                     </div>
                   </div>
