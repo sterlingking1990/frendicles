@@ -404,7 +404,7 @@ class PlaceTemplate extends React.Component {
       url: this.props.url,
       phone: this.props.phone,
       count: 0,
-      offer_price: this.props.place.offer_price
+      offer_price: this.props.place.offer_price?this.props.place.offer_price:0
     };
   }
   componentDidMount() {
