@@ -244,6 +244,7 @@ class PlacesToJoinFB extends React.Component {
 const Places = ({ places, hooks, joinPlaces, onJoinPlace, onUnJoinPlace, join_ref,isToJoin,isToUnJoin,join_token,allJoined,email,pkey,username }) => (
     <div>
         {places.map(place => (
+          
             <PlaceTemplate key={place.uid} place_id={place.uid} place={place} hooks={hooks} allJoined={allJoined} joinPlaces={joinPlaces} onJoinPlace={onJoinPlace} onUnJoinPlace={onUnJoinPlace} join_ref={join_ref} isToJoin={isToJoin} isToUnjoin={isToUnJoin} join_token={join_token} email={email} pkey={pkey} username={username}/>
         ))}
     </div>
@@ -409,7 +410,8 @@ class PlaceTemplate extends React.Component {
                           src={image}
                           className="card-img img-responsive img-fluid"
                           loading="lazy"
-                          style={{ width: "100%", height: "auto" }}
+                          width={100}
+                          height={100}
                           itemprop="image"
                           alt="product"
                         />
