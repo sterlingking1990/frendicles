@@ -1,8 +1,7 @@
 import React from 'react';
 import {Switch,Route } from 'react-router-dom';
-import Dashboard from './Dashboard';
+import LoadableDashboard from './LoadableDashboard';
 import ErrorPage from './ErrorPage';
-import PlacesToJoinFB from './PlacesToJoinFB';
 import ChangePasswordPage from './ChangePasswordPage';
 // import MyTransactionsFB from './MyTransactionsFB';
 import SetRewardGoal from './SetRewardGoal';
@@ -10,11 +9,12 @@ import CheckMilestone from './CheckMilestone';
 
 import SetNotification from './SetNotification';
 import ChangePhone from './ChangePhone';
+import PlaceToJoinLazy from './PlaceToJoinLazy';
 
 const UserRouter = () => (
   <Switch>
-      <Route exact path="/" component={Dashboard} />
-      <Route exact path="/offer" component={PlacesToJoinFB} />
+      <Route exact path="/" component={LoadableDashboard} />
+      <Route exact path="/offer" component={PlaceToJoinLazy} />
       {/* <Route exact path="/my-transactions" component={MyTransactionsFB} /> */}
       <Route exact path="/change-password" component={ChangePasswordPage} />
       <Route exact path="/change-phone" component={ChangePhone} />
