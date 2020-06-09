@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Dashboard from './Dashboard';
+import LoadableDashboard from './LoadableDashboard';
 import ErrorPage from '../components/ErrorPage';
 import PlacesToJoinFB from './PlacesToJoinFB';
 import OfferAnalytics from "./OfferAnalytics";
@@ -17,7 +17,7 @@ import ConfirmFunCodeFB from './ConfirmFunCodeFB';
 
 const UserRouter = () => (
   <Switch>
-    <Route exact path="/" component={Dashboard} />
+    <Route exact path="/" component={LoadableDashboard} />
     <Route exact path="/create-offer" component={createPlaceFB} />
     {/* <Route exact path="/offer" component={PlacesToJoinFB} /> */}
     <Route exact path="/admin-setup-goal" component={AdminSetupGoal} />
