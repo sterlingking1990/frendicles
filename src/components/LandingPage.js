@@ -12,7 +12,7 @@ import pic5 from '../imageUpload/pic5.png';
 
 const LandingPage = () => (
   <div className="landing">
-    <div className="banner-body-background">
+    <div loading="lazy" width={100} height={100} className="banner-body-background">
       <div className="banner-body-text1">
         <span className="logo-name" id="app-name">
           ofatri
