@@ -5,6 +5,7 @@ const INITIAL_DETAILS={
     new_password:'',
     confirm_password:'',
     error:null,
+    passwordChanged:false,
 }
 
 class ChangePasswordPage extends React.Component{
@@ -22,7 +23,7 @@ class ChangePasswordPage extends React.Component{
 
         this.props.firebase.doPasswordUpdate(new_password)
         .then(()=>{
-            this.setState({...INITIAL_DETAILS})
+            this.setState({...INITIAL_DETAILS,passwordChanged:true})
         })
         .catch(error=>{
             this.setState({error})
@@ -34,7 +35,8 @@ class ChangePasswordPage extends React.Component{
         const {
             new_password,
             confirm_password,
-            error
+            error,
+            passwordChanged
         } = this.state;
 
         const isInvalid = confirm_password !== new_password || confirm_password === '';
@@ -51,22 +53,28 @@ class ChangePasswordPage extends React.Component{
             <div className="container mt-3">
                 <div className="row">
                     <div className="col-lg-12 sm-12">
-                        <div className="form-group">
-                            <input name="new_password" className="form-control" type="password" placeholder="enter new password" onChange={this.onChange} value={new_password} />
-                        </div>
-                        <div className="form-group">
-                            <input name="confirm_Password" className="form-control" type="password" placeholder="confirm password" onChange={this.onChange} value={confirm_password} />
-                        </div>
-                        <div className="form-group">
-                            <button type="submit" className="form-control btn-success text-white" disabled={isInvalid} onClick={this.changePassword}>Reset Password</button>
-                        </div>
-                        <div className="form-group">
-                            {error && <p className="text-muted text-red bg-white">{error.message}</p>}
-                        </div>
+                            {passwordChanged && 
+                            <div className="card bg-dark">
+                                <div className="card-body">
+                                    <p className="text-display text-center text-white">Password has been changed successfully click <a href="http://ofatri.com/#/signin">here</a> to sign in</p>
+                                </div>
+                            </div>}
+                    <div className="form-group">
+                        <input name="new_password" className="form-control" type="password" placeholder="enter new password" onChange={this.onChange} value={new_password} />
+                    </div>
+                    <div className="form-group">
+                        <input name="confirm_Password" className="form-control" type="password" placeholder="confirm password" onChange={this.onChange} value={confirm_password} />
+                    </div>
+                    <div className="form-group">
+                        <button type="submit" className="form-control btn-success text-white" disabled={isInvalid} onClick={this.changePassword}>Reset Password</button>
+                    </div>
+                    <div className="form-group">
+                        {error && <p className="text-muted text-red bg-white">{error.message}</p>}
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
+    </div>
         )
     }
 }
