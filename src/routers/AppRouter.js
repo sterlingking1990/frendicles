@@ -15,28 +15,40 @@ import {withAuthentication} from '../session';
 import {AuthUserContext} from '../session'
 
 
+
 export const history=createHistory();
+
+
+
 
 const HOCHeader = (Component1, Component2, Component3, Component4) => {
     return () => (
         <div>
             <AuthUserContext.Consumer>
             {authUser=>{
-                if(authUser){
-                  console.log(authUser)
-                    if(authUser.email==='izundukingsleyemeka@gmail.com'){
+              
+              const marketers_email=[]
+              for(let i=0;i<authUser.users.length;i++){
+                if(!!authUser.users[i].marketer){
+                  marketers_email.push(authUser.users[i].email)
+                }
+              }
+              
+                if(authUser.authState){
+                    if(authUser.authState.email==='izundukingsleyemeka@gmail.com'){
                         return <Component1 />
                     }
-                    else if (authUser.marketer===true){
-                      
-                           {/* authUser.email === "uche@gmail.com" ||
+                    else if (marketers_email.includes(authUser.authState.email)) {
+                           
+                             /* authUser.email === "uche@gmail.com" ||
                            authUser.email === "izunduchiomaij@gmail.com" ||
                            authUser.email === "ofatri4business@gmail.com" ||
                            authUser.email === "kingstan4christ@yahoo.com" ||
                            authUser.email === "jumokemagaret@gmail.com" ||
                            authUser.email ==="ekwulugwogloriaoluchukwu@gmail.com" ||
-                           authUser.email ==="onyinyeizundu3@gmail.com" */}
-                    
+                           authUser.email ==="onyinyeizundu3@gmail.com" */
+                          
+
                            //partner emails
                            return <Component4 />;
                          } else {
@@ -57,22 +69,29 @@ const HOCRouter = (Component1, Component2, Component3, Component4) => {
         <div>
             <AuthUserContext.Consumer>
                 {authUser => {
-                    if (authUser) {
-                        if (authUser.email === 'izundukingsleyemeka@gmail.com') {
+                  
+                  const marketers_email_router = [];
+                  for (let i = 0; i < authUser.users.length; i++) {
+                    if (!!authUser.users[i].marketer) {
+                      marketers_email_router.push(authUser.users[i].email);
+                    }
+                  }
+                    if (authUser.authState) {
+                      
+                        if (authUser.authState.email === 'izundukingsleyemeka@gmail.com') {
                             return <Component1 />
                         }
-                        else if (authUser.marketer===true){
-                               {/* authUser.email === "uche@gmail.com" ||
+                        else if (marketers_email_router.includes(authUser.authState.email)) {
+                               /* authUser.email === "uche@gmail.com" ||
                                authUser.email === "izunduchiomaij@gmail.com" ||
                                authUser.email === "ofatri4business@gmail.com" ||
                                authUser.email === "kingstan4christ@yahoo.com" ||
                                authUser.email === "jumokemagaret@gmail.com" ||
                                authUser.email ==="ekwulugwogloriaoluchukwu@gmail.com" ||
-                               authUser.email === "onyinyeizundu3@gmail.com" */}
-                              
+                               authUser.email === "onyinyeizundu3@gmail.com" */
+
                                //partner emails
                                return <Component4 />;
-                            
                              } else {
                                return <Component2 />;
                              }
@@ -87,8 +106,8 @@ const HOCRouter = (Component1, Component2, Component3, Component4) => {
 
 }
 
-const HeaderHOC = HOCHeader(AdminHeader, UserHeader, GuestHeader,PartnerHeader)
-const RouterHOC=HOCRouter(AdminRouter,UserRouter,GuestRouter, PartnerRouter);
+const HeaderHOC = HOCHeader(AdminHeader, UserHeader, GuestHeader,PartnerHeader,GetUsers)
+const RouterHOC=HOCRouter(AdminRouter,UserRouter,GuestRouter, PartnerRouter,GetUsers);
 
 
 const AppRouter = () => (
