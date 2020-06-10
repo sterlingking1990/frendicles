@@ -5,6 +5,7 @@ import AdminDashboard from '../components/AdminDashboard';
 // import EditPlace from '../components/EditPlace';
 // import EditHook from '../components/EditHook';
 // import HooksPage from '../components/HooksPage';
+import UpgradeUser from './UpgradeUser';
 import ErrorPage from '../components/ErrorPage';
 import ConfirmFunCodeFB from './ConfirmFunCodeFB';
 // import PlacesPage from '../components/PlacesPage';
@@ -13,20 +14,21 @@ import UpdateAccountFB from './UpdateAccountFB';
 import AdminSetupGoal from './AdminSetupGoal';
 import RedeemCoin from './RedeemCoin';
 const AdminRouter = () => (
-            <Switch>
-                <Route exact path="/" component={AdminDashboard} />
+  <Switch>
+    <Route exact path="/" component={AdminDashboard} />
 
-                {/* <Route exact path="/edit-place/:id" component={EditPlace}  /> */}
-                {/* <Route exact path="/create-hook" component={CreateHookFB}  /> */}
-                <Route exact path="/confirm-funcode" component={ConfirmFunCodeFB} />
-                <Route exact path="/redeem-coin" component={RedeemCoin} />
-                <Route exact path="/admin-setup-goal" component={AdminSetupGoal} />
-                <Route exact path="/update-ofatri-account" component={UpdateAccountFB} />
-                {/* <Route exact path="/hooks-page" component={HooksPage} />
+    {/* <Route exact path="/edit-place/:id" component={EditPlace}  /> */}
+    {/* <Route exact path="/create-hook" component={CreateHookFB}  /> */}
+    <Route exact path="/confirm-funcode" component={ConfirmFunCodeFB} />
+    <Route exact path="/redeem-coin" component={RedeemCoin} />
+    <Route exact path="/admin-setup-goal" component={AdminSetupGoal} />
+    <Route exact path="/update-ofatri-account" component={UpdateAccountFB} />
+    <Route exact path="/upgrade-user" component={UpgradeUser} />
+    {/* <Route exact path="/hooks-page" component={HooksPage} />
                 <Route exact path="/places-page" component={PlacesPage} />
                 <Route exact path="/edit-hook/:id" component={EditHook}  /> */}
-                <Route exact component={ErrorPage} />
-            </Switch>
-)
+    <Route exact component={ErrorPage} />
+  </Switch>
+);
 
 export default AdminRouter
