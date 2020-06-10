@@ -23,18 +23,20 @@ const HOCHeader = (Component1, Component2, Component3, Component4) => {
             <AuthUserContext.Consumer>
             {authUser=>{
                 if(authUser){
+                  console.log(authUser)
                     if(authUser.email==='izundukingsleyemeka@gmail.com'){
                         return <Component1 />
                     }
-                    else if (
-                           authUser.email === "uche@gmail.com" ||
+                    else if (authUser.marketer===true){
+                      
+                           {/* authUser.email === "uche@gmail.com" ||
                            authUser.email === "izunduchiomaij@gmail.com" ||
                            authUser.email === "ofatri4business@gmail.com" ||
                            authUser.email === "kingstan4christ@yahoo.com" ||
                            authUser.email === "jumokemagaret@gmail.com" ||
                            authUser.email ==="ekwulugwogloriaoluchukwu@gmail.com" ||
-                           authUser.email ==="onyinyeizundu3@gmail.com"
-                         ) {
+                           authUser.email ==="onyinyeizundu3@gmail.com" */}
+                    
                            //partner emails
                            return <Component4 />;
                          } else {
@@ -59,17 +61,18 @@ const HOCRouter = (Component1, Component2, Component3, Component4) => {
                         if (authUser.email === 'izundukingsleyemeka@gmail.com') {
                             return <Component1 />
                         }
-                        else if (
-                               authUser.email === "uche@gmail.com" ||
+                        else if (authUser.marketer===true){
+                               {/* authUser.email === "uche@gmail.com" ||
                                authUser.email === "izunduchiomaij@gmail.com" ||
                                authUser.email === "ofatri4business@gmail.com" ||
                                authUser.email === "kingstan4christ@yahoo.com" ||
                                authUser.email === "jumokemagaret@gmail.com" ||
                                authUser.email ==="ekwulugwogloriaoluchukwu@gmail.com" ||
-                               authUser.email === "onyinyeizundu3@gmail.com"
-                             ) {
+                               authUser.email === "onyinyeizundu3@gmail.com" */}
+                              
                                //partner emails
                                return <Component4 />;
+                            
                              } else {
                                return <Component2 />;
                              }
