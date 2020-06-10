@@ -44,7 +44,8 @@ class Firebase {
           username,
           email,
           phone,
-          notification: "enabled"
+          notification: "enabled",
+          marketer:false
         });
       });
   };
