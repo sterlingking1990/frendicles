@@ -12,6 +12,7 @@ const PasswordRecoveryPage=()=>(
 const INITIAL_DETAILS={
     email:'',
     error:null,
+    sent_mail:false,
 };
 
 class PasswordRecoveryHOC extends React.Component{
@@ -24,7 +25,7 @@ class PasswordRecoveryHOC extends React.Component{
         const {email} = this.state
         this.props.firebase.doPasswordReset(email)
         .then(()=>{
-            this.setState({...INITIAL_DETAILS})
+            this.setState({...INITIAL_DETAILS,sent_mail:true})
         })
         .catch(error=>{
             this.setState({error})
@@ -37,12 +38,18 @@ class PasswordRecoveryHOC extends React.Component{
     }
 
     render(){
-        const {email,error}=this.state
+        const {email,error,sent_mail}=this.state
         const isInvalid=email===''
         return(
             <div className="container mt-3">
                 <div className="row">
                     <div className="col-lg-12 sm-12">
+                            {sent_mail && 
+                            <div className="card bg-dark">
+                                <div className="card-body">
+                                    <p className="text-display text-center text-white">Password reset link sent to mail, Please check and update Password</p>
+                                </div>
+                            </div>}
                         <div className="form-group">
                             <input name="email" type="email" placeholder="email address" className="form-control" value={this.state.email} onChange={this.onChange} />
                         </div>
@@ -50,7 +57,7 @@ class PasswordRecoveryHOC extends React.Component{
                             <button disabled={isInvalid} type="submit" className="form-control" onClick={this.recoverPassword}>Recover Password</button>
                         </div>
                         <div className="form-group">
-                            {error && <p className="text-red bg-white">{error.message}</p>}
+                            {error && <p className="text-display text-center bg-dark text-white">{error.message}</p>}
                         </div>
                     </div>
                 </div>
