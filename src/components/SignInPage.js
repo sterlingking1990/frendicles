@@ -47,43 +47,75 @@ class SignInHOC extends React.Component{
             error,
         }=this.state
 
-        return(
-            <div className="login">
-                <div className="banner-body-background">
-                    <div className="banner-body-text1">
-                        <span className="logo-name" id="app-name">ofatri</span>
-                        <div className="text-display text-center"><strong id="first_heading">Make Transactions </strong> &nbsp;<strong id="second_heading"> Get Rewarded</strong>&nbsp;<strong id="third_heading"> Achieve Goals</strong></div>
-                        <div className="container mt-3">
-                            <div className="row">
-                                <div className="col-lg-12 sm-12">
-                                    {error && <h3 className="text-display text-white bg-dark">{error}</h3>}
-                                    <div className="form-group">
-
-                                        <input name="email" type="email" placeholder="email" className="form-control" value={email} onChange={this.onChange} />
-                                    </div>
-                                    <div className="form-group">
-                                        <input name="password" type="password" placeholder="enter password" className="form-control" value={password} onChange={this.onChange} />
-                                    </div>
-                                    <div className="form-group">
-                                        <button type="submit" className="form-control btn-success" onClick={this.onSignIn}>Log In</button>
-                                    </div>
-                                    <div className="form-group">
-                                        {error && <p className="text-red bg-white">{error.message}</p>}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                             <PasswordRecoveryLink/>
-                            <SignUpLink/>
-                            </div>
-                            
-                        </div>
-                       
-                    </div>
+        return (
+          <div className="login">
+            <div className="banner-body-background">
+              <div className="banner-body-text1">
+                <span className="logo-name" id="app-name">
+                  ofatri
+                </span>
+                <div className="text-display text-center">
+                  <strong id="first_heading">Make Transactions </strong> &nbsp;
+                  <strong id="second_heading"> Get Rewarded</strong>&nbsp;
+                  <strong id="third_heading"> Achieve Goals</strong>
                 </div>
-          
-        </div>
-        )
+                <div className="container mt-3">
+                  <div className="row">
+                    <div className="col-lg-12 sm-12">
+                      {error && (
+                        <div className="card bg-dark">
+                          <div className="card-body">
+                            <p className="text-display text-center text-white">
+                              {error}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      <div className="form-group">
+                        <input
+                          name="email"
+                          type="email"
+                          placeholder="email"
+                          className="form-control"
+                          value={email}
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <input
+                          name="password"
+                          type="password"
+                          placeholder="enter password"
+                          className="form-control"
+                          value={password}
+                          onChange={this.onChange}
+                        />
+                      </div>
+                      <div className="form-group">
+                        <button
+                          type="submit"
+                          className="form-control btn-success"
+                          onClick={this.onSignIn}
+                        >
+                          Log In
+                        </button>
+                      </div>
+                      <div className="form-group">
+                        {error && (
+                          <p className="text-red bg-white">{error.message}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <PasswordRecoveryLink />
+                    <SignUpLink />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
     }
 }
 
