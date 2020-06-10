@@ -74,6 +74,16 @@ const AdminHeader = () => (
                     User Info
                   </NavLink>
                 </li>
+                <li data-toggle="collapse" data-target="#Navmenu">
+                  <NavLink
+                    className="nav-link"
+                    to="/upgrade-user"
+                    activeClassName="is-active"
+                    exact={true}
+                  >
+                    Upgrade User
+                  </NavLink>
+                </li>
               </ul>
             </li>
 
