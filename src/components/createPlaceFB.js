@@ -25,7 +25,8 @@ const INITIALS={
     loading_hooks:false,
     loading_places:false,
     user_id:'',
-    url:''
+    url:'',
+    isCreating:false,
 }
 
 class CreatePlaceFB extends React.Component{
@@ -147,6 +148,7 @@ class CreatePlaceFB extends React.Component{
         const isPlaceHooks=place_hooks!==null
         const proceedToSubmit=isPlaceName && isDescription && isContact && isImage && isPlaceHooks 
         if(proceedToSubmit){
+          this.setState({isCreating:true})
             //upload the image
             this.props.firebase.imageStore(image.name).put(image).on("state_changed", snapShot => {
                 //get the progress
@@ -172,7 +174,7 @@ class CreatePlaceFB extends React.Component{
                     place_hooks:place_hooks,
                     status:"open"
                 })
-                this.setState({isCreated:true,url})
+                this.setState({isCreated:true,url,isCreating:false})
                 //send mail to all registered users about new created place
                 this.props.firebase.sendEmail(subject, place_name, url, description);
                 
@@ -185,7 +187,7 @@ class CreatePlaceFB extends React.Component{
     }
 
     render(){
-        const {url,user_id,place_name,offer_price,description,contact,ig_acct,youtube_term,email,subaccount,hooks,loading_places,isCreated,places}=this.state
+        const {url,user_id,place_name,offer_price,description,contact,ig_acct,youtube_term,email,subaccount,hooks,loading_places,isCreated,places,isCreating}=this.state
         return (
           <div id="create-place">
             <div className="banner-body-background">
@@ -205,11 +207,7 @@ class CreatePlaceFB extends React.Component{
                 <div className="container mt-3">
                   <div className="row">
                     <div className="col-lg-12">
-                      {isCreated && (
-                        <p className="text-center text-white bg-dark">
-                          offer created successfully
-                        </p>
-                      )}
+                      
                       <p className="card-title text-success text-center">
                         Create Promotional Offer
                       </p>
@@ -313,12 +311,18 @@ class CreatePlaceFB extends React.Component{
                        */}
                       <div className="form-group mt-2">
                         <button
-                          className="form-control btn-dark text-white"
+                          className="form-control btn btn-primary"
                           onClick={() => this.handleSubmit(authUser.authState)}
                         >
                           Submit
                         </button>
                       </div>
+                      {isCreating && (<p className="text-display text-center text-white bg-dark">Please wait...</p>)}
+                      {isCreated && (
+                        <p className="text-display text-center text-white bg-dark">
+                          offer created successfully
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
