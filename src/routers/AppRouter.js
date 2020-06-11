@@ -106,8 +106,8 @@ const HOCRouter = (Component1, Component2, Component3, Component4) => {
 
 }
 
-const HeaderHOC = HOCHeader(AdminHeader, UserHeader, GuestHeader,PartnerHeader,GetUsers)
-const RouterHOC=HOCRouter(AdminRouter,UserRouter,GuestRouter, PartnerRouter,GetUsers);
+const HeaderHOC = HOCHeader(AdminHeader, UserHeader, GuestHeader,PartnerHeader)
+const RouterHOC=HOCRouter(AdminRouter,UserRouter,GuestRouter, PartnerRouter);
 
 
 const AppRouter = () => (
