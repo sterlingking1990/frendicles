@@ -147,7 +147,7 @@ class AdminSetupGoal extends React.Component{
                                 {/* <input type="text" name="goal_image" value={goal_image} className="form-control" placeholder="input image url for further explanation" onChange={this.onChange}/> */}
                             </div>
                             <div className="form-group">
-                                <button className="form-control btn-success" onClick={(e)=>this.saveGoal(e,authUser)}>Save</button>
+                                <button className="form-control btn-success" onClick={(e)=>this.saveGoal(e,authUser.authState)}>Save</button>
                             </div>
                         </div>
                     </div>
