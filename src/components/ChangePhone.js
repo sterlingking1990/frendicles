@@ -75,7 +75,7 @@ class ChangePhone extends React.Component{
                                                     <input type="number" className="form-control" value={phone} onChange={this.setPhone} />
                                                 </div>
                                                 <div className="form-group">
-                                                    <button className="form-control btn btn-success" onClick={(e) => this.updatePhone(e,authUser)}  disabled={isInvalid}>Update</button>
+                                                    <button className="form-control btn btn-success" onClick={(e) => this.updatePhone(e,authUser.authState)}  disabled={isInvalid}>Update</button>
                                                 </div>
                                             </div>
                                         </div>
