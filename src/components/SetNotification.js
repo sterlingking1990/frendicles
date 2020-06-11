@@ -79,7 +79,7 @@ class SetNotification extends React.Component{
                                 </div>
                                 <br/>
                                     <div className="form-group">
-                                        <button className="form-control btn btn-success" onClick={(e)=>this.saveSetting(e,authUser)}>Save Setting</button>
+                                        <button className="form-control btn btn-success" onClick={(e)=>this.saveSetting(e,authUser.authState)}>Save Setting</button>
                                     </div>
                                 </div>
                             </div>
