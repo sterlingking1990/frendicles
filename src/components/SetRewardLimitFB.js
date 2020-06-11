@@ -111,7 +111,7 @@ class SetRewardLimitFB extends React.Component{
                         <div className="row">
                                 <div className="col-lg-12 sm-12">
                                     <div className="form-group">
-                                        <button className="form-control bg-dark text-white" onClick={(e) => this.saveFunSetting(e, authUser)}>Save</button>
+                                        <button className="form-control bg-dark text-white" onClick={(e) => this.saveFunSetting(e, authUser.authState)}>Save</button>
                                     </div>
                                 </div>
                         </div>
