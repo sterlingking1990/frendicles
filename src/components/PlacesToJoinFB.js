@@ -475,7 +475,7 @@ class PlaceTemplate extends React.Component {
                               onClick={() =>
                                 this.props.onUnJoinPlace(
                                   joinedPlaceID,
-                                  authUser
+                                  authUser.authState
                                 )
                               }
                             >
@@ -556,7 +556,7 @@ class PlaceTemplate extends React.Component {
                               this.props.onJoinPlace(
                                 place_id,
                                 place_name,
-                                authUser
+                                authUser.authState
                               )
                             }
                           >
@@ -572,7 +572,7 @@ class PlaceTemplate extends React.Component {
                             this.props.onJoinPlace(
                               place_id,
                               place_name,
-                              authUser
+                              authUser.authState
                             )
                           }
                         >
