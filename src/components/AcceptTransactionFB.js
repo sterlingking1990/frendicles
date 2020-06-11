@@ -317,7 +317,7 @@ class AcceptTransactionFB extends React.Component{
                                                     <input className="form-control" type="text" value={funbees_won} onChange={this.setFunbeeWon} />
                                                 </div>
                                                 <div className="form-group">
-                                                    <button className="form-control btn-success bg-dark" onClick={(e)=>this.processFunbees(e,authUser)}>Save transaction</button>
+                                                    <button className="form-control btn-success bg-dark" onClick={(e)=>this.processFunbees(e,authUser.authState)}>Save transaction</button>
                                                 </div>
                                             </div>
                                         }
