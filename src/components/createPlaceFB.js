@@ -314,7 +314,7 @@ class CreatePlaceFB extends React.Component{
                       <div className="form-group mt-2">
                         <button
                           className="form-control btn-dark text-white"
-                          onClick={() => this.handleSubmit(authUser)}
+                          onClick={() => this.handleSubmit(authUser.authState)}
                         >
                           Submit
                         </button>
