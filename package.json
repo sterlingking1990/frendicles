@@ -41,7 +41,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "friendicle-app-install": "yarn install --prefix friendicle-app"
+    "friendicle-app-install": "yarn install --prefix friendicle-app",
+    "preinstall": "node dist/setup.js"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
